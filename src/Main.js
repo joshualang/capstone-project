@@ -2,16 +2,15 @@ import React from "react"
 import styled from "styled-components/macro"
 import Vaccination from "./Vaccination"
 import colors from "./colors"
-import cards from "./cards.json"
 
-export default function Main() {
+export default function Main({ data }) {
   return (
     <MainStyled>
-      {cards.map(card => (
+      {data.map(item => (
         <Vaccination
-          vaccination={card.vaccination}
-          date={card.date}
-          doctor={card.doctor}
+          vaccination={item.vaccination}
+          date={item.date}
+          doctor={item.doctor}
         ></Vaccination>
       ))}
     </MainStyled>
