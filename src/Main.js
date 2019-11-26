@@ -1,17 +1,44 @@
 import React from "react"
 import styled from "styled-components/macro"
 import Vaccination from "./Vaccination"
+import SectionText from "./common/Text/SectionText"
 import colors from "./colors"
 
 export default function Main({ data }) {
+  const sectionTitles = {
+    due: "Anstehende Impfungen",
+    done: "Erledigte Impfungen"
+  }
+  const diseaseNames = {
+    rotaviren: "Rotaviren",
+    tetanus: "Tetanus",
+    diphterie: "Diphterie",
+    pertussis: "Pertussis",
+    hib: "Humane Papillomviren",
+    poliomyeitis: "Poliomyeitis",
+    hepatitisB: "Hepatitis B",
+    pneumokokken: "Pneumokokken",
+    meningokokkenC: "Meningokokken C",
+    masern: "Masern",
+    mumps: "mumps",
+    varizellen: "Varizellen",
+    hpv: "HPV",
+    herpesZoster: "Herpes zoster",
+    influenza: "Influenza"
+  }
   return (
     <MainStyled>
       {data.map(item => (
-        <Vaccination
-          vaccination={item.vaccination}
-          date={item.date}
-          doctor={item.doctor}
-        ></Vaccination>
+        <>
+          <SectionText>{sectionTitles[Object.keys(item)[0]]}</SectionText>
+          {item[Object.keys(item)[0]].map(el => (
+            <Vaccination
+              vaccination={diseaseNames[el.vaccination]}
+              date={el.date}
+              doctor={el.doctor}
+            ></Vaccination>
+          ))}
+        </>
       ))}
     </MainStyled>
   )
