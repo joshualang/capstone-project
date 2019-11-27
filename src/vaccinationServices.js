@@ -1,4 +1,4 @@
-export default function nextDate(
+export default function nextVaccinations(
   birthDate,
   vaccinationsMade,
   vaccinationRecommendations
@@ -25,12 +25,11 @@ export default function nextDate(
 
     singleDiseaseName.forEach(item => {
       if (
-        vaccinationsMade.find(
+        !vaccinationsMade.find(
           el => el.disease === diseaseName && el.type === item.type
-        )
+        ) &&
+        userAgeInDays + 90 > item.ageInDays
       ) {
-        return
-      } else if (userAgeInDays + 900 > item.ageInDays) {
         vaccinationsDue[diseaseIndex] = [
           ...vaccinationsDue[diseaseIndex],
           {
