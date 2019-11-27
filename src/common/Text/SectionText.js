@@ -6,4 +6,5 @@ export default styled.h4`
   font-size: 1.25rem;
   color: ${colors.balck};
   margin: 0;
+  padding: 8px 0 0;
 `

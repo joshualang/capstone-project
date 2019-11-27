@@ -1,6 +1,3 @@
-import React from "react"
-import Vaccination from "./Vaccination"
-
 export default function nextDate(
   birthDate,
   vaccinationsMade,
@@ -11,11 +8,18 @@ export default function nextDate(
     const now = new Date().getTime()
     return Math.floor((now - birth) / (1000 * 60 * 60 * 24))
   }
+  function setDate(days) {
+    const nowInMilliseconds = new Date().getTime()
+    const futureInMilliseconds = days * (1000 * 60 * 60 * 24)
+    const timestamp = nowInMilliseconds + futureInMilliseconds
+    return new Date(timestamp)
+  }
 
   let vaccinationsDue = []
   const userAgeInDays = toAgeInDays(birthDate)
 
-  vaccinationRecommendations.forEach(disease => {
+  vaccinationRecommendations.forEach((disease, diseaseIndex) => {
+    vaccinationsDue = [...vaccinationsDue, []]
     const diseaseName = Object.keys(disease)[0]
     const singleDisease = disease[diseaseName]
     singleDisease.forEach(item => {
@@ -42,11 +46,11 @@ export default function nextDate(
           vaccinationsMade,
           item
         )
-        vaccinationsDue = [
-          ...vaccinationsDue,
+        vaccinationsDue[diseaseIndex] = [
+          ...vaccinationsDue[diseaseIndex],
           {
             vaccination: diseaseName,
-            date: "You missed",
+            date: setDate(item.ageInDays - userAgeInDays),
             doctor: "Select a Doctor",
             type: item.type
           }
@@ -60,11 +64,11 @@ export default function nextDate(
           vaccinationsMade,
           item
         )
-        vaccinationsDue = [
-          ...vaccinationsDue,
+        vaccinationsDue[diseaseIndex] = [
+          ...vaccinationsDue[diseaseIndex],
           {
             vaccination: diseaseName,
-            date: "You missed",
+            date: setDate(item.ageInDays - userAgeInDays),
             doctor: "Select a Doctor",
             type: item.type
           }
@@ -81,16 +85,19 @@ export default function nextDate(
     })
   })
 
+  vaccinationsDue = vaccinationsDue
+    .map(array => array[0])
+    .filter(item => item != undefined)
+
   const allVaccinations = [...vaccinationsMade, ...vaccinationsDue]
   const vaccinationsOrdered = [
     {
-      due: allVaccinations.filter(item => !item.hasOwnProperty("_id"))
+      due: allVaccinations.filter(el => !el.hasOwnProperty("_id"))
     },
     {
       done: allVaccinations.filter(item => item.hasOwnProperty("_id"))
     }
   ]
-  console.log(allVaccinations)
-  console.log(vaccinationsOrdered)
+  console.log("return", vaccinationsOrdered)
   return vaccinationsOrdered
 }
