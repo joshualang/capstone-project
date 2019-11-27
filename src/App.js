@@ -21,7 +21,7 @@ function App() {
     <div className="App">
       <>
         <GlobalStyles />
-        <Header></Header>
+        <Header />
         <Main data={vaccinationsDue}></Main>
       </>
     </div>
