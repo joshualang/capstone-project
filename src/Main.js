@@ -30,9 +30,12 @@ export default function Main({ data }) {
     <MainStyled>
       {data.map(item => (
         <>
-          <SectionText>{sectionTitles[Object.keys(item)[0]]}</SectionText>
-          {item[Object.keys(item)[0]].map(el => (
+          <SectionText key={sectionTitles[Object.keys(item)[0]]}>
+            {sectionTitles[Object.keys(item)[0]]}
+          </SectionText>
+          {item[Object.keys(item)[0]].map((el, index) => (
             <Vaccination
+              key={index + el.vaccination + el.date}
               vaccination={diseaseNames[el.vaccination]}
               date={el.date}
               doctor={el.doctor}

@@ -21,49 +21,16 @@ export default function nextDate(
   vaccinationRecommendations.forEach((disease, diseaseIndex) => {
     vaccinationsDue = [...vaccinationsDue, []]
     const diseaseName = Object.keys(disease)[0]
-    const singleDisease = disease[diseaseName]
-    singleDisease.forEach(item => {
+    const singleDiseaseName = disease[diseaseName]
+
+    singleDiseaseName.forEach(item => {
       if (
         vaccinationsMade.find(
           el => el.disease === diseaseName && el.type === item.type
         )
       ) {
-        console.log(
-          "vaccination made",
-          diseaseName,
-          item.type,
-          vaccinationsMade,
-          item
-        )
-        //Vaccination made
-        return console.log("vaccination made")
-      } else if (userAgeInDays > item.ageInDays) {
-        //You missed ... || implement intervall
-        console.log(
-          "You missed",
-          diseaseName,
-          item.type,
-          vaccinationsMade,
-          item
-        )
-        vaccinationsDue[diseaseIndex] = [
-          ...vaccinationsDue[diseaseIndex],
-          {
-            vaccination: diseaseName,
-            date: setDate(item.ageInDays - userAgeInDays),
-            doctor: "Select a Doctor",
-            type: item.type
-          }
-        ]
+        return
       } else if (userAgeInDays + 90 > item.ageInDays) {
-        //vaccinationsDue.push(entry)
-        console.log(
-          "Make an Appointment",
-          diseaseName,
-          item.type,
-          vaccinationsMade,
-          item
-        )
         vaccinationsDue[diseaseIndex] = [
           ...vaccinationsDue[diseaseIndex],
           {
@@ -73,14 +40,6 @@ export default function nextDate(
             type: item.type
           }
         ]
-      } else {
-        console.log(
-          "3+ Months in the future",
-          diseaseName,
-          item.type,
-          vaccinationsMade,
-          item
-        )
       }
     })
   })
@@ -98,6 +57,5 @@ export default function nextDate(
       done: allVaccinations.filter(item => item.hasOwnProperty("_id"))
     }
   ]
-  console.log("return", vaccinationsOrdered)
   return vaccinationsOrdered
 }
