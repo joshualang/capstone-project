@@ -1,0 +1,10 @@
+[
+  {
+    "_id": "5ddbae057bb58028293a93a7",
+    "disease": "rotaviren",
+    "vaccination": "rotaviren",
+    "type": "G1",
+    "date": "2019 11 12",
+    "doctor": "Dr. med. Max Mustermann"
+  }
+]

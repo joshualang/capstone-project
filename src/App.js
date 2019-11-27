@@ -2,15 +2,27 @@ import React from "react"
 import Main from "./Main"
 import GlobalStyles from "./GlobalStyles"
 import Header from "./Header"
-import cards from "./cards.json"
+
+import vaccinationServices from "./vaccinationServices"
+import vaccinationRecommendations from "./vaccinationRecommendations.json"
+import vaccinationsMade from "./vaccinationsMade.json"
+
+const user = {
+  age: "2019 09 29"
+}
 
 function App() {
+  const vaccinationsDue = vaccinationServices(
+    user.age,
+    vaccinationsMade,
+    vaccinationRecommendations
+  )
   return (
     <div className="App">
       <>
-        <GlobalStyles></GlobalStyles>
-        <Header></Header>
-        <Main data={cards}></Main>
+        <GlobalStyles />
+        <Header />
+        <Main data={vaccinationsDue}></Main>
       </>
     </div>
   )

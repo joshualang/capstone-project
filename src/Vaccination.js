@@ -5,7 +5,7 @@ import germanStrings from "react-timeago/lib/language-strings/de"
 import buildFormatter from "react-timeago/lib/formatters/buildFormatter"
 
 import Title from "./common/Text/Title"
-import Details from "./common/Text/DetailsText"
+import DetailsText from "./common/Text/DetailsText"
 import colors from "./colors"
 
 export default function Vaccination({ vaccination, date, doctor }) {
@@ -13,12 +13,12 @@ export default function Vaccination({ vaccination, date, doctor }) {
   return (
     <VaccinationStyled>
       <Title>{vaccination}</Title>
-      <div className="details">
-        <Details fontWeight="Bold">
+      <Details>
+        <DetailsText fontWeight="Bold">
           <TimeAgo date={date} formatter={formatter} />
-        </Details>
-        <Details>{doctor}</Details>
-      </div>
+        </DetailsText>
+        <DetailsText>{doctor}</DetailsText>
+      </Details>
     </VaccinationStyled>
   )
 }
@@ -34,8 +34,8 @@ const VaccinationStyled = styled.section`
   box-shadow: 0px 4px 8px rgb(48, 48, 48, 0.1);
   margin: 8px 4px;
   padding: 24px 8px 16px;
-  .details {
-    display: flex;
-    justify-content: space-between;
-  }
+`
+const Details = styled.div`
+  display: flex;
+  justify-content: space-between;
 `
