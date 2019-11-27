@@ -30,7 +30,7 @@ export default function nextDate(
         )
       ) {
         return
-      } else if (userAgeInDays + 90 > item.ageInDays) {
+      } else if (userAgeInDays + 900 > item.ageInDays) {
         vaccinationsDue[diseaseIndex] = [
           ...vaccinationsDue[diseaseIndex],
           {
@@ -47,6 +47,7 @@ export default function nextDate(
   vaccinationsDue = vaccinationsDue
     .map(array => array[0])
     .filter(item => item != undefined)
+    .sort((a, b) => a.date - b.date)
 
   const allVaccinations = [...vaccinationsMade, ...vaccinationsDue]
   const vaccinationsOrdered = [

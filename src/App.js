@@ -6,7 +6,7 @@ import Header from "./Header"
 import vaccinationServices from "./vaccinationServices"
 import vaccinationRecommendations from "./vaccinationRecommendations.json"
 import vaccinationsMade from "./vaccinationsMade.json"
-//non-mandatory vaccinations are optional depending on your history. medical advice is required
+
 const user = {
   age: "2019 09 29"
 }
@@ -20,7 +20,7 @@ function App() {
   return (
     <div className="App">
       <>
-        <GlobalStyles></GlobalStyles>
+        <GlobalStyles />
         <Header></Header>
         <Main data={vaccinationsDue}></Main>
       </>
