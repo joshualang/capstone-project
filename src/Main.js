@@ -33,18 +33,13 @@ export default function Main({ data, vaccinationOnClick }) {
         .filter(item => (oneOpen ? item.isOpen : true))
         .map((el, index) => (
           <>
-            {/*<SectionText key={sectionTitles[Object.keys(item)[0]]}>
-            {sectionTitles[Object.keys(item)[0]]}
-      </SectionText>
-          data.map((el, index) => (*/}
-            {console.log(el.isOpen)}
             <Vaccination
               key={index + el.vaccination + el.date}
               vaccination={diseaseNames[el.vaccination]}
               date={el.date}
               doctor={el.doctor}
               vaccinationOnClick={vaccinationOnClick}
-              index={index /*need index through id */}
+              index={index}
               active={el.isOpen}
             ></Vaccination>
           </>

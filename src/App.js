@@ -18,13 +18,13 @@ function App() {
     vaccinationRecommendations
   )
   vaccinations.map(item => (item.isOpen = false))
-  const [isVaccinationOpen, setIsVaccinationOpen] = useState(vaccinations)
+  const [vaccination, setVaccination] = useState(vaccinations)
   function vaccinationOnClick(index) {
-    const clickedVaccination = !isVaccinationOpen[index].isOpen
-    setIsVaccinationOpen(() => [
-      ...isVaccinationOpen.slice(0, index),
-      { ...isVaccinationOpen[index], isOpen: clickedVaccination },
-      ...isVaccinationOpen.slice(index + 1)
+    const clickedVaccination = !vaccination[index].isOpen
+    setVaccination(() => [
+      ...vaccination.slice(0, index),
+      { ...vaccination[index], isOpen: clickedVaccination },
+      ...vaccination.slice(index + 1)
     ])
   }
   return (
@@ -32,10 +32,7 @@ function App() {
       <>
         <GlobalStyles />
         <Header />
-        <Main
-          data={isVaccinationOpen}
-          vaccinationOnClick={vaccinationOnClick}
-        ></Main>
+        <Main data={vaccination} vaccinationOnClick={vaccinationOnClick}></Main>
       </>
     </div>
   )
