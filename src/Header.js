@@ -3,15 +3,20 @@ import styled from "styled-components/macro"
 import Headline from "./common/text/Headline"
 import menu from "./img/menu.svg"
 import more from "./img/more.svg"
+import { Link } from "react-router-dom"
 
-export default function Header() {
+export default function Header({ onMenuClick, showTitle = false }) {
   return (
     <HeaderStyled>
       <div>
-        <img src={menu}></img>
-        <img src={more}></img>
+        <img onClick={() => onMenuClick()} src={menu}></img>
+
+        <Link to="/addvaccination">
+          <img src={more}></img>
+        </Link>
       </div>
-      <Headline>Dein Impfpass</Headline>
+
+      {showTitle ? <Headline>Dein Impfpass</Headline> : ""}
     </HeaderStyled>
   )
 }

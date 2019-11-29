@@ -8,6 +8,7 @@ import Head from "./Head"
 import info from "./img/info.svg"
 import checkmark from "./img/checkmark.svg"
 import vaccinationExample from "./vaccinationExample.jpg"
+import { Link } from "react-router-dom"
 
 export default function() {
   const now = new Date()
@@ -25,7 +26,14 @@ export default function() {
   console.log(form)
   return (
     <>
-      <Head onBackClick={null} topRight={<img src={checkmark}></img>}>
+      <Head
+        onBackClick={null}
+        topRight={
+          <Link to="/home">
+            <img src={checkmark} />
+          </Link>
+        }
+      >
         Füge eine Impfung hinzu
       </Head>
       <Form>
@@ -91,10 +99,11 @@ const Form = styled.form`
   justify-content: flex-start;
   gap: 24px;
   height: 100%;
+  overflow-y: scroll;
   width: 100%;
   background: ${colors.white};
   box-shadow: none;
-  margin: 0 8px;
+  margin: 16px 8px 0;
   padding: 0 8px;
   input {
     font-family: Helvetica, sans-serif;

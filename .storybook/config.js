@@ -4,6 +4,7 @@ import styled from "styled-components/macro"
 import React from "react"
 import { withInfo } from "@storybook/addon-info"
 import GlobalStyles from "../src/common/styles/GlobalStyles"
+import { Router } from "react-router-dom"
 
 //add-ons
 import "@storybook/addon-knobs/register"

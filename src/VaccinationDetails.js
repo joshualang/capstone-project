@@ -1,35 +1,19 @@
-import styled from "styled-components/macro"
 import React from "react"
-import TimeAgo from "react-timeago"
-import germanStrings from "react-timeago/lib/language-strings/de"
-import buildFormatter from "react-timeago/lib/formatters/buildFormatter"
+import styled from "styled-components/macro"
 
 import colors from "./common/styles/colors"
-import Title from "./common/text/Title"
-import DetailsText from "./common/text/DetailsText"
-import Text from "./common/text/Text"
-import SectionText from "./common/text/SectionText"
-import Line from "./Line"
-import back from "./img/ios-back.svg"
 import Head from "./Head"
+import Title from "./common/text/Title"
+import Text from "./common/text/Text"
+import Fadeout from "./common/Fadeout"
+import Whitespace from "./common/Whitespace"
 
-export default function Vaccination({
-  vaccination,
-  date,
-  doctor,
-  vaccinationOnClick,
-  index,
-  active
-}) {
-  const formatter = buildFormatter(germanStrings)
-
-  return active ? (
+export default function VaccinationDetails() {
+  return (
     <>
       <Head>title</Head>
-      <VaccinationStyledOpen
-        active={active}
-        onClick={() => vaccinationOnClick(index)}
-      >
+
+      <VaccinationStyledOpen>
         <Title>Wann</Title>
         <Text>20. November 2019</Text>
         <Title>Arzt</Title>
@@ -59,38 +43,12 @@ export default function Vaccination({
           Fäl­len von Dar­min­va­gi­na­ti­on nach Imp­fung ge­gen
           Ro­ta­vi­rus-Ga­stro­en­te­ri­tis (11.05.2015)
         </Text>
+        <Whitespace />
       </VaccinationStyledOpen>
-    </>
-  ) : (
-    <>
-      <VaccinationStyled
-        active={active}
-        onClick={() => vaccinationOnClick(index)}
-      >
-        <Title>{vaccination}</Title>
-        <Details>
-          <DetailsText fontWeight="Bold">
-            <TimeAgo date={date} formatter={formatter} />
-          </DetailsText>
-          <DetailsText>{doctor}</DetailsText>
-        </Details>
-      </VaccinationStyled>
     </>
   )
 }
 
-const VaccinationStyled = styled.section`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 100%;
-  height: 80px;
-  border-radius: 4px;
-  background: ${colors.white};
-  box-shadow: 0px 4px 8px rgb(48, 48, 48, 0.1);
-  margin: 8px 4px;
-  padding: 24px 8px 16px;
-`
 const VaccinationStyledOpen = styled.section`
   display: flex;
   flex-direction: column;
@@ -98,13 +56,9 @@ const VaccinationStyledOpen = styled.section`
   gap: 8px;
   width: 100%;
   height: 100%;
+  overflow-y: scroll;
   background: ${colors.white};
   box-shadow: none;
   margin: 0 8px;
-  padding: 0 8px;
-`
-
-const Details = styled.div`
-  display: flex;
-  justify-content: space-between;
+  padding: 16px 8px;
 `
