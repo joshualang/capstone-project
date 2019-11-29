@@ -1,10 +1,10 @@
-import React from "react"
+import React, { Children } from "react"
 import styled from "styled-components/macro"
 import Vaccination from "./Vaccination"
-import SectionText from "./common/Text/SectionText"
-import colors from "./colors"
+import SectionText from "./common/text/SectionText"
+import colors from "./common/styles/colors"
 
-export default function Main({ data, vaccinationOnClick }) {
+export default function Main({ data, vaccinationOnClick, children }) {
   const sectionTitles = {
     due: "Anstehende Impfungen",
     done: "Erledigte Impfungen"
@@ -29,6 +29,7 @@ export default function Main({ data, vaccinationOnClick }) {
   const oneOpen = data.some(item => item.isOpen === true)
   return (
     <MainStyled active={oneOpen}>
+      {children}
       {data
         .filter(item => (oneOpen ? item.isOpen : true))
         .map((el, index) => (

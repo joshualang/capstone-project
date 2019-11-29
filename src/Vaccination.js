@@ -4,12 +4,14 @@ import TimeAgo from "react-timeago"
 import germanStrings from "react-timeago/lib/language-strings/de"
 import buildFormatter from "react-timeago/lib/formatters/buildFormatter"
 
-import colors from "./colors"
-import Title from "./common/Text/Title"
-import DetailsText from "./common/Text/DetailsText"
-import Text from "./common/Text/Text"
-import SectionText from "./common/Text/SectionText"
-import back from "./ios-back.svg"
+import colors from "./common/styles/colors"
+import Title from "./common/text/Title"
+import DetailsText from "./common/text/DetailsText"
+import Text from "./common/text/Text"
+import SectionText from "./common/text/SectionText"
+import Line from "./Line"
+import back from "./img/ios-back.svg"
+import Head from "./Head"
 
 export default function Vaccination({
   vaccination,
@@ -23,15 +25,11 @@ export default function Vaccination({
 
   return active ? (
     <>
+      <Head>title</Head>
       <VaccinationStyledOpen
         active={active}
         onClick={() => vaccinationOnClick(index)}
       >
-        <Nav>
-          <img src={back} alt="back"></img>
-          <SectionText textAlign="center">{vaccination}</SectionText>
-        </Nav>
-        <Line></Line>
         <Title>Wann</Title>
         <Text>20. November 2019</Text>
         <Title>Arzt</Title>
@@ -100,7 +98,6 @@ const VaccinationStyledOpen = styled.section`
   gap: 8px;
   width: 100%;
   height: 100%;
-  border-radius: 4px;
   background: ${colors.white};
   box-shadow: none;
   margin: 0 8px;
@@ -110,15 +107,4 @@ const VaccinationStyledOpen = styled.section`
 const Details = styled.div`
   display: flex;
   justify-content: space-between;
-`
-const Nav = styled.header`
-  display: grid;
-  grid-template-columns: 48px auto 48px;
-  align-items: center;
-`
-const Line = styled.div`
-  width: 100%;
-  background: ${colors.greySemi};
-  padding: 1px 0 0;
-  margin: 16px 0;
 `

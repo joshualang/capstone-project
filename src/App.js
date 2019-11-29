@@ -1,11 +1,12 @@
 import React, { useState } from "react"
 import Main from "./Main"
-import GlobalStyles from "./GlobalStyles"
+import GlobalStyles from "./common/styles/GlobalStyles"
 import Header from "./Header"
 
 import vaccinationServices from "./vaccinationServices"
 import vaccinationRecommendations from "./vaccinationRecommendations.json"
 import vaccinationsMade from "./vaccinationsMade.json"
+import VaccinationForm from "./VaccinationForm"
 
 const user = {
   age: "2019 10 20"
@@ -32,7 +33,9 @@ function App() {
       <>
         <GlobalStyles />
         <Header />
-        <Main data={vaccination} vaccinationOnClick={vaccinationOnClick}></Main>
+        <Main data={vaccination} vaccinationOnClick={vaccinationOnClick}>
+          <VaccinationForm></VaccinationForm>
+        </Main>
       </>
     </div>
   )
