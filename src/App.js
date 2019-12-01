@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Switch, Route, useParams } from "react-router-dom"
+import { Switch, Route } from "react-router-dom"
 
 import Main from "./Main"
 import Header from "./Header"
@@ -41,7 +41,6 @@ function App() {
         </Route>
         <Route path="/vaccinationdetails/:id">
           <Header onMenuClick={onMenuClick} />
-          {console.log()}
           <Main fullscreen="true">
             <VaccinationDetails data={data}></VaccinationDetails>
           </Main>

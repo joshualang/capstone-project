@@ -9,8 +9,7 @@ import Head from "./Head"
 
 export default function VaccinationDetails({ data }) {
   let { id } = useParams()
-  console.log(id) //give id through url
-  const vaccination = findVaccination(data)
+  const vaccination = { ...findVaccination(data), id: "" }
 
   function findVaccination(data) {
     return (
@@ -18,8 +17,6 @@ export default function VaccinationDetails({ data }) {
       data.vaccinationsOpen.find(entry => entry.id === id)
     )
   }
-  console.log("check", vaccination)
-  delete vaccination.id
 
   const keysToTitles = {
     date: "Datum",
@@ -34,7 +31,8 @@ export default function VaccinationDetails({ data }) {
     registrationDate: "Zulassungsdatum",
     begins: "Anfang des Impfungszeitraums",
     ends: "Ende des Impfungszeitraums",
-    comment: "Kommentar"
+    comment: "Kommentar",
+    id: "Id"
   }
 
   return (
@@ -42,12 +40,14 @@ export default function VaccinationDetails({ data }) {
       <Head headline={vaccination.disease}></Head>
 
       <VaccinationStyledOpen>
-        {Object.keys(vaccination).map(entry => (
-          <div key={entry}>
-            <Title key={"Title" + entry}>{keysToTitles[entry]}</Title>
-            <Text key={"Text" + entry}>{vaccination[entry]}</Text>
-          </div>
-        ))}
+        {Object.keys(vaccination)
+          .filter(entry => vaccination[entry] != "")
+          .map(entry => (
+            <div key={entry}>
+              <Title key={"Title" + entry}>{keysToTitles[entry]}</Title>
+              <Text key={"Text" + entry}>{vaccination[entry]}</Text>
+            </div>
+          ))}
       </VaccinationStyledOpen>
     </>
   )

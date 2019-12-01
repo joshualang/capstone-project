@@ -1,14 +1,16 @@
 import React, { useState } from "react"
+import { Link } from "react-router-dom"
 import styled from "styled-components/macro"
+
+import info from "./img/info.svg"
+import vaccinationExample from "./vaccinationExample.jpg"
+import checkmark from "./img/checkmark.svg"
+
 import colors from "./common/styles/colors"
 import Title from "./common/text/Title"
-import Text from "./common/text/Text"
 import DetailsText from "./common/text/DetailsText"
+
 import Head from "./Head"
-import info from "./img/info.svg"
-import checkmark from "./img/checkmark.svg"
-import vaccinationExample from "./vaccinationExample.jpg"
-import { Link } from "react-router-dom"
 
 export default function() {
   const now = new Date()
@@ -19,31 +21,27 @@ export default function() {
 
   const [form, setForm] = useState({ doctor: "", date: "", sticker: "" })
   const [infoVisible, setInfoVisible] = useState(false)
-  console.log(form)
   return (
     <>
       <Head
-        onBackClick={null}
+        headline="Impfung hinzufügen"
         topRight={
           <Link to="/home">
             <img src={checkmark} />
           </Link>
         }
-        headline="Impfung hinzufügen"
-      >
-        Füge eine Impfung hinzu
-      </Head>
+      />
       <Form>
         <Flexbox>
-          <label htmlFor="vaccinationDate">
+          <label htmlFor="vaccinationDoctor">
             <Title>Name des Arztes</Title>
           </label>
           <input
-            onInput={event => setForm({ ...form, doctor: event.target.value })}
-            type="text"
             id="vaccinationDoctor"
             name="vaccinationDoctor"
+            onInput={event => setForm({ ...form, doctor: event.target.value })}
             placeholder="Dr. med. Max Mustermann"
+            type="text"
           ></input>
         </Flexbox>
         <Flexbox>
@@ -51,8 +49,11 @@ export default function() {
             <Title>Datum der Impfung</Title>
           </label>
           <input
+            id="vaccinationDate"
+            name="vaccinationDate"
             onInput={event => setForm({ ...form, date: event.target.value })}
             placeholder={dateString}
+            type="text"
             value={form.date}
           ></input>
         </Flexbox>
@@ -61,7 +62,7 @@ export default function() {
             flexDirection="row"
             onClick={() => setInfoVisible(!infoVisible)}
           >
-            <label htmlFor="vaccinationDate">
+            <label htmlFor="vaccinationSticker">
               <Title>Text auf den Aufklebern</Title>
             </label>
             <img className="icon" src={info}></img>
@@ -81,6 +82,8 @@ export default function() {
             <></>
           )}
           <input
+            id="vaccinationSticker"
+            name="vaccinationSticker"
             onInput={event => setForm({ ...form, sticker: event.target.value })}
             type="text"
             placeholder="Infanrix hexa A21CA404C"
@@ -112,7 +115,8 @@ const Form = styled.form`
     margin-left: 4px;
     width: 80%;
     border: none;
-    border-bottom: 1px solid ${colors.greySemi};
+    border-bottom: 1px solid
+      ${props => (!props.correct ? "green" : colors.greySemi)};
     ::placeholder {
       color: ${colors.grey};
     }

@@ -57,6 +57,5 @@ export default function nextVaccinations(
       done: allVaccinations.filter(item => item.hasOwnProperty("_id"))
     }
   ]
-  console.log(vaccinationsDue)
   return vaccinationsDue
 }
