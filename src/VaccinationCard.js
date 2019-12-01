@@ -7,19 +7,14 @@ import buildFormatter from "react-timeago/lib/formatters/buildFormatter"
 import colors from "./common/styles/colors"
 import Title from "./common/text/Title"
 import DetailsText from "./common/text/DetailsText"
+import { Link } from "@reach/router"
 
-export default function Vaccination({
-  vaccination,
-  date,
-  doctor,
-  vaccinationOnClick,
-  index
-}) {
+export default function Vaccination({ vaccination, date, doctor, id }) {
   const formatter = buildFormatter(germanStrings)
 
   return (
-    <>
-      <VaccinationStyled onClick={() => vaccinationOnClick(index)}>
+    <Link to={"/vaccinationdetails/" + id}>
+      <VaccinationStyled>
         <Title>{vaccination}</Title>
         <Details>
           <DetailsText fontWeight="Bold">
@@ -28,7 +23,7 @@ export default function Vaccination({
           <DetailsText>{doctor}</DetailsText>
         </Details>
       </VaccinationStyled>
-    </>
+    </Link>
   )
 }
 

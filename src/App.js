@@ -1,51 +1,37 @@
 import React, { useState } from "react"
-import { Switch, Route } from "react-router-dom"
+import { Switch, Route, useParams } from "react-router-dom"
 
 import Main from "./Main"
 import Header from "./Header"
-
-import vaccinationServices from "./vaccinationServices"
-import vaccinationRecommendations from "./vaccinationRecommendations.json"
-import vaccinationsMade from "./vaccinationsMade.json"
-import VaccinationForm from "./VaccinationForm"
-import VaccinationDetails from "./VaccinationDetails"
 import Navigation from "./Navigation"
 
-const user = {
-  age: "2019 10 20"
-}
+import Vaccinations from "./Vaccinations"
+import VaccinationDetails from "./VaccinationDetails"
+import VaccinationForm from "./VaccinationForm"
+
+import mockUpData from "./mockUpData.json"
+const data = mockUpData[0]
 
 function App() {
   const [isMenuShown, setIsMenuShown] = useState(false)
-  const vaccinations = vaccinationServices(
-    user.age,
-    vaccinationsMade,
-    vaccinationRecommendations
-  )
-  vaccinations.map(item => (item.isOpen = false))
-  const [vaccination, setVaccination] = useState(vaccinations)
-  function vaccinationOnClick(index) {
-    const clickedVaccination = !vaccination[index].isOpen
-    setVaccination(() => [
-      ...vaccination.slice(0, index),
-      { ...vaccination[index], isOpen: clickedVaccination },
-      ...vaccination.slice(index + 1)
-    ])
-  }
+
   function onMenuClick() {
     setIsMenuShown(!isMenuShown)
   }
 
   return (
     <>
-      {isMenuShown ? <Navigation onMenuClick={onMenuClick} /> : ""}
+      {isMenuShown ? (
+        <Navigation profile={data.name} onMenuClick={onMenuClick} />
+      ) : (
+        ""
+      )}
       <Switch>
         <Route path="/home">
           <Header onMenuClick={onMenuClick} showTitle="true" />
-          <Main
-            data={vaccination}
-            vaccinationOnClick={vaccinationOnClick}
-          ></Main>
+          <Main>
+            <Vaccinations data={data}></Vaccinations>
+          </Main>
         </Route>
         <Route path="/addvaccination">
           <Header onMenuClick={onMenuClick} />
@@ -53,10 +39,11 @@ function App() {
             <VaccinationForm></VaccinationForm>
           </Main>
         </Route>
-        <Route path="/vaccinationdetails">
+        <Route path="/vaccinationdetails/:id">
           <Header onMenuClick={onMenuClick} />
+          {console.log()}
           <Main fullscreen="true">
-            <VaccinationDetails></VaccinationDetails>
+            <VaccinationDetails data={data}></VaccinationDetails>
           </Main>
         </Route>
       </Switch>

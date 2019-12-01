@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "react-router-dom"
 import styled from "styled-components/macro"
 import colors from "./common/styles/colors"
 
@@ -6,14 +7,16 @@ import SectionText from "./common/text/SectionText"
 import Title from "./common/text/Title"
 import Line from "./Line"
 
-export default function({ onMenuClick }) {
+export default function({ profile, onMenuClick }) {
   return (
     <>
       <Navigation>
         <div>
-          <SectionText>User</SectionText>
+          <SectionText>{profile}</SectionText>
           <Line margin="8px 0 16px"></Line>
-          <Title>Home</Title>
+          <Link to="/home" onClick={() => onMenuClick()}>
+            <Title>Home</Title>
+          </Link>
         </div>
         <div>
           <Line></Line>
@@ -38,7 +41,7 @@ const Navigation = styled.nav`
   justify-content: space-between;
 
   background: ${colors.white};
-  box-shadow: 0px 4px 8px rgb(48, 48, 48, 0.1);
+  box-shadow: 8px 0px 16px rgb(48, 48, 48, 0.2);
 `
 const ClosingArea = styled.div`
   position: absolute;

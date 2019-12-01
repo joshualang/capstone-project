@@ -6,7 +6,7 @@ import SectionText from "./common/text/SectionText"
 import Fadeout from "./common/Fadeout"
 import { Link } from "react-router-dom"
 
-export default function({ children, onBackClick, topRight }) {
+export default function({ onBackClick, topRight, headline }) {
   return (
     <>
       <Header>
@@ -14,7 +14,7 @@ export default function({ children, onBackClick, topRight }) {
           <Link to="/home">
             <img onClick={onBackClick} src={back} alt="back"></img>
           </Link>
-          <SectionText textAlign="center">Headline</SectionText>
+          <SectionText textAlign="center">{headline}</SectionText>
           <div>{topRight}</div>
         </Grid>
         <Line margin="16px 0 0" />
@@ -24,11 +24,11 @@ export default function({ children, onBackClick, topRight }) {
   )
 }
 const Grid = styled.div`
-  width: 100%;
   display: grid;
   grid-template-columns: 14px auto 14px;
   align-items: center;
   justify-items: center;
+  width: 100%;
 `
 
 const Header = styled.header`

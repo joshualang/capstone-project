@@ -17,10 +17,6 @@ export default function() {
   const year = now.getFullYear()
   const dateString = `${date}.${month}.${year}`
 
-  function dateValidation() {
-    //regEx
-  }
-
   const [form, setForm] = useState({ doctor: "", date: "", sticker: "" })
   const [infoVisible, setInfoVisible] = useState(false)
   console.log(form)
@@ -33,6 +29,7 @@ export default function() {
             <img src={checkmark} />
           </Link>
         }
+        headline="Impfung hinzufügen"
       >
         Füge eine Impfung hinzu
       </Head>
@@ -56,6 +53,7 @@ export default function() {
           <input
             onInput={event => setForm({ ...form, date: event.target.value })}
             placeholder={dateString}
+            value={form.date}
           ></input>
         </Flexbox>
         <Flexbox>

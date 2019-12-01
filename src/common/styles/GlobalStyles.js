@@ -22,4 +22,7 @@ export default createGlobalStyle`
     rgba(255, 236, 210, 1) 100%
   );
 }
+a {
+  text-decoration: none;
+}
 `

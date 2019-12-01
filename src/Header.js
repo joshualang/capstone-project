@@ -10,12 +10,10 @@ export default function Header({ onMenuClick, showTitle = false }) {
     <HeaderStyled>
       <div>
         <img onClick={() => onMenuClick()} src={menu}></img>
-
         <Link to="/addvaccination">
           <img src={more}></img>
         </Link>
       </div>
-
       {showTitle ? <Headline>Dein Impfpass</Headline> : ""}
     </HeaderStyled>
   )

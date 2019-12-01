@@ -1,48 +1,35 @@
 import React from "react"
 import VaccinationCard from "./VaccinationCard"
 import styled from "styled-components/macro"
-import Fadeout from "./common/Fadeout"
+import SectionText from "./common/text/SectionText"
 
-export default function({ data, vaccinationOnClick }) {
-  const sectionTitles = {
-    due: "Anstehende Impfungen",
-    done: "Erledigte Impfungen"
-  }
-  const diseaseNames = {
-    rotaviren: "Rotaviren",
-    tetanus: "Tetanus",
-    diphterie: "Diphterie",
-    pertussis: "Pertussis",
-    hib: "Humane Papillomviren",
-    poliomyeitis: "Poliomyeitis",
-    hepatitisB: "Hepatitis B",
-    pneumokokken: "Pneumokokken",
-    meningokokkenC: "Meningokokken C",
-    masern: "Masern",
-    mumps: "mumps",
-    varizellen: "Varizellen",
-    hpv: "HPV",
-    herpesZoster: "Herpes zoster",
-    influenza: "Influenza"
-  }
-
+export default function({ data }) {
   return (
     <Vaccinations>
-      {data
-        .filter(item => (false ? item.isOpen : true))
-        .map((el, index) => (
-          <>
-            <VaccinationCard
-              key={index + el.vaccination + el.date}
-              vaccination={diseaseNames[el.vaccination]}
-              date={el.date}
-              doctor={el.doctor}
-              vaccinationOnClick={vaccinationOnClick}
-              index={index}
-              active={el.isOpen}
-            ></VaccinationCard>
-          </>
-        ))}
+      <SectionText>Anstehende Impfungen</SectionText>
+      {data.vaccinationsOpen.map(entry => (
+        <>
+          <VaccinationCard
+            key={entry.id}
+            vaccination={entry.disease}
+            date={entry.begins}
+            doctor={entry.doctor}
+            id={entry.id}
+          ></VaccinationCard>
+        </>
+      ))}
+      <SectionText>Erledigte Impfungen</SectionText>
+      {data.vaccinationsMade.map(entry => (
+        <>
+          <VaccinationCard
+            key={entry.id}
+            vaccination={entry.disease}
+            date={entry.date}
+            doctor={entry.doctor}
+            id={entry.id}
+          ></VaccinationCard>
+        </>
+      ))}
     </Vaccinations>
   )
 }

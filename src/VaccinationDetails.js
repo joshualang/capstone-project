@@ -1,49 +1,53 @@
 import React from "react"
 import styled from "styled-components/macro"
+import { useParams } from "react-router-dom"
 
 import colors from "./common/styles/colors"
-import Head from "./Head"
 import Title from "./common/text/Title"
 import Text from "./common/text/Text"
-import Fadeout from "./common/Fadeout"
-import Whitespace from "./common/Whitespace"
+import Head from "./Head"
 
-export default function VaccinationDetails() {
+export default function VaccinationDetails({ data }) {
+  let { id } = useParams()
+  console.log(id) //give id through url
+  const vaccination = findVaccination(data)
+
+  function findVaccination(data) {
+    return (
+      data.vaccinationsMade.find(entry => entry.id === id) ||
+      data.vaccinationsOpen.find(entry => entry.id === id)
+    )
+  }
+  console.log("check", vaccination)
+  delete vaccination.id
+
+  const keysToTitles = {
+    date: "Datum",
+    disease: "Rotavirus",
+    doctor: "Arzt",
+    registrationNumber: "Zu­las­sungs­num­mer",
+    vaccinationType: "Art der Impfung",
+    admittedApplicant: "Zulassungsinhaber",
+    description: "Stoff- oder In­di­ka­ti­onsgrup­pe",
+    furtherInformation: "Weitere Informationen",
+    name: "Bezeichnung",
+    registrationDate: "Zulassungsdatum",
+    begins: "Anfang des Impfungszeitraums",
+    ends: "Ende des Impfungszeitraums",
+    comment: "Kommentar"
+  }
+
   return (
     <>
-      <Head>title</Head>
+      <Head headline={vaccination.disease}></Head>
 
       <VaccinationStyledOpen>
-        <Title>Wann</Title>
-        <Text>20. November 2019</Text>
-        <Title>Arzt</Title>
-        <Text>Dr. med. Max Mustermann</Text>
-        <Title>Typ</Title>
-        <Text>1. Grundimmunisierung</Text>
-        <Title>Anmerkungen</Title>
-        <Text>1. Grundimmunisierung</Text>
-        <Title>Bezeichnung</Title>
-        <Text>Ro­ta­rix</Text>
-        <Title>Krankheit / Stoff-Indikationsgruppe</Title>
-        <Text>
-          Ro­ta­vi­rus-Impf­stoff (le­bend, at­te­nu­iert) Ver­wen­dung ab
-          ei­nem Le­bensal­ter von 6 Wo­chen
-        </Text>
-        <Title>Zu­las­sungs­in­ha­ber</Title>
-        <Text>Gla­xoS­mit­h­Kli­ne Bio­lo­gi­cals s.a., Bel­gi­en</Text>
-        <Title>Impfstoffart</Title>
-        <Text>Mono</Text>
-        <Title>Zulassungsnummer</Title>
-        <Text>EU/1/05/330/001-011</Text>
-        <Title>Zu­las­sungs­da­tum</Title>
-        <Text>21.02.2006</Text>
-        <Title>Weitere Informationen</Title>
-        <Text>
-          EPAR: Ro­ta­rix In­for­ma­ti­on des Paul-Ehr­lich-In­sti­tuts zu
-          Fäl­len von Dar­min­va­gi­na­ti­on nach Imp­fung ge­gen
-          Ro­ta­vi­rus-Ga­stro­en­te­ri­tis (11.05.2015)
-        </Text>
-        <Whitespace />
+        {Object.keys(vaccination).map(entry => (
+          <div key={entry}>
+            <Title key={"Title" + entry}>{keysToTitles[entry]}</Title>
+            <Text key={"Text" + entry}>{vaccination[entry]}</Text>
+          </div>
+        ))}
       </VaccinationStyledOpen>
     </>
   )
@@ -61,4 +65,5 @@ const VaccinationStyledOpen = styled.section`
   box-shadow: none;
   margin: 0 8px;
   padding: 16px 8px;
+  hyphens: none;
 `
