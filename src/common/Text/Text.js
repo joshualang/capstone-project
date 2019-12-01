@@ -1,10 +1,12 @@
 import styled from "styled-components/macro"
+
 import colors from "../styles/colors"
 
-export default styled.h4`
+export default styled.h3`
   font-family: Helvetica, sans-serif;
-  font-size: 1.25rem;
-  color: ${colors.balck};
+  font-weight: 300;
+  font-size: 1rem;
+  color: ${colors.grey};
   margin: 0;
-  text-align: ${props => props.textAlign || "inital"};
+  padding: 0 0 8px;
 `

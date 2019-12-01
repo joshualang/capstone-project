@@ -1,15 +1,15 @@
 import React from "react"
 
-import Vaccination from "./Vaccination"
+import VaccinationCard from "./VaccinationCard"
 
 export default {
-  title: "Vaccination"
+  title: "VaccinationCard"
 }
 
 export const text = () => (
-  <Vaccination
+  <VaccinationCard
     vaccination="Gelbsucht"
     date="11 dec, 2014"
     doctor="Dr. med. Max Mustermann"
-  ></Vaccination>
+  ></VaccinationCard>
 )

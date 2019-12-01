@@ -2,9 +2,14 @@ import styled, { createGlobalStyle } from "styled-components/macro"
 
 export default createGlobalStyle`
 *{
+   scrollbar-width: none;
     box-sizing: border-box;
+    ::-webkit-scrollbar {
+    display: none;
+    }
 }
 #root{
+
     position: absolute;
     top: 0;
     bottom: 0;
@@ -16,5 +21,8 @@ export default createGlobalStyle`
     rgba(252, 182, 159, 1) 80%,
     rgba(255, 236, 210, 1) 100%
   );
+}
+a {
+  text-decoration: none;
 }
 `

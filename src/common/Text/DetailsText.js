@@ -1,5 +1,5 @@
 import styled from "styled-components/macro"
-import colors from "../../colors"
+import colors from "../styles/colors"
 
 export default styled.span`
   color: ${colors.grey};

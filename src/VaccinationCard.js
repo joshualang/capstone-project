@@ -4,22 +4,26 @@ import TimeAgo from "react-timeago"
 import germanStrings from "react-timeago/lib/language-strings/de"
 import buildFormatter from "react-timeago/lib/formatters/buildFormatter"
 
-import Title from "./common/Text/Title"
-import DetailsText from "./common/Text/DetailsText"
-import colors from "./colors"
+import colors from "./common/styles/colors"
+import Title from "./common/text/Title"
+import DetailsText from "./common/text/DetailsText"
+import { Link } from "@reach/router"
 
-export default function Vaccination({ vaccination, date, doctor }) {
+export default function Vaccination({ vaccination, date, doctor, id }) {
   const formatter = buildFormatter(germanStrings)
+
   return (
-    <VaccinationStyled>
-      <Title>{vaccination}</Title>
-      <Details>
-        <DetailsText fontWeight="Bold">
-          <TimeAgo date={date} formatter={formatter} />
-        </DetailsText>
-        <DetailsText>{doctor}</DetailsText>
-      </Details>
-    </VaccinationStyled>
+    <Link to={"/vaccinationdetails/" + id}>
+      <VaccinationStyled>
+        <Title>{vaccination}</Title>
+        <Details>
+          <DetailsText fontWeight="Bold">
+            <TimeAgo date={date} formatter={formatter} />
+          </DetailsText>
+          <DetailsText>{doctor}</DetailsText>
+        </Details>
+      </VaccinationStyled>
+    </Link>
   )
 }
 
@@ -27,7 +31,6 @@ const VaccinationStyled = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 100%;
   height: 80px;
   border-radius: 4px;
   background: ${colors.white};
@@ -35,6 +38,7 @@ const VaccinationStyled = styled.section`
   margin: 8px 4px;
   padding: 24px 8px 16px;
 `
+
 const Details = styled.div`
   display: flex;
   justify-content: space-between;
