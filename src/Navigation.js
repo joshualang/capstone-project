@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import styled from "styled-components/macro"
-import { useSpring, animated } from "react-spring"
+import { useSpring, animated, config } from "react-spring"
 
 import colors from "./common/styles/colors"
 
@@ -10,9 +10,15 @@ import Title from "./common/text/Title"
 import Line from "./Line"
 
 export default function({ profile, onMenuClick }) {
+  const props = useSpring({
+    config: { tension: 5000, mass: 1, friction: 300 },
+    opacity: 1,
+    transform: "translateX(0)",
+    from: { opacity: 0, transform: "translateX(-100%)" }
+  })
   return (
     <>
-      <Navigation>
+      <Navigation style={props}>
         <div>
           <SectionText>{profile}</SectionText>
           <Line margin="8px 0 16px"></Line>

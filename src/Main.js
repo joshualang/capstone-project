@@ -1,7 +1,8 @@
 import styled from "styled-components/macro"
 import colors from "./common/styles/colors"
+import { animated } from "react-spring"
 
-export default styled.main`
+export default styled(animated.main)`
   position: absolute;
   bottom: 0;
   left: 0;
