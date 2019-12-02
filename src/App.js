@@ -1,5 +1,6 @@
 import React, { useState } from "react"
-import { Switch, Route } from "react-router-dom"
+import { Switch, Route, useLocation } from "react-router-dom"
+import { useTransition } from "react-spring"
 
 import Main from "./Main"
 import Header from "./Header"
@@ -18,7 +19,19 @@ function App() {
   function onMenuClick() {
     setIsMenuShown(!isMenuShown)
   }
+  const location = useLocation()
+  const animationConfig = {
+    config: { tension: 3000, mass: 1, friction: 200 },
+    from: { transform: "translateY(100%)" },
+    enter: { transform: "translateY(0)" },
+    leave: { transform: "translateY(100%)" }
+  }
 
+  const transitions = useTransition(
+    location,
+    location => location.pathname,
+    animationConfig
+  )
   return (
     <>
       {isMenuShown ? (
@@ -26,26 +39,22 @@ function App() {
       ) : (
         ""
       )}
-      <Switch>
-        <Route path="/home">
-          <Header onMenuClick={onMenuClick} showTitle="true" />
-          <Main>
-            <Vaccinations data={data}></Vaccinations>
-          </Main>
-        </Route>
-        <Route path="/addvaccination">
-          <Header onMenuClick={onMenuClick} />
-          <Main fullscreen="true">
-            <VaccinationForm></VaccinationForm>
-          </Main>
-        </Route>
-        <Route path="/vaccinationdetails/:id">
-          <Header onMenuClick={onMenuClick} />
-          <Main fullscreen="true">
-            <VaccinationDetails data={data}></VaccinationDetails>
-          </Main>
-        </Route>
-      </Switch>
+      <Header onMenuClick={onMenuClick} showTitle="true" />
+      {transitions.map(({ item, props, key }) => (
+        <Main key={key} style={props}>
+          <Switch location={item}>
+            <Route path="/home">
+              <Vaccinations data={data}></Vaccinations>
+            </Route>
+            <Route path="/addvaccination">
+              <VaccinationForm></VaccinationForm>
+            </Route>
+            <Route path="/vaccinationdetails/:id">
+              <VaccinationDetails data={data}></VaccinationDetails>
+            </Route>
+          </Switch>
+        </Main>
+      ))}
     </>
   )
 }
