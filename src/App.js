@@ -23,10 +23,10 @@ function App() {
   const location = useLocation()
   console.log("location", location)
   const animationConfig = {
-    config: { tension: 50, mass: 1, friction: 2 },
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 }
+    config: { tension: 3000, mass: 1, friction: 200 },
+    from: { transform: "translateY(100%)" },
+    enter: { transform: "translateY(0)" },
+    leave: { transform: "translateY(100%)" }
   }
 
   const transitions = useTransition(
@@ -44,26 +44,20 @@ function App() {
       )}
       <Header onMenuClick={onMenuClick} showTitle="true" />
       {transitions.map(({ item, props, key }) => (
-        <animated.div key={key} style={props}>
+        <Main key={key} style={props}>
           {console.log("item", item, "props", props, "key", key)}
           <Switch location={item}>
             <Route path="/home">
-              <Main>
-                <Vaccinations data={data}></Vaccinations>
-              </Main>
+              <Vaccinations data={data}></Vaccinations>
             </Route>
             <Route path="/addvaccination">
-              <Main fullscreen="true">
-                <VaccinationForm></VaccinationForm>
-              </Main>
+              <VaccinationForm></VaccinationForm>
             </Route>
             <Route path="/vaccinationdetails/:id">
-              <Main fullscreen="true">
-                <VaccinationDetails data={data}></VaccinationDetails>
-              </Main>
+              <VaccinationDetails data={data}></VaccinationDetails>
             </Route>
           </Switch>
-        </animated.div>
+        </Main>
       ))}
     </>
   )
