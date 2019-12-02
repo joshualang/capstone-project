@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Switch, Route, useLocation } from "react-router-dom"
-import { useSpring, useTransition, animated } from "react-spring"
+import { useTransition } from "react-spring"
 
 import Main from "./Main"
 import Header from "./Header"
@@ -19,9 +19,7 @@ function App() {
   function onMenuClick() {
     setIsMenuShown(!isMenuShown)
   }
-  //rect-spring trasition
   const location = useLocation()
-  console.log("location", location)
   const animationConfig = {
     config: { tension: 3000, mass: 1, friction: 200 },
     from: { transform: "translateY(100%)" },
@@ -34,7 +32,6 @@ function App() {
     location => location.pathname,
     animationConfig
   )
-  console.log(transitions)
   return (
     <>
       {isMenuShown ? (
@@ -45,7 +42,6 @@ function App() {
       <Header onMenuClick={onMenuClick} showTitle="true" />
       {transitions.map(({ item, props, key }) => (
         <Main key={key} style={props}>
-          {console.log("item", item, "props", props, "key", key)}
           <Switch location={item}>
             <Route path="/home">
               <Vaccinations data={data}></Vaccinations>
