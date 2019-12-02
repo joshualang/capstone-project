@@ -116,7 +116,7 @@ const Form = styled.form`
     width: 80%;
     border: none;
     border-bottom: 1px solid
-      ${props => (!props.correct ? "green" : colors.greySemi)};
+      ${props => (props.correct ? "green" : colors.greySemi)};
     ::placeholder {
       color: ${colors.grey};
     }

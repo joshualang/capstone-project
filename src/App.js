@@ -34,13 +34,11 @@ function App() {
           </Main>
         </Route>
         <Route path="/addvaccination">
-          <Header onMenuClick={onMenuClick} />
           <Main fullscreen="true">
             <VaccinationForm></VaccinationForm>
           </Main>
         </Route>
         <Route path="/vaccinationdetails/:id">
-          <Header onMenuClick={onMenuClick} />
           <Main fullscreen="true">
             <VaccinationDetails data={data}></VaccinationDetails>
           </Main>

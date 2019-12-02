@@ -1,6 +1,8 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import styled from "styled-components/macro"
+import { useSpring, animated } from "react-spring"
+
 import colors from "./common/styles/colors"
 
 import SectionText from "./common/text/SectionText"
@@ -27,7 +29,7 @@ export default function({ profile, onMenuClick }) {
     </>
   )
 }
-const Navigation = styled.nav`
+const Navigation = styled(animated.nav)`
   position: absolute;
   z-index: 100;
   top: 0;

@@ -20,7 +20,7 @@ export default function VaccinationDetails({ data }) {
 
   const keysToTitles = {
     date: "Datum",
-    disease: "Rotavirus",
+    disease: "Krankheit",
     doctor: "Arzt",
     registrationNumber: "Zu­las­sungs­num­mer",
     vaccinationType: "Art der Impfung",
@@ -31,8 +31,7 @@ export default function VaccinationDetails({ data }) {
     registrationDate: "Zulassungsdatum",
     begins: "Anfang des Impfungszeitraums",
     ends: "Ende des Impfungszeitraums",
-    comment: "Kommentar",
-    id: "Id"
+    comment: "Kommentar"
   }
 
   return (
