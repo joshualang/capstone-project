@@ -64,7 +64,7 @@ server.patch("/api/:user", (req, res) => {
         const vaccine = doc.data()
         vaccine.diseases.forEach(disease => {
           newVaccinations.push({
-            date: req.body.date,
+            date: new Date(req.body.date),
             disease: disease,
             doctor: req.body.doctor,
             id: uid(),
@@ -139,8 +139,11 @@ function userFormatter(json) {
 
   json.vaccinationsMade.map(item => {
     item.vaccinationType = getType(item.vaccinationType)
+    console.log("date", item.date)
     item.date = toDate(item.date)
-    item.intervall = `${item.intervall} Tage`
+    //item.intervall = `${item.intervall} Tage`
+    console.log("registrationDate", item.registrationDate)
+    item.registrationDate = toDate(item.registrationDate)
   })
   return json
 }
@@ -221,28 +224,40 @@ function nextVaccination(data) {
             disease: diseaseNames[diseaseName],
             begins: setDate(item.ageInDays - userAgeInDays),
             doctor: "Select a Doctor",
-            vaccinationType: item.vaccinationType,
-            intervall: item.intervall || 0
+            vaccinationType: item.vaccinationType
           }
         ]
       }
     })
   })
-  console.log(vaccinationsDue)
+  console.log("before filtering", vaccinationsDue)
 
   const vaccinationDue = vaccinationsDue
     .map(array => array[0])
     .filter(item => item != undefined)
     .sort((a, b) => a.date - b.date)
+  console.log("after filtering", vaccinationDue)
+  // .map(vaccination => {
+  //   vaccination.vaccinationsMade.map(entry => {
+  //     Object.keys(entry).forEach(key => entry[key] === undefined && delete entry[key])
+  //   })
+  //   vaccination.vaccinationsOpen.map(entry => {
+  //     Object.keys(entry).forEach(key => entry[key] === undefined && delete entry[key])
+  //   })
+  // })
 
-  vaccinationDue.forEach(due => {
-    if (
-      !vaccinationsOpen.some(
-        open => open.vaccinationType === due.vaccinationType
-      )
-    ) {
-      vaccinationsOpen.push(due)
-    }
-  })
-  return data
+  // vaccinationDue.forEach(due => {
+  //   if (
+  //     !vaccinationsOpen.some(
+  //       open => open.vaccinationType === due.vaccinationType
+  //     )
+  //   ) {
+  //     vaccinationsOpen.push(due)
+  //   }
+  // })
+  //vaccinationsOpen = vaccinationDue
+  let returnData = data
+  returnData.vaccinationsOpen = vaccinationDue
+
+  return returnData
 }

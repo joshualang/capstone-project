@@ -14,3 +14,8 @@ export function patchData(vaccination) {
     .then(res => res.json())
     .then(res => console.log(res))
 }
+
+//date not in future || in form
+//x? update vaccinationsOpen || need to test
+//remove all undefined
+//vaccinationType

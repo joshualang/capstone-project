@@ -9,6 +9,7 @@ import Head from "./Head"
 
 export default function VaccinationDetails({ data }) {
   let { id } = useParams()
+  console.log("vaccinationDetails data", data, "id", id)
   const vaccination = { ...findVaccination(data), id: "" }
 
   function findVaccination(data) {
