@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
 import styled from "styled-components/macro"
+import { patchData } from "./services"
 
 import info from "./img/info.svg"
 import vaccinationExample from "./vaccinationExample.jpg"
@@ -27,11 +28,17 @@ export default function() {
         headline="Impfung hinzufügen"
         topRight={
           <Link to="/home">
-            <img src={checkmark} />
+            <img src={checkmark} alt="submit" />
           </Link>
         }
       />
-      <Form>
+      <Form
+        onSubmit={event => {
+          event.preventDefault()
+          console.log(form)
+          patchData(form)
+        }}
+      >
         <Flexbox>
           <label htmlFor="vaccinationDoctor">
             <Title>Name des Arztes</Title>
@@ -65,7 +72,7 @@ export default function() {
             <label htmlFor="vaccinationSticker">
               <Title>Text auf den Aufklebern</Title>
             </label>
-            <img className="icon" src={info}></img>
+            <img className="icon" src={info} alt="further information"></img>
           </Flexbox>
           {infoVisible ? (
             <>
@@ -75,7 +82,7 @@ export default function() {
                 <br />
                 Zum Beispiel:
               </DetailsText>
-              <img src={vaccinationExample}></img>
+              <img src={vaccinationExample} alt="vaccination sticker"></img>
               <DetailsText>Prevenar 32323 P661966</DetailsText>
             </>
           ) : (
@@ -89,6 +96,7 @@ export default function() {
             placeholder="Infanrix hexa A21CA404C"
           ></input>
         </Flexbox>
+        <button type="submit">Submit</button>
       </Form>
     </>
   )

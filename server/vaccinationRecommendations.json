@@ -1,0 +1,277 @@
+[
+  {
+    "rotaviren": [
+      {
+        "vaccinationType": "rotavirusG1",
+        "ageInDays": 42,
+        "mandatory": true,
+        "intervall": 28,
+        "comment": "Die 1. Impfung sollte bereits ab dem Alter von 6 Wochen erfolgen, je nach verwendetem Impfstoff sind 2 bzw. 3 Impfstoff- dosen im Abstand von mindestens 4 Wochen erforderlich."
+      },
+      {
+        "vaccinationType": "rotavirusG2",
+        "ageInDays": 62,
+        "mandatory": true,
+        "intervall": 28
+      },
+      {
+        "vaccinationType": "rotavirusG3",
+        "ageInDays": 92,
+        "mandatory": false,
+        "intervall": 28
+      }
+    ]
+  },
+  {
+    "tetanus": [
+      { "vaccinationType": "tetanusG1", "ageInDays": 62, "mandatory": true },
+      { "vaccinationType": "tetanusG2", "ageInDays": 93, "mandatory": true },
+      { "vaccinationType": "tetanusG3", "ageInDays": 124, "mandatory": true },
+      { "vaccinationType": "tetanusG4", "ageInDays": 341, "mandatory": true },
+      {
+        "vaccinationType": "tetanusA1",
+        "ageInDays": 1825,
+        "mandatory": true
+      },
+      {
+        "vaccinationType": "tetanusA2",
+        "ageInDays": 3285,
+        "mandatory": true
+      },
+      {
+        "vaccinationType": "tetanusA",
+        "ageInDays": 6570,
+        "intervall": 3650,
+        "mandatory": true,
+        "comment": "Td-Auffrischimpfung alle 10 Jahre. Die nächste fällige Td-Impfung einmalig als Tdap- bzw. bei entsprechender Indikation als Tdap-IPV-Kombinationsimpfung."
+      }
+    ]
+  },
+  {
+    "diphterie": [
+      { "vaccinationType": "diphterieG1", "ageInDays": 62, "mandatory": true },
+      { "vaccinationType": "diphterieG2", "ageInDays": 93, "mandatory": true },
+      { "vaccinationType": "diphterieG3", "ageInDays": 124, "mandatory": true },
+      { "vaccinationType": "diphterieG4", "ageInDays": 341, "mandatory": true },
+      {
+        "vaccinationType": "diphterieA1",
+        "ageInDays": 1825,
+        "mandatory": true
+      },
+      {
+        "vaccinationType": "diphterieA2",
+        "ageInDays": 3285,
+        "mandatory": true
+      },
+      {
+        "vaccinationType": "diphterieA",
+        "ageInDays": 6570,
+        "intervall": 3650,
+        "mandatory": true,
+        "comment": "Td-Auffrischimpfung alle 10 Jahre. Die nächste fällige Td-Impfung einmalig als Tdap- bzw. bei entsprechender Indikation als Tdap-IPV-Kombinationsimpfung."
+      }
+    ]
+  },
+  {
+    "pertussis": [
+      { "vaccinationType": "pertussisG1", "ageInDays": 62, "mandatory": true },
+      { "vaccinationType": "pertussisG2", "ageInDays": 93, "mandatory": true },
+      { "vaccinationType": "pertussisG3", "ageInDays": 124, "mandatory": true },
+      { "vaccinationType": "pertussisG4", "ageInDays": 341, "mandatory": true },
+      {
+        "vaccinationType": "pertussisA1",
+        "ageInDays": 1825,
+        "mandatory": true
+      },
+      {
+        "vaccinationType": "pertussisA2",
+        "ageInDays": 3285,
+        "mandatory": true
+      },
+      {
+        "vaccinationType": "pertussisA3",
+        "ageInDays": 6570,
+        "mandatory": true,
+        "comment": "Td-Auffrischimpfung alle 10 Jahre. Die nächste fällige Td-Impfung einmalig als Tdap- bzw. bei entsprechender Indikation als Tdap-IPV-Kombinationsimpfung."
+      }
+    ]
+  },
+  {
+    "hib": [
+      { "vaccinationType": "hibG1", "ageInDays": 62, "mandatory": true },
+      {
+        "vaccinationType": "hibG2",
+        "ageInDays": 93,
+        "mandatory": false,
+        "comment": "Bei Anwendung eines monovalenten Impfstoffes kann diese Dosis entfallen."
+      },
+      { "vaccinationType": "hibG3", "ageInDays": 124, "mandatory": true },
+      { "vaccinationType": "hibG4", "ageInDays": 341, "mandatory": true }
+    ]
+  },
+  {
+    "poliomyeitis": [
+      {
+        "vaccinationType": "poliomyeitisG1",
+        "ageInDays": 62,
+        "mandatory": true
+      },
+      {
+        "vaccinationType": "poliomyeitisG2",
+        "ageInDays": 93,
+        "mandatory": false,
+        "comment": "Bei Anwendung eines monovalenten Impfstoffes kann diese Dosis entfallen."
+      },
+      {
+        "vaccinationType": "poliomyeitisG3",
+        "ageInDays": 124,
+        "mandatory": true
+      },
+      {
+        "vaccinationType": "poliomyeitisG4",
+        "ageInDays": 341,
+        "mandatory": true
+      },
+      {
+        "vaccinationType": "poliomyeitisA1",
+        "ageInDays": 3285,
+        "mandatory": true
+      }
+    ]
+  },
+  {
+    "hepatitisB": [
+      { "vaccinationType": "hepatitisBG1", "ageInDays": 62, "mandatory": true },
+      {
+        "vaccinationType": "hepatitisBG2",
+        "ageInDays": 93,
+        "mandatory": false,
+        "comment": "Bei Anwendung eines monovalenten Impfstoffes kann diese Dosis entfallen."
+      },
+      {
+        "vaccinationType": "hepatitisBG3",
+        "ageInDays": 124,
+        "mandatory": true
+      },
+      { "vaccinationType": "hepatitisBG4", "ageInDays": 341, "mandatory": true }
+    ]
+  },
+  {
+    "pneumokokken": [
+      {
+        "vaccinationType": "pneumokokkenG1",
+        "ageInDays": 62,
+        "mandatory": true
+      },
+      {
+        "vaccinationType": "pneumokokkenG2",
+        "ageInDays": 93,
+        "mandatory": false,
+        "comment": "Frühgeborene erhalten eine zusätzliche Impfstoffdosis im Alter von 3 Monaten, d. h. insgesamt 4 Impfstoffdosen."
+      },
+      {
+        "vaccinationType": "pneumokokkenG3",
+        "ageInDays": 124,
+        "mandatory": true
+      },
+      {
+        "vaccinationType": "pneumokokkenG4",
+        "ageInDays": 341,
+        "mandatory": true
+      },
+      {
+        "vaccinationType": "pneumokokkenS",
+        "ageInDays": 21900,
+        "mandatory": true,
+        "comment": "Impfung mit dem 23-valenten Polysaccharid-Impfstoff."
+      }
+    ]
+  },
+  {
+    "meningokokkenC": [
+      {
+        "vaccinationType": "meningokokkenG1",
+        "ageInDays": 365,
+        "mandatory": true
+      }
+    ]
+  },
+  {
+    "masern": [
+      { "vaccinationType": "masernG1", "ageInDays": 341, "mandatory": true },
+      { "vaccinationType": "masernG2", "ageInDays": 465, "mandatory": true },
+      {
+        "vaccinationType": "masernS",
+        "ageInDays": 6570,
+        "mandatory": true,
+        "comment": "Einmalige Impfung mit einem MMR-Impfstoff für alle nach 1970 geborenen Personen ≥ 18 Jahre mit unklarem Impfstatus, ohne Impfung oder mit nur einer Impfung in der Kindheit."
+      }
+    ]
+  },
+  {
+    "mumps": [
+      { "vaccinationType": "mumpsG1", "ageInDays": 341, "mandatory": true },
+      { "vaccinationType": "mumpsG2", "ageInDays": 465, "mandatory": true }
+    ]
+  },
+  {
+    "varizellen": [
+      {
+        "vaccinationType": "variazellenG1",
+        "ageInDays": 341,
+        "mandatory": true
+      },
+      {
+        "vaccinationType": "variazellenG2",
+        "ageInDays": 465,
+        "mandatory": true
+      }
+    ]
+  },
+  {
+    "hpv": [
+      {
+        "vaccinationType": "hpvG1",
+        "ageInDays": 3285,
+        "mandatory": true,
+        "intervall": 155,
+        "comment": "Standardimpfung für Kinder und Jugendliche im Alter von 9 – 14 Jahren mit 2 Impfstoffdosen im Abstand von mindestens 5 Monaten, bei Nachholimpfung beginnend im Alter > 14 Jahren oder bei einem Impfabstand von < 5 Monaten zwischen 1. und 2. Dosis ist eine 3. Dosis erforderlich (Fachinformation beachten)."
+      },
+      {
+        "vaccinationType": "hpvG2",
+        "ageInDays": 3440,
+        "mandatory": true,
+        "intervall": 155,
+        "comment": "Standardimpfung für Kinder und Jugendliche im Alter von 9 – 14 Jahren mit 2 Impfstoffdosen im Abstand von mindestens 5 Monaten, bei Nachholimpfung beginnend im Alter > 14 Jahren oder bei einem Impfabstand von < 5 Monaten zwischen 1. und 2. Dosis ist eine 3. Dosis erforderlich (Fachinformation beachten)."
+      }
+    ]
+  },
+  {
+    "herpesZoster": [
+      {
+        "vaccinationType": "herpesZosterG1",
+        "ageInDays": 21900,
+        "mandatory": true,
+        "intervall": 62,
+        "comment": "Zweimalige Impfung mit dem adjuvantierten Herpes-zoster-Totimpfstoff im Abstand von mindestens 2 bis maximal 6 Monaten."
+      },
+      {
+        "vaccinationType": "herpesZosterG2",
+        "ageInDays": 21962,
+        "mandatory": true,
+        "intervall": 62,
+        "comment": "Zweimalige Impfung mit dem adjuvantierten Herpes-zoster-Totimpfstoff im Abstand von mindestens 2 bis maximal 6 Monaten."
+      }
+    ]
+  },
+  {
+    "influenza": [
+      {
+        "vaccinationType": "influenza",
+        "ageInDays": 21900,
+        "mandatory": true,
+        "intervall": 365
+      }
+    ]
+  }
+]

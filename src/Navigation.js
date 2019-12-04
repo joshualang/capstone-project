@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import styled from "styled-components/macro"
-import { useSpring, animated, config } from "react-spring"
+import { useSpring, animated } from "react-spring"
 
 import colors from "./common/styles/colors"
 

@@ -31,7 +31,8 @@ export default function VaccinationDetails({ data }) {
     registrationDate: "Zulassungsdatum",
     begins: "Anfang des Impfungszeitraums",
     ends: "Ende des Impfungszeitraums",
-    comment: "Kommentar"
+    comment: "Kommentar",
+    intervall: "Abstand zur letzten Impfung"
   }
 
   return (
@@ -40,7 +41,7 @@ export default function VaccinationDetails({ data }) {
 
       <VaccinationStyledOpen>
         {Object.keys(vaccination)
-          .filter(entry => vaccination[entry] != "")
+          .filter(entry => vaccination[entry] !== "")
           .map(entry => (
             <div key={entry}>
               <Title key={"Title" + entry}>{keysToTitles[entry]}</Title>

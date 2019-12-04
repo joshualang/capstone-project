@@ -1,6 +1,7 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Switch, Route, useLocation } from "react-router-dom"
 import { useTransition } from "react-spring"
+import { getData } from "./services"
 
 import Main from "./Main"
 import Header from "./Header"
@@ -10,12 +11,24 @@ import Vaccinations from "./Vaccinations"
 import VaccinationDetails from "./VaccinationDetails"
 import VaccinationForm from "./VaccinationForm"
 
-import mockUpData from "./mockUpData.json"
-const data = mockUpData[0]
+import defaultData from "./empty.json"
+
+// const network = fetch("http://localhost:3334/ZA1U8UchFPV5nk7ZuICs")
+//   .then(res => res.json())
+//   .then(response => {
+//     console.log(response)
+//     return response
+//   })
+//   .catch(err => console.log("--->", err))
 
 function App() {
+  const [data, setData] = useState(defaultData)
   const [isMenuShown, setIsMenuShown] = useState(false)
 
+  useEffect(() => {
+    getData().then(setData)
+  }, [])
+  console.log(data)
   function onMenuClick() {
     setIsMenuShown(!isMenuShown)
   }
@@ -43,14 +56,14 @@ function App() {
       {transitions.map(({ item, props, key }) => (
         <Main key={key} style={props}>
           <Switch location={item}>
-            <Route path="/home">
-              <Vaccinations data={data}></Vaccinations>
-            </Route>
             <Route path="/addvaccination">
               <VaccinationForm></VaccinationForm>
             </Route>
             <Route path="/vaccinationdetails/:id">
               <VaccinationDetails data={data}></VaccinationDetails>
+            </Route>
+            <Route path="/home">
+              <Vaccinations data={data}></Vaccinations>
             </Route>
           </Switch>
         </Main>

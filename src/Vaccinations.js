@@ -18,7 +18,9 @@ export default function({ data }) {
           ></VaccinationCard>
         </>
       ))}
-      <SectionText>Erledigte Impfungen</SectionText>
+      <SectionText style={{ paddingTop: "16px" }}>
+        Erledigte Impfungen
+      </SectionText>
       {data.vaccinationsMade.map(entry => (
         <>
           <VaccinationCard
