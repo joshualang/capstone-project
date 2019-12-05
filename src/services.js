@@ -16,6 +16,11 @@ export function patchData(vaccination) {
 }
 
 //date not in future || in form
-//x? update vaccinationsOpen || need to test
-//remove all undefined
-//vaccinationType
+//x update vaccinationsOpen || need to test
+//x remove all undefined
+//vaccinationType || made entries in json, now:
+//get disease name and check to which date in vaccination recommendations its equal -> vaccinationtype
+
+//update database then get
+
+//date patched to server incorrect for vaccinationsMade

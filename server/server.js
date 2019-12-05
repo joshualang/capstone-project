@@ -54,6 +54,13 @@ server.get("/api/:user", (req, res) => {
 server.patch("/api/:user", (req, res) => {
   let newVaccinations = []
   console.log(req.body)
+  function toDateObject(reqDateString) {
+    const day = Number(reqDateString.slice(0, 3))
+    const month = Number(reqDateString.slice(3, 6))
+    const year = Number(reqDateString.slice(6))
+    return new Date(`${year}, ${month}, ${day}`)
+  }
+
   db.collection("vaccines")
     .doc("421FbrvSm2Vc4EJsTejV")
     .get()
@@ -63,18 +70,40 @@ server.patch("/api/:user", (req, res) => {
       } else {
         const vaccine = doc.data()
         vaccine.diseases.forEach(disease => {
+          console.log(disease)
+          function vaccinationType() {
+            const indexOfDisease = vaccinationRecommendations.findIndex(
+              item => item[disease]
+            )
+
+            if (indexOfDisease >= 0) {
+              console.log(indexOfDisease)
+              console.log("index", vaccinationRecommendations[indexOfDisease])
+              return vaccinationRecommendations[indexOfDisease][disease].find(
+                entry =>
+                  entry.beginsAtAgeInDays <
+                  (toDateObject(req.body.date).getTime() -
+                    toDateObject(req.body.userBirth).getTime()) /
+                    (1000 * 60 * 60 * 24) <
+                  entry.endsAtAgeInDays
+              )
+            } else {
+              return "Impfung nicht zuruordnen"
+            }
+          }
+
           newVaccinations.push({
             date: new Date(req.body.date),
             disease: disease,
             doctor: req.body.doctor,
             id: uid(),
             registrationNumber: req.body.sticker,
-            vaccinationType: "To be found",
             admittedApplicant: vaccine.admittedApplicant,
             description: vaccine.description,
             furtherInformation: vaccine.furtherInformation,
             name: vaccine.name,
-            registrationDate: vaccine.registrationDate
+            registrationDate: vaccine.registrationDate,
+            vaccinationType: vaccinationType()
           })
         })
         db.collection("users")
@@ -134,14 +163,12 @@ function userFormatter(json) {
   json.vaccinationsOpen.map(item => {
     item.vaccinationType = getType(item.vaccinationType)
     item.begins = toDate(item.begins)
-    item.intervall = `${item.intervall} Tage`
   })
 
   json.vaccinationsMade.map(item => {
     item.vaccinationType = getType(item.vaccinationType)
     console.log("date", item.date)
     item.date = toDate(item.date)
-    //item.intervall = `${item.intervall} Tage`
     console.log("registrationDate", item.registrationDate)
     item.registrationDate = toDate(item.registrationDate)
   })
@@ -209,20 +236,22 @@ function nextVaccination(data) {
     vaccinationsDue = [...vaccinationsDue, []]
     const diseaseName = Object.keys(disease)[0]
     const singleDisease = disease[diseaseName]
+    console.log("singleDisease", diseaseName)
 
     singleDisease.forEach(item => {
       if (
         !vaccinationsMade.some(
           el => el.vaccinationType === item.vaccinationType
         ) &&
-        userAgeInDays + 90 > item.ageInDays
+        userAgeInDays + 90 > item.beginsAtAgeInDays
       ) {
+        console.log("vaccinationsdue bedingung")
         vaccinationsDue[diseaseIndex] = [
           ...vaccinationsDue[diseaseIndex],
           {
             id: uid(),
-            disease: diseaseNames[diseaseName],
-            begins: setDate(item.ageInDays - userAgeInDays),
+            disease: diseaseName,
+            begins: setDate(item.beginsAtAgeInDays - userAgeInDays),
             doctor: "Select a Doctor",
             vaccinationType: item.vaccinationType
           }
@@ -256,8 +285,9 @@ function nextVaccination(data) {
   //   }
   // })
   //vaccinationsOpen = vaccinationDue
+
   let returnData = data
   returnData.vaccinationsOpen = vaccinationDue
-
+  console.log(returnData)
   return returnData
 }

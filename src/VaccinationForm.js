@@ -20,7 +20,12 @@ export default function() {
   const year = now.getFullYear()
   const dateString = `${date}.${month}.${year}`
 
-  const [form, setForm] = useState({ doctor: "", date: "", sticker: "" })
+  const [form, setForm] = useState({
+    doctor: "",
+    date: "",
+    sticker: "",
+    userBirth: "24.09.2019"
+  })
   const [infoVisible, setInfoVisible] = useState(false)
   return (
     <>
