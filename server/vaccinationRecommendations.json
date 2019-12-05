@@ -1,6 +1,6 @@
 [
   {
-    "rotaviren": [
+    "Rotaviren": [
       {
         "vaccinationType": "rotavirusG1",
         "beginsAtAgeInDays": 42,
@@ -26,7 +26,7 @@
     ]
   },
   {
-    "tetanus": [
+    "Tetanus": [
       {
         "vaccinationType": "tetanusG1",
         "beginsAtAgeInDays": 62,
@@ -74,7 +74,7 @@
     ]
   },
   {
-    "diphterie": [
+    "Diphterie": [
       {
         "vaccinationType": "diphterieG1",
         "beginsAtAgeInDays": 62,
@@ -122,7 +122,7 @@
     ]
   },
   {
-    "pertussis": [
+    "Pertussis": [
       {
         "vaccinationType": "pertussisG1",
         "beginsAtAgeInDays": 62,
@@ -169,7 +169,7 @@
     ]
   },
   {
-    "hib": [
+    "Hib": [
       {
         "vaccinationType": "hibG1",
         "beginsAtAgeInDays": 62,
@@ -198,7 +198,7 @@
     ]
   },
   {
-    "poliomyeitis": [
+    "Poliomyeitis": [
       {
         "vaccinationType": "poliomyeitisG1",
         "beginsAtAgeInDays": 62,
@@ -262,7 +262,7 @@
     ]
   },
   {
-    "pneumokokken": [
+    "Pneumokokken": [
       {
         "vaccinationType": "pneumokokkenG1",
         "beginsAtAgeInDays": 62,
@@ -298,7 +298,7 @@
     ]
   },
   {
-    "meningokokkenC": [
+    "MeningokokkenC": [
       {
         "vaccinationType": "meningokokkenG1",
         "beginsAtAgeInDays": 365,
@@ -308,7 +308,7 @@
     ]
   },
   {
-    "masern": [
+    "Masern": [
       {
         "vaccinationType": "masernG1",
         "beginsAtAgeInDays": 341,
@@ -331,7 +331,7 @@
     ]
   },
   {
-    "mumps": [
+    "Mumps": [
       {
         "vaccinationType": "mumpsG1",
         "beginsAtAgeInDays": 341,
@@ -347,7 +347,7 @@
     ]
   },
   {
-    "varizellen": [
+    "Varizellen": [
       {
         "vaccinationType": "variazellenG1",
         "beginsAtAgeInDays": 341,
@@ -363,7 +363,7 @@
     ]
   },
   {
-    "hpv": [
+    "HPV": [
       {
         "vaccinationType": "hpvG1",
         "beginsAtAgeInDays": 3285,
@@ -383,7 +383,7 @@
     ]
   },
   {
-    "herpesZoster": [
+    "Herpes Zoster": [
       {
         "vaccinationType": "herpesZosterG1",
         "beginsAtAgeInDays": 21900,
@@ -403,7 +403,7 @@
     ]
   },
   {
-    "influenza": [
+    "Influenza": [
       {
         "vaccinationType": "influenza",
         "beginsAtAgeInDays": 21900,

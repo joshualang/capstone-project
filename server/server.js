@@ -1,59 +1,86 @@
-const vaccinationRecommendations = require("./vaccinationRecommendations.json")
-const admin = require("firebase-admin")
-let serviceAccount = require("./medical-assistant-19fc3-cee7dfd4e3aa.json")
+const vaccinationRecommendations = require('./vaccinationRecommendations.json')
+const admin = require('firebase-admin')
+let serviceAccount = require('./medical-assistant-19fc3-cee7dfd4e3aa.json')
+
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
+  credential: admin.credential.cert(serviceAccount),
 })
 let db = admin.firestore()
 
-const express = require("express")
-const uid = require("uid")
-const cors = require("cors")
+const express = require('express')
+const uid = require('uid')
+const cors = require('cors')
 
 const server = express()
 const port = 3334
 server.listen(port, () => console.log(`Express ready on port ${port}`))
 server.use(cors())
 server.use(express.json())
-server.set("json spaces", 2)
+server.set('json spaces', 2)
 
-server.get("/api/:user", (req, res) => {
+server.get('/api/:user', (req, res) => {
   const { user } = req.params
 
-  db.collection("users")
+  db.collection('users')
     .doc(user)
     .get()
     .then(doc => {
       if (!doc.exists) {
-        console.log("No such document!")
+        console.log('GET user for set', 'No such document!')
       } else {
-        db.collection("users")
-          .doc("LA")
+        db.collection('users')
+          .doc('LA')
           .set(nextVaccination(doc.data(), { merge: true }))
       }
     })
     .catch(err => {
-      console.log("Error getting document", err)
+      console.log('Error getting document', err)
     })
   updateVaccinationsOpen(user)
-  db.collection("users")
+  db.collection('users')
     .doc(user)
     .get()
     .then(doc => {
       if (!doc.exists) {
-        res.send("No such document!")
+        res.send('GET user', 'No such document!')
       } else {
         res.send(userFormatter(doc.data()))
       }
     })
     .catch(err => {
-      res.send("Error getting document", err)
+      res.send('Error getting document', err)
     })
 })
 
-server.patch("/api/:user", (req, res) => {
-  let newVaccinations = []
-  console.log(req.body)
+server.patch('/api/:user', (req, res) => {
+  db.collection('vaccines')
+    .doc('421FbrvSm2Vc4EJsTejV')
+    .get()
+    .then(doc => {
+      if (!doc.exists) {
+        console.log('PATCH', 'No such document!')
+      } else {
+        const vaccine = doc.data()
+        db.collection('users')
+          .doc('LA')
+          .set(
+            {
+              vaccinationsMade: [
+                ...createVaccinationsMadeFromVaccine(vaccine, req),
+              ],
+            },
+            { merge: true }
+          )
+      }
+    })
+    .catch(err => {
+      console.log('Error getting document', err)
+    })
+
+  res.json('Arrived')
+})
+
+function createVaccinationsMadeFromVaccine(vaccine, request) {
   function toDateObject(reqDateString) {
     const day = Number(reqDateString.slice(0, 3))
     const month = Number(reqDateString.slice(3, 6))
@@ -61,82 +88,62 @@ server.patch("/api/:user", (req, res) => {
     return new Date(`${year}, ${month}, ${day}`)
   }
 
-  db.collection("vaccines")
-    .doc("421FbrvSm2Vc4EJsTejV")
-    .get()
-    .then(doc => {
-      if (!doc.exists) {
-        console.log("No such document!")
+  let newVaccinations = []
+  vaccine.diseases.forEach(disease => {
+    console.log(disease)
+    function vaccinationType() {
+      const indexOfDisease = vaccinationRecommendations.findIndex(
+        item => item[disease]
+      )
+
+      if (indexOfDisease >= 0) {
+        console.log(indexOfDisease)
+        console.log('index', vaccinationRecommendations[indexOfDisease])
+        return vaccinationRecommendations[indexOfDisease][disease].find(
+          entry =>
+            entry.beginsAtAgeInDays <
+            (toDateObject(request.body.date).getTime() -
+              toDateObject(request.body.userBirth).getTime()) /
+              (1000 * 60 * 60 * 24) <
+            entry.endsAtAgeInDays
+        ).vaccinationType
       } else {
-        const vaccine = doc.data()
-        vaccine.diseases.forEach(disease => {
-          console.log(disease)
-          function vaccinationType() {
-            const indexOfDisease = vaccinationRecommendations.findIndex(
-              item => item[disease]
-            )
-
-            if (indexOfDisease >= 0) {
-              console.log(indexOfDisease)
-              console.log("index", vaccinationRecommendations[indexOfDisease])
-              return vaccinationRecommendations[indexOfDisease][disease].find(
-                entry =>
-                  entry.beginsAtAgeInDays <
-                  (toDateObject(req.body.date).getTime() -
-                    toDateObject(req.body.userBirth).getTime()) /
-                    (1000 * 60 * 60 * 24) <
-                  entry.endsAtAgeInDays
-              )
-            } else {
-              return "Impfung nicht zuruordnen"
-            }
-          }
-
-          newVaccinations.push({
-            date: new Date(req.body.date),
-            disease: disease,
-            doctor: req.body.doctor,
-            id: uid(),
-            registrationNumber: req.body.sticker,
-            admittedApplicant: vaccine.admittedApplicant,
-            description: vaccine.description,
-            furtherInformation: vaccine.furtherInformation,
-            name: vaccine.name,
-            registrationDate: vaccine.registrationDate,
-            vaccinationType: vaccinationType()
-          })
-        })
-        db.collection("users")
-          .doc("LA")
-          .set({ vaccinationsMade: [...newVaccinations] }, { merge: true })
+        return 'Impfung nicht zuruordnen'
       }
-    })
-    .catch(err => {
-      console.log("Error getting document", err)
-    })
+    }
 
-  res.json("Arrived")
-  //make request for vaccine in firestore
-  //create entrie
-  //set to firestore with merge: true
-  //send set to firestore back
-})
+    newVaccinations.push({
+      date: toDateObject(request.body.date),
+      disease: disease,
+      doctor: request.body.doctor,
+      id: uid(),
+      registrationNumber: request.body.sticker,
+      admittedApplicant: vaccine.admittedApplicant,
+      description: vaccine.description,
+      furtherInformation: vaccine.furtherInformation,
+      name: vaccine.name,
+      registrationDate: vaccine.registrationDate,
+      vaccinationType: vaccinationType(),
+    })
+  })
+  return newVaccinations
+}
 
 function userFormatter(json) {
   function toDate(key) {
     const months = {
-      1: "Jan",
-      2: "Feb",
-      3: "Mar",
-      4: "Apr",
-      5: "May",
-      6: "Jun",
-      7: "Jul",
-      8: "Aug",
-      9: "Sep",
-      10: "Oct",
-      11: "Nov",
-      12: "Dec"
+      1: 'Jan',
+      2: 'Feb',
+      3: 'Mar',
+      4: 'Apr',
+      5: 'May',
+      6: 'Jun',
+      7: 'Jul',
+      8: 'Aug',
+      9: 'Sep',
+      10: 'Oct',
+      11: 'Nov',
+      12: 'Dec',
     }
 
     key = new Date(key._seconds * 1000)
@@ -150,10 +157,10 @@ function userFormatter(json) {
 
   function getType(string) {
     const cases = {
-      rotavirusG1: "1. Grundimmunisierung",
-      rotavirusG2: "2. Grundimmunisierung",
-      rotavirusG3: "3. Grundimmunisierung",
-      rotavirusG4: "4. Grundimmunisierung"
+      rotavirusG1: '1. Grundimmunisierung',
+      rotavirusG2: '2. Grundimmunisierung',
+      rotavirusG3: '3. Grundimmunisierung',
+      rotavirusG4: '4. Grundimmunisierung',
     }
     return cases[string]
   }
@@ -167,49 +174,49 @@ function userFormatter(json) {
 
   json.vaccinationsMade.map(item => {
     item.vaccinationType = getType(item.vaccinationType)
-    console.log("date", item.date)
+    console.log('date', item.date)
     item.date = toDate(item.date)
-    console.log("registrationDate", item.registrationDate)
+    console.log('registrationDate', item.registrationDate)
     item.registrationDate = toDate(item.registrationDate)
   })
   return json
 }
 
 function updateVaccinationsOpen(user) {
-  db.collection("user")
+  db.collection('user')
     .doc(user)
     .get()
     .then(doc => {
       if (!doc.exists) {
-        console.log("No such document!")
+        console.log('No such document!')
       } else {
-        db.collection("users")
-          .doc("LA")
+        db.collection('users')
+          .doc('LA')
           .set(nextVaccination(doc.data(), { merge: true }))
       }
     })
     .catch(err => {
-      console.log("Error getting document", err)
+      console.log('Error getting document', err)
     })
 }
 
 function nextVaccination(data) {
   const diseaseNames = {
-    rotaviren: "Rotavirus",
-    tetanus: "Tetanus",
-    diphterie: "Diphterie",
-    pertussis: "Pertussis",
-    hib: "Hib",
-    poliomyeitis: "Polio",
-    hepatitisB: "Hepatitis B",
-    pneumokokken: "Pneumokokken",
-    meningokokkenC: "Meningokokken C",
-    masern: "Masern",
-    mumps: "Mumps, Röteln",
-    varizellen: "Varizellen",
-    hpv: "HPV",
-    herpesZoster: "Herpes Zoster",
-    influenza: "Influenza"
+    rotaviren: 'Rotavirus',
+    tetanus: 'Tetanus',
+    diphterie: 'Diphterie',
+    pertussis: 'Pertussis',
+    hib: 'Hib',
+    poliomyeitis: 'Polio',
+    hepatitisB: 'Hepatitis B',
+    pneumokokken: 'Pneumokokken',
+    meningokokkenC: 'Meningokokken C',
+    masern: 'Masern',
+    mumps: 'Mumps, Röteln',
+    varizellen: 'Varizellen',
+    hpv: 'HPV',
+    herpesZoster: 'Herpes Zoster',
+    influenza: 'Influenza',
   }
 
   const birthDate = data.age._seconds * 1000
@@ -229,14 +236,14 @@ function nextVaccination(data) {
   }
 
   let vaccinationsDue = []
-  console.log("birthDate", birthDate)
+  console.log('birthDate', birthDate)
   const userAgeInDays = toAgeInDays(birthDate)
-  console.log("userAgeInDays", userAgeInDays)
+  console.log('userAgeInDays', userAgeInDays)
   vaccinationRecommendations.forEach((disease, diseaseIndex) => {
     vaccinationsDue = [...vaccinationsDue, []]
     const diseaseName = Object.keys(disease)[0]
     const singleDisease = disease[diseaseName]
-    console.log("singleDisease", diseaseName)
+    console.log('singleDisease', diseaseName)
 
     singleDisease.forEach(item => {
       if (
@@ -245,27 +252,27 @@ function nextVaccination(data) {
         ) &&
         userAgeInDays + 90 > item.beginsAtAgeInDays
       ) {
-        console.log("vaccinationsdue bedingung")
+        console.log('vaccinationsdue bedingung')
         vaccinationsDue[diseaseIndex] = [
           ...vaccinationsDue[diseaseIndex],
           {
             id: uid(),
             disease: diseaseName,
             begins: setDate(item.beginsAtAgeInDays - userAgeInDays),
-            doctor: "Select a Doctor",
-            vaccinationType: item.vaccinationType
-          }
+            doctor: 'Select a Doctor',
+            vaccinationType: item.vaccinationType,
+          },
         ]
       }
     })
   })
-  console.log("before filtering", vaccinationsDue)
+  console.log('before filtering', vaccinationsDue)
 
   const vaccinationDue = vaccinationsDue
     .map(array => array[0])
     .filter(item => item != undefined)
     .sort((a, b) => a.date - b.date)
-  console.log("after filtering", vaccinationDue)
+  console.log('after filtering', vaccinationDue)
   // .map(vaccination => {
   //   vaccination.vaccinationsMade.map(entry => {
   //     Object.keys(entry).forEach(key => entry[key] === undefined && delete entry[key])
