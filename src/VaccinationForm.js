@@ -77,7 +77,7 @@ export default function() {
               setForm({
                 ...form,
                 doctor: event.target.value,
-                validDoctor: event.target.value !== '',
+                validDoctor: event.target.value,
               })
             }
             placeholder="Dr. med. Max Mustermann"
@@ -135,7 +135,7 @@ export default function() {
               setForm({
                 ...form,
                 sticker: event.target.value,
-                validSticker: event.target.value !== '',
+                validSticker: event.target.value,
               })
             }
             type="text"
