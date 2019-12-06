@@ -56,7 +56,7 @@ export default function() {
         headline="Impfung hinzufügen"
         topRight={
           <Link to="/home">
-            <img src={checkmark} alt="submit" />
+            <img height="18px" width="18px" src={checkmark} alt="submit" />
           </Link>
         }
       />

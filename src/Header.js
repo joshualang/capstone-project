@@ -10,6 +10,8 @@ export default function Header({ onMenuClick, onMoreDropdownMenuClick }) {
       <div>
         <img onClick={() => onMenuClick()} src={menu} alt="menu"></img>
         <img
+          width="18px"
+          height="18px"
           src={more}
           alt="more"
           onClick={() => onMoreDropdownMenuClick()}

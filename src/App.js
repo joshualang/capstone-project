@@ -10,6 +10,7 @@ import Vaccinations from './Vaccinations'
 import VaccinationDetails from './VaccinationDetails'
 import VaccinationForm from './VaccinationForm'
 import MoreDropdownMenu from './MoreDropdownMenu'
+import Spinner from './Spinner'
 
 import useLoadingEffect from './hooks/useLoadingEffect'
 
@@ -63,14 +64,16 @@ function App() {
             </Route>
             <Route path="/vaccinationdetails/:id">
               {isLoading ? (
-                <div>Loading...</div>
+                <Spinner/>
+              
               ) : (
                 <VaccinationDetails data={data}></VaccinationDetails>
               )}
             </Route>
             <Route path="/home">
               {isLoading ? (
-                <div>Loading...</div>
+                 <Spinner/>
+              
               ) : (
                 <Vaccinations data={data}></Vaccinations>
               )}

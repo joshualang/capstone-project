@@ -1,10 +1,10 @@
-import React from "react"
-import styled from "styled-components/macro"
-import Line from "./Line"
-import back from "./img/ios-back.svg"
-import SectionText from "./common/text/SectionText"
-import Fadeout from "./common/Fadeout"
-import { Link } from "react-router-dom"
+import React from 'react'
+import styled from 'styled-components/macro'
+import Line from './Line'
+import back from './img/ios-back.svg'
+import SectionText from './common/text/SectionText'
+import Fadeout from './common/Fadeout'
+import { Link } from 'react-router-dom'
 
 export default function({ onBackClick, topRight, headline }) {
   return (
@@ -12,7 +12,13 @@ export default function({ onBackClick, topRight, headline }) {
       <Header>
         <Grid>
           <Link to="/home">
-            <img onClick={onBackClick} src={back} alt="back"></img>
+            <img
+              height="18px"
+              width="18px"
+              onClick={onBackClick}
+              src={back}
+              alt="back"
+            ></img>
           </Link>
           <SectionText textAlign="center">{headline}</SectionText>
           <div>{topRight}</div>
