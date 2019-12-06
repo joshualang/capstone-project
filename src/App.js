@@ -9,15 +9,19 @@ import Navigation from './Navigation'
 import Vaccinations from './Vaccinations'
 import VaccinationDetails from './VaccinationDetails'
 import VaccinationForm from './VaccinationForm'
+import MoreDropdownMenu from './MoreDropdownMenu'
 
 import useLoadingEffect from './hooks/useLoadingEffect'
 
 function App() {
   const { data, isLoading } = useLoadingEffect()
+  const [isMoreDropdownMenuShown, setIsMoreDropdownMenuShown] = useState(false)
   const [isMenuShown, setIsMenuShown] = useState(false)
-
   function onMenuClick() {
     setIsMenuShown(!isMenuShown)
+  }
+  function onMoreDropdownMenuClick() {
+    setIsMoreDropdownMenuShown(!isMoreDropdownMenuShown)
   }
 
   const location = useLocation()
@@ -40,7 +44,17 @@ function App() {
       ) : (
         ''
       )}
-      <Header onMenuClick={onMenuClick} showTitle="true" />
+      {isMoreDropdownMenuShown ? (
+        <MoreDropdownMenu
+          onMoreDropdownMenuClick={onMoreDropdownMenuClick}
+        ></MoreDropdownMenu>
+      ) : (
+        ''
+      )}
+      <Header
+        onMenuClick={onMenuClick}
+        onMoreDropdownMenuClick={onMoreDropdownMenuClick}
+      />
       {transitions.map(({ item, props, key }) => (
         <Main key={key} style={props}>
           <Switch location={item}>
