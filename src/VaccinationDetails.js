@@ -1,15 +1,15 @@
-import React from "react"
-import styled from "styled-components/macro"
-import { useParams } from "react-router-dom"
+import React from 'react'
+import styled from 'styled-components/macro'
+import { useParams } from 'react-router-dom'
 
-import colors from "./common/styles/colors"
-import Title from "./common/text/Title"
-import Text from "./common/text/Text"
-import Head from "./Head"
+import colors from './common/styles/colors'
+import Title from './common/text/Title'
+import Text from './common/text/Text'
+import Head from './Head'
 
 export default function VaccinationDetails({ data }) {
   let { id } = useParams()
-  const vaccination = { ...findVaccination(data), id: "" }
+  const vaccination = { ...findVaccination(data), id: '' }
 
   function findVaccination(data) {
     return (
@@ -19,19 +19,20 @@ export default function VaccinationDetails({ data }) {
   }
 
   const keysToTitles = {
-    date: "Datum",
-    disease: "Krankheit",
-    doctor: "Arzt",
-    registrationNumber: "Zu­las­sungs­num­mer",
-    vaccinationType: "Art der Impfung",
-    admittedApplicant: "Zulassungsinhaber",
-    description: "Stoff- oder In­di­ka­ti­onsgrup­pe",
-    furtherInformation: "Weitere Informationen",
-    name: "Bezeichnung",
-    registrationDate: "Zulassungsdatum",
-    begins: "Anfang des Impfungszeitraums",
-    ends: "Ende des Impfungszeitraums",
-    comment: "Kommentar"
+    date: 'Datum',
+    disease: 'Krankheit',
+    doctor: 'Arzt',
+    registrationNumber: 'Zu­las­sungs­num­mer',
+    vaccinationType: 'Art der Impfung',
+    admittedApplicant: 'Zulassungsinhaber',
+    description: 'Stoff- oder In­di­ka­ti­onsgrup­pe',
+    furtherInformation: 'Weitere Informationen',
+    name: 'Bezeichnung',
+    registrationDate: 'Zulassungsdatum',
+    begins: 'Anfang des Impfungszeitraums',
+    ends: 'Ende des Impfungszeitraums',
+    comment: 'Kommentar',
+    intervall: 'Abstand zur letzten Impfung',
   }
 
   return (
@@ -40,11 +41,11 @@ export default function VaccinationDetails({ data }) {
 
       <VaccinationStyledOpen>
         {Object.keys(vaccination)
-          .filter(entry => vaccination[entry] != "")
+          .filter(entry => vaccination[entry] !== '')
           .map(entry => (
             <div key={entry}>
-              <Title key={"Title" + entry}>{keysToTitles[entry]}</Title>
-              <Text key={"Text" + entry}>{vaccination[entry]}</Text>
+              <Title key={'Title' + entry}>{keysToTitles[entry]}</Title>
+              <Text key={'Text' + entry}>{vaccination[entry]}</Text>
             </div>
           ))}
       </VaccinationStyledOpen>
