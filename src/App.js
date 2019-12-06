@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Switch, Route, useLocation } from 'react-router-dom'
 import { useTransition } from 'react-spring'
 

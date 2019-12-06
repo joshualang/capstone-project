@@ -14,6 +14,17 @@ import DetailsText from './common/text/DetailsText'
 import Head from './Head'
 
 export default function() {
+  const [form, setForm] = useState({
+    doctor: '',
+    validDoctor: false,
+    date: '',
+    validDate: false,
+    sticker: '',
+    validSticker: false,
+    userBirth: '24.09.2019',
+    infoVisible: false,
+  })
+
   function nowAsString() {
     function addLeadingZero(n) {
       return n < 10 ? '0' + n : n
@@ -28,27 +39,16 @@ export default function() {
   function isValidDate(date) {
     const matches = /^(\d{2})\.(\d{2})\.(\d{4})$/.exec(date)
     if (matches == null) return false
-    const d = matches[1]
-    const m = matches[2] - 1
-    const y = matches[3]
+    const d = Number(matches[1])
+    const m = Number(matches[2]) - 1
+    const y = Number(matches[3])
     const composedDate = new Date(y, m, d)
     return (
-      composedDate.getDate() == d &&
-      composedDate.getMonth() == m &&
-      composedDate.getFullYear() == y
+      composedDate.getDate() === d &&
+      composedDate.getMonth() === m &&
+      composedDate.getFullYear() === y
     )
   }
-
-  const [form, setForm] = useState({
-    doctor: '',
-    validDoctor: false,
-    date: '',
-    validDate: false,
-    sticker: '',
-    validSticker: false,
-    userBirth: '24.09.2019',
-    infoVisible: false,
-  })
 
   return (
     <>
@@ -63,7 +63,6 @@ export default function() {
       <Form
         onSubmit={event => {
           event.preventDefault()
-          console.log(form)
           patchData(form)
         }}
       >
@@ -146,11 +145,11 @@ export default function() {
         </Flexbox>
         {form.validSticker && form.validDate && form.validDoctor ? (
           <SubmitButton isActive={true} type="submit">
-            Submit{console.log('enabled')}
+            Submit
           </SubmitButton>
         ) : (
           <SubmitButton isActive={false} disabled>
-            Submit{console.log('disabled')}
+            Submit
           </SubmitButton>
         )}
       </Form>
