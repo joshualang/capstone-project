@@ -5,20 +5,20 @@ import { Link } from 'react-router-dom'
 
 import Text from './common/text/Text'
 
-export default function({ onMoreMenuClick }) {
+export default function({ onMoreDropdownMenuClick }) {
   return (
     <>
-      <MoreMenu>
-        <Link to="/addvaccination" onClick={() => onMoreMenuClick()}>
+      <MoreDropdownMenu>
+        <Link to="/addvaccination" onClick={() => onMoreDropdownMenuClick()}>
           <Text color="black">Impfung hinzufügen</Text>
         </Link>
-      </MoreMenu>
-      <ClickableArea onClick={() => onMoreMenuClick()}></ClickableArea>
+      </MoreDropdownMenu>
+      <ClickableArea onClick={() => onMoreDropdownMenuClick()}></ClickableArea>
     </>
   )
 }
 
-const MoreMenu = styled.div`
+const MoreDropdownMenu = styled.div`
   position: absolute;
   z-index: 5;
   top: 20px;

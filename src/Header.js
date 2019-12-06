@@ -4,18 +4,18 @@ import Headline from './common/text/Headline'
 import menu from './img/menu.svg'
 import more from './img/more.svg'
 
-export default function Header({
-  onMenuClick,
-  showTitle = false,
-  onMoreMenuClick,
-}) {
+export default function Header({ onMenuClick, onMoreDropdownMenuClick }) {
   return (
     <HeaderStyled>
       <div>
         <img onClick={() => onMenuClick()} src={menu} alt="menu"></img>
-        <img src={more} alt="more" onClick={() => onMoreMenuClick()}></img>
+        <img
+          src={more}
+          alt="more"
+          onClick={() => onMoreDropdownMenuClick()}
+        ></img>
       </div>
-      {showTitle ? <Headline>Dein Impfpass</Headline> : ''}
+      <Headline>Dein Impfpass</Headline>
     </HeaderStyled>
   )
 }

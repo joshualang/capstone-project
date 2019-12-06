@@ -1,5 +1,5 @@
 import React from 'react'
-import MoreMenu from './MoreMenu'
+import MoreDropdownMenu from './MoreDropdownMenu'
 
 import Title from './common/text/Title'
 import Text from './common/text/Text'
@@ -9,4 +9,4 @@ export default {
   title: 'More Menu',
 }
 
-export const menu = () => <MoreMenu></MoreMenu>
+export const menu = () => <MoreDropdownMenu></MoreDropdownMenu>
