@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react'
 import { getData } from './../services'
-import defaultData from './../empty.json'
 
 export default function useLoadingEffect() {
-  const [data, setData] = useState(defaultData)
+  const [data, setData] = useState({})
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {

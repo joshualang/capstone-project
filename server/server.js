@@ -35,22 +35,24 @@ server.get('/api/:user', (req, res) => {
           .set(nextVaccination(doc.data(), { merge: true }))
       }
     })
+    .then(
+      db
+        .collection('users')
+        .doc(user)
+        .get()
+        .then(doc => {
+          if (!doc.exists) {
+            res.send('No such document!')
+          } else {
+            res.send(userFormatter(doc.data()))
+          }
+        })
+        .catch(err => {
+          res.send('Error getting document', err)
+        })
+    )
     .catch(err => {
       console.log('Error getting document', err)
-    })
-
-  db.collection('users')
-    .doc(user)
-    .get()
-    .then(doc => {
-      if (!doc.exists) {
-        res.send('No such document!')
-      } else {
-        res.send(userFormatter(doc.data()))
-      }
-    })
-    .catch(err => {
-      res.send('Error getting document', err)
     })
 })
 
