@@ -4,22 +4,23 @@ import Line from './Line'
 import back from './img/ios-back.svg'
 import SectionText from './common/text/SectionText'
 import Fadeout from './common/Fadeout'
-import { Link } from 'react-router-dom'
 
-export default function({ onBackClick, topRight, headline }) {
+export default function({
+  topRight,
+  onTopLeftClick = () => window.history.back(),
+  headline,
+}) {
   return (
     <>
       <Header>
         <Grid>
-          <Link to="/home">
-            <img
-              height="18px"
-              width="18px"
-              onClick={onBackClick}
-              src={back}
-              alt="back"
-            ></img>
-          </Link>
+          <img
+            height="18px"
+            width="18px"
+            onClick={onTopLeftClick}
+            src={back}
+            alt="back"
+          ></img>
           <SectionText textAlign="center">{headline}</SectionText>
           <div>{topRight}</div>
         </Grid>

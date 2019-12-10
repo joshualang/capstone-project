@@ -30,9 +30,10 @@ server.get('/api/:user', (req, res) => {
       if (!doc.exists) {
         console.log('No such document!')
       } else {
+        console.log(doc.data())
         db.collection('users')
-          .doc('LA')
-          .set(nextVaccination(doc.data(), { merge: true }))
+          .doc(user)
+          .set(nextVaccination(doc.data()))
       }
     })
     .then(
@@ -42,13 +43,13 @@ server.get('/api/:user', (req, res) => {
         .get()
         .then(doc => {
           if (!doc.exists) {
-            res.send('No such document!')
+            console.log('No such document!')
           } else {
-            res.send(userFormatter(doc.data()))
+            res.json(userFormatter(doc.data()))
           }
         })
         .catch(err => {
-          res.send('Error getting document', err)
+          console.log('Error getting document', err)
         })
     )
     .catch(err => {
@@ -57,31 +58,39 @@ server.get('/api/:user', (req, res) => {
 })
 
 server.patch('/api/:user', (req, res) => {
+  const { user } = req.params
   db.collection('vaccines')
     .doc(req.body.sticker)
     .get()
     .then(doc => {
       if (!doc.exists) {
-        res.send('No such document!')
+        res.json(
+          'Wir haben leider keine entsprechende Impfung gefunden. Vielleicht hast du dich vertippt?'
+        )
       } else {
         const vaccine = doc.data()
+        const newVaccinations = createVaccinationsMadeFromVaccine(vaccine, req)
+        console.log('new vaccinations', newVaccinations)
         db.collection('users')
-          .doc('LA')
-          .set(
-            {
-              vaccinationsMade: [
-                ...createVaccinationsMadeFromVaccine(vaccine, req),
-              ],
-            },
-            { merge: true }
-          )
+          .doc(user)
+          .update({
+            vaccinationsMade: admin.firestore.FieldValue.arrayUnion(
+              ...newVaccinations
+            ),
+          })
+
+        // .set(
+        //   {
+        //     vaccinationsMade: [...newVaccinations],
+        //   },
+        //   { merge: true }
+        // )
+        res.json(newVaccinations)
       }
     })
     .catch(err => {
-      res.send('Error getting document', err)
+      console.log('Error getting document', err)
     })
-
-  res.json('Arrived')
 })
 
 function createVaccinationsMadeFromVaccine(vaccine, request) {
@@ -127,6 +136,7 @@ function createVaccinationsMadeFromVaccine(vaccine, request) {
       vaccinationType: vaccinationType(),
     })
   })
+  console.log(newVaccinations)
   return newVaccinations
 }
 
@@ -169,13 +179,13 @@ function userFormatter(json) {
       tetanusA1: '1. Auffrischimpfung',
       tetanusA2: '2. Auffrischimpfung',
       tetanusA: 'Auffrischimpfung',
-      diphterieG1: '1. Grundimmunisierung',
-      diphterieG2: '2. Grundimmunisierung',
-      diphterieG3: '3. Grundimmunisierung',
-      diphterieG4: '4. Grundimmunisierung',
-      diphterieA1: '1. Auffrischimpfung',
-      diphterieA2: '2. Auffrischimpfung',
-      diphterieA: 'Auffrischimpfung',
+      diphtherieG1: '1. Grundimmunisierung',
+      diphtherieG2: '2. Grundimmunisierung',
+      diphtherieG3: '3. Grundimmunisierung',
+      diphtherieG4: '4. Grundimmunisierung',
+      diphtherieA1: '1. Auffrischimpfung',
+      diphtherieA2: '2. Auffrischimpfung',
+      diphtherieA: 'Auffrischimpfung',
       pertussisG1: '1. Grundimmunisierung',
       pertussisG2: '2. Grundimmunisierung',
       pertussisG3: '3. Grundimmunisierung',
@@ -268,7 +278,7 @@ function nextVaccination(data) {
             id: uid(),
             disease: diseaseName,
             begins: setDate(item.beginsAtAgeInDays - userAgeInDays),
-            doctor: 'Select a Doctor',
+            doctor: 'Vereinbare einen Termin',
             vaccinationType: item.vaccinationType,
           },
         ]
@@ -279,8 +289,9 @@ function nextVaccination(data) {
   const vaccinationDue = vaccinationsDue
     .map(array => array[0])
     .filter(item => item != undefined)
-    .sort((a, b) => a.date - b.date)
+    .sort((a, b) => a.begins - b.begins)
 
-  let returnData = data
-  return (returnData.vaccinationsOpen = vaccinationDue)
+  console.log(vaccinationDue)
+  data.vaccinationsOpen = vaccinationDue
+  return data
 }

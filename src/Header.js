@@ -2,20 +2,17 @@ import React from 'react'
 import styled from 'styled-components/macro'
 import Headline from './common/text/Headline'
 import menu from './img/menu.svg'
-import more from './img/more.svg'
+import plus from './img/plus.svg'
+import { Link } from 'react-router-dom'
 
-export default function Header({ onMenuClick, onMoreDropdownMenuClick }) {
+export default function Header({ onMenuClick }) {
   return (
     <HeaderStyled>
       <div>
         <img onClick={() => onMenuClick()} src={menu} alt="menu"></img>
-        <img
-          width="18px"
-          height="18px"
-          src={more}
-          alt="more"
-          onClick={() => onMoreDropdownMenuClick()}
-        ></img>
+        <Link to="addvaccination">
+          <img width="18px" height="18px" src={plus} alt="more"></img>
+        </Link>
       </div>
       <Headline>Dein Impfpass</Headline>
     </HeaderStyled>

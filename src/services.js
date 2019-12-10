@@ -10,7 +10,5 @@ export function patchData(vaccination) {
     headers: {
       'content-type': 'application/json',
     },
-  })
-    .then(res => res.json())
-    .then(res => console.log(res))
+  }).then(res => res.json())
 }
