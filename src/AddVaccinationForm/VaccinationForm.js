@@ -1,69 +1,34 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react'
+import { Redirect } from 'react-router-dom'
 import styled from 'styled-components/macro'
-import { patchData } from './services'
+import { patchData } from '../services'
 
-import info from './img/info.svg'
-import vaccinationExample from './vaccinationExample.jpg'
-import checkmark from './img/checkmark.svg'
+import info from '../img/info.svg'
+import vaccinationExample from '../img/vaccinationExample.jpg'
 
-import colors from './common/styles/colors'
-import Title from './common/text/Title'
-import DetailsText from './common/text/DetailsText'
+import colors from '../common/styles/colors'
+import Title from '../common/text/Title'
+import DetailsText from '../common/text/DetailsText'
 
-import Head from './Head'
+import Head from '../Head'
 
-export default function() {
-  const [form, setForm] = useState({
-    doctor: '',
-    validDoctor: false,
-    date: '',
-    validDate: false,
-    sticker: '',
-    validSticker: false,
-    userBirth: '24.09.2019',
-    infoVisible: false,
-  })
-
-  function nowAsString() {
-    function addLeadingZero(n) {
-      return n < 10 ? '0' + n : n
-    }
-    const now = new Date()
-    const date = now.getDate()
-    const month = now.getMonth() + 1
-    const year = now.getFullYear()
-    return `${addLeadingZero(date)}.${addLeadingZero(month)}.${year}`
-  }
-
-  function isValidDate(date) {
-    const matches = /^(\d{2})\.(\d{2})\.(\d{4})$/.exec(date)
-    if (matches == null) return false
-    const d = Number(matches[1])
-    const m = Number(matches[2]) - 1
-    const y = Number(matches[3])
-    const composedDate = new Date(y, m, d)
-    return (
-      composedDate.getDate() === d &&
-      composedDate.getMonth() === m &&
-      composedDate.getFullYear() === y
-    )
-  }
-
+export default function({
+  form,
+  onFormSubmit,
+  onFormInfoVisibleChange,
+  onFormDoctorChange,
+  onFormDateChange,
+  onFormStickerChange,
+}) {
   return (
     <>
-      <Head
-        headline="Impfung hinzufügen"
-        topRight={
-          <Link to="/home">
-            <img src={checkmark} alt="submit" />
-          </Link>
-        }
-      />
+      <Head headline="Impfung hinzufügen" />
       <Form
         onSubmit={event => {
           event.preventDefault()
-          patchData(form)
+          patchData(form).then(res => {
+            onFormSubmit(res)
+          })
         }}
       >
         <Flexbox>
@@ -73,15 +38,10 @@ export default function() {
           <Input
             id="vaccinationDoctor"
             name="vaccinationDoctor"
-            onInput={event =>
-              setForm({
-                ...form,
-                doctor: event.target.value,
-                validDoctor: event.target.value,
-              })
-            }
+            onInput={event => onFormDoctorChange(event)}
             placeholder="Dr. med. Max Mustermann"
             type="text"
+            value={form.doctor}
             valid={form.validDoctor}
           ></Input>
         </Flexbox>
@@ -92,14 +52,9 @@ export default function() {
           <Input
             id="vaccinationDate"
             name="vaccinationDate"
-            onInput={event =>
-              setForm({
-                ...form,
-                date: event.target.value,
-                validDate: isValidDate(event.target.value),
-              })
-            }
-            placeholder={nowAsString()}
+            onInput={event => onFormDateChange(event)}
+            placeholder="DD.MM.YYYY"
+            value={form.date}
             type="text"
             valid={form.validDate}
           ></Input>
@@ -107,7 +62,7 @@ export default function() {
         <Flexbox>
           <Flexbox
             flexDirection="row"
-            onClick={() => setForm({ ...form, infoVisible: !form.infoVisible })}
+            onClick={() => onFormInfoVisibleChange()}
           >
             <label htmlFor="vaccinationSticker">
               <Title>Text auf den Aufklebern</Title>
@@ -131,15 +86,10 @@ export default function() {
           <Input
             id="vaccinationSticker"
             name="vaccinationSticker"
-            onInput={event =>
-              setForm({
-                ...form,
-                sticker: event.target.value,
-                validSticker: event.target.value,
-              })
-            }
+            onInput={event => onFormStickerChange(event)}
             type="text"
             placeholder="Infanrix hexa A21CA404C"
+            value={form.sticker}
             valid={form.validSticker}
           ></Input>
         </Flexbox>

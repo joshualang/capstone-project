@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { getData } from './../services'
 
-export default function useLoadingEffect() {
+export default function useLoadingEffect(effect) {
   const [data, setData] = useState({})
   const [isLoading, setIsLoading] = useState(true)
 
@@ -10,7 +10,7 @@ export default function useLoadingEffect() {
       setData(loadedData)
       setIsLoading(false)
     })
-  }, [])
+  }, [effect])
 
   return { data, isLoading }
 }

@@ -74,45 +74,45 @@
     ]
   },
   {
-    "Diphterie": [
+    "Diphtherie": [
       {
-        "vaccinationType": "diphterieG1",
+        "vaccinationType": "diphtherieG1",
         "beginsAtAgeInDays": 62,
         "endsAtAgeInDays": 92,
         "mandatory": true
       },
       {
-        "vaccinationType": "diphterieG2",
+        "vaccinationType": "diphtherieG2",
         "beginsAtAgeInDays": 93,
         "endsAtAgeInDays": 123,
         "mandatory": true
       },
       {
-        "vaccinationType": "diphterieG3",
+        "vaccinationType": "diphtherieG3",
         "beginsAtAgeInDays": 124,
         "endsAtAgeInDays": 340,
         "mandatory": true
       },
       {
-        "vaccinationType": "diphterieG4",
+        "vaccinationType": "diphtherieG4",
         "beginsAtAgeInDays": 341,
         "endsAtAgeInDays": 434,
         "mandatory": true
       },
       {
-        "vaccinationType": "diphterieA1",
+        "vaccinationType": "diphtherieA1",
         "beginsAtAgeInDays": 1825,
         "endsAtAgeInDays": 2190,
         "mandatory": true
       },
       {
-        "vaccinationType": "diphterieA2",
+        "vaccinationType": "diphtherieA2",
         "beginsAtAgeInDays": 3285,
         "endsAtAgeInDays": 5840,
         "mandatory": true
       },
       {
-        "vaccinationType": "diphterieA",
+        "vaccinationType": "diphtherieA",
         "beginsAtAgeInDays": 6570,
         "endsAtAgeInDays": 0,
         "intervall": 3650,
@@ -198,34 +198,34 @@
     ]
   },
   {
-    "Poliomyeitis": [
+    "Polio": [
       {
-        "vaccinationType": "poliomyeitisG1",
+        "vaccinationType": "polioG1",
         "beginsAtAgeInDays": 62,
         "endsAtAgeInDays": 92,
         "mandatory": true
       },
       {
-        "vaccinationType": "poliomyeitisG2",
+        "vaccinationType": "polioG2",
         "beginsAtAgeInDays": 93,
         "endsAtAgeInDays": 123,
         "mandatory": false,
         "comment": "Bei Anwendung eines monovalenten Impfstoffes kann diese Dosis entfallen."
       },
       {
-        "vaccinationType": "poliomyeitisG3",
+        "vaccinationType": "polioG3",
         "beginsAtAgeInDays": 124,
         "endsAtAgeInDays": 340,
         "mandatory": true
       },
       {
-        "vaccinationType": "poliomyeitisG4",
+        "vaccinationType": "polioG4",
         "beginsAtAgeInDays": 341,
         "endsAtAgeInDays": 434,
         "mandatory": true
       },
       {
-        "vaccinationType": "poliomyeitisA1",
+        "vaccinationType": "polioA1",
         "beginsAtAgeInDays": 3285,
         "endsAtAgeInDays": 5840,
         "mandatory": true

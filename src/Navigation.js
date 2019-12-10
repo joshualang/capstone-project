@@ -1,20 +1,20 @@
-import React from "react"
-import { Link } from "react-router-dom"
-import styled from "styled-components/macro"
-import { useSpring, animated } from "react-spring"
+import React from 'react'
+import { Link } from 'react-router-dom'
+import styled from 'styled-components/macro'
+import { useSpring, animated } from 'react-spring'
 
-import colors from "./common/styles/colors"
+import colors from './common/styles/colors'
 
-import SectionText from "./common/text/SectionText"
-import Title from "./common/text/Title"
-import Line from "./Line"
+import SectionText from './common/text/SectionText'
+import Title from './common/text/Title'
+import Line from './Line'
 
 export default function({ profile, onMenuClick }) {
   const props = useSpring({
     config: { tension: 5000, mass: 1, friction: 300 },
     opacity: 1,
-    transform: "translateX(0)",
-    from: { opacity: 0, transform: "translateX(-100%)" }
+    transform: 'translateX(0)',
+    from: { opacity: 0, transform: 'translateX(-100%)' },
   })
   return (
     <>
@@ -22,7 +22,7 @@ export default function({ profile, onMenuClick }) {
         <div>
           <SectionText>{profile}</SectionText>
           <Line margin="8px 0 16px"></Line>
-          <Link to="/home" onClick={() => onMenuClick()}>
+          <Link to="/" onClick={() => onMenuClick()}>
             <Title>Home</Title>
           </Link>
         </div>
