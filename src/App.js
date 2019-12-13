@@ -13,6 +13,21 @@ export default function App() {
   auth.onAuthStateChanged(user => {
     if (user) {
       setLoggedInUser(user)
+      firebase
+        .auth()
+        .currentUser.getIdToken(/* forceRefresh */ true)
+        .then(function(idToken) {
+          // Send token to your backend via HTTPS
+          // ...
+          console.log(idToken)
+          fetch(`https://localhost:3338/${user.uid}`, {
+            method: 'GET',
+            headers: {
+              'content-type': 'application/json',
+              authorization: idToken,
+            },
+          }).then(res => res.json())
+        })
     } else {
       setLoggedInUser(user)
     }

@@ -9,6 +9,7 @@
     "firebase": "^7.5.2",
     "firebase-admin": "^8.8.0",
     "http2": "^3.3.7",
+    "https": "^1.0.0",
     "node-sass": "^4.13.0",
     "nodemon": "^2.0.1",
     "npm-run-all": "^4.1.5",
@@ -24,9 +25,9 @@
     "uid": "0.0.2"
   },
   "scripts": {
-    "start": "run-p client storybook server",
+    "start": "run-p client storybook",
     "client": "react-scripts start",
-    "server": "nodemon server/server.js",
+    "server": "nodemon server/sshserver.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

@@ -20,14 +20,6 @@ server.use(cors())
 server.use(express.json())
 server.set('json spaces', 2)
 
-server.post('/api/:user', (req, res) => {
-  const { user } = req.params
-  db.collection('users')
-    .doc(user)
-    .set({ vaccinationsOpen: [], vaccinationsMade: [], age: new Date() })
-    .then(response => res.json(response))
-})
-
 server.get('/api/:user', (req, res) => {
   const { user } = req.params
 
