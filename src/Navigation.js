@@ -28,7 +28,9 @@ export default function({ profile, onMenuClick }) {
           </Link>
         </div>
         <div>
-          <Title onClick={() => signOut()}>Abmelden</Title>
+          <Title color="crimson" onClick={() => signOut()}>
+            Abmelden
+          </Title>
           <Line></Line>
           <Title>Einstellungen</Title>
         </div>

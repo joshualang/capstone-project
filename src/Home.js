@@ -15,7 +15,8 @@ import Spinner from './Spinner'
 import useLoadingEffect from './hooks/useLoadingEffect'
 
 export default function Home({ user }) {
-  console.log(user)
+  const { data, isLoading } = useLoadingEffect(user)
+
   const [form, setForm] = useState({
     doctor: '',
     validDoctor: false,
@@ -27,8 +28,6 @@ export default function Home({ user }) {
     infoVisible: false,
     isSubmitted: false,
   })
-
-  const { data, isLoading } = useLoadingEffect(user.uid)
   const [isMoreDropdownMenuShown, setIsMoreDropdownMenuShown] = useState(false)
   const [isMenuShown, setIsMenuShown] = useState(false)
 
