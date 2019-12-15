@@ -10,6 +10,7 @@ import Vaccinations from './Vaccinations'
 import VaccinationDetails from './VaccinationDetails'
 import AddVaccination from './AddVaccinationForm/AddVaccination'
 import MoreDropdownMenu from './MoreDropdownMenu'
+import Settings from './Settings'
 import Spinner from './Spinner'
 
 import useLoadingEffect from './hooks/useLoadingEffect'
@@ -144,6 +145,9 @@ export default function Home({ user }) {
               ) : (
                 <VaccinationDetails data={data}></VaccinationDetails>
               )}
+            </Route>
+            <Route path="/settings">
+              <Settings></Settings>
             </Route>
             <Route path="/">
               {isLoading ? (
