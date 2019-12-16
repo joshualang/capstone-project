@@ -27,6 +27,21 @@ export default function SignInScreen() {
   )
 }
 
+export function updateUserDisplayName(newName) {
+  var user = auth.currentUser
+
+  user
+    .updateProfile({
+      displayName: newName,
+    })
+    .then(function() {
+      // Update successful.
+    })
+    .catch(function(error) {
+      // An error happened.
+    })
+}
+
 export const signOut = () => auth.signOut()
 
 const SignInCard = styled.div`

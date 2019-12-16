@@ -154,6 +154,6 @@ const SubmitButton = styled.button`
   border: 2px solid blue;
   width: 80px;
   height: 32px;
-  background: ${props => (props.isActive ? 'blue' : 'white')};
-  color: ${props => (props.isActive ? 'white' : 'blue')};
+  background: ${props => (props.isActive ? colors.blue : 'white')};
+  color: ${props => (props.isActive ? 'white' : colors.blue)};
 `
