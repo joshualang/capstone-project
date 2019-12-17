@@ -11,22 +11,17 @@ import DetailsText from './common/text/DetailsText'
 import { stringifyDate, isValidDate } from './dateHelper'
 import { updateUserDisplayName } from './Auth/AuthServices'
 
-export default function({ userAge, userName }) {
+export default function({
+  userAge,
+  userName,
+  updateSettingsInBackend,
+  diseases,
+}) {
   const refSubmit = useRef(null)
   const [settings, setSettings] = useState({
     name: userName,
     age: stringifyDate(new Date(userAge)),
-    diseases: {
-      Rotaviren: true,
-      Tetanus: true,
-      Diphterie: false,
-      Pertussis: true,
-      Hib: true,
-      Polio: true,
-      HepatitisB: true,
-      Pneumokokken: true,
-      MeningokokkenC: true,
-    },
+    diseases: { ...diseases },
   })
   console.log(settings)
   function onFormNameChange(event) {
@@ -56,8 +51,11 @@ export default function({ userAge, userName }) {
       <Settings
         onSubmit={event => {
           event.preventDefault()
-          console.log(event)(settings.name !== userName) &&
-            updateUserDisplayName(settings.name)
+          settings.name !== userName && updateUserDisplayName(settings.name)
+          updateSettingsInBackend({
+            age: settings.age,
+            settings: settings.diseases,
+          })
         }}
       >
         <div>

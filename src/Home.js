@@ -14,6 +14,7 @@ import Settings from './Settings'
 import Spinner from './Spinner'
 
 import useLoadingEffect from './hooks/useLoadingEffect'
+import { patchData, updateSettings } from './services'
 import { isValidDate, nowAsString } from './dateHelper'
 
 export default function Home({ user }) {
@@ -62,6 +63,13 @@ export default function Home({ user }) {
       sticker: event.target.value,
       validSticker: event.target.value,
     })
+  }
+  function sendDataToBackend(data) {
+    return patchData(user.uid, user._lat, data)
+  }
+
+  function updateSettingsInBackend(settings) {
+    return updateSettings(user.uid, user._lat, settings)
   }
 
   function onMenuClick() {
@@ -114,6 +122,7 @@ export default function Home({ user }) {
                 onFormDoctorChange={onFormDoctorChange}
                 onFormDateChange={onFormDateChange}
                 onFormStickerChange={onFormStickerChange}
+                sendDataToBackend={sendDataToBackend}
               ></AddVaccination>
             </Route>
             <Route path="/vaccinationdetails/:id">
@@ -128,8 +137,10 @@ export default function Home({ user }) {
                 <Spinner />
               ) : (
                 <Settings
+                  updateSettingsInBackend={updateSettingsInBackend}
                   userName={user.displayName}
                   userAge={data.age}
+                  diseases={data.settings}
                 ></Settings>
               )}
             </Route>

@@ -18,14 +18,17 @@ export default function({
   onFormDoctorChange,
   onFormDateChange,
   onFormStickerChange,
+  sendDataToBackend,
 }) {
+  console.log(sendDataToBackend)
   return (
     <>
       <Head headline="Impfung hinzufügen" />
       <Form
         onSubmit={event => {
           event.preventDefault()
-          patchData(form).then(res => {
+          console.log(form)
+          sendDataToBackend(form).then(res => {
             onFormSubmit(res)
           })
         }}

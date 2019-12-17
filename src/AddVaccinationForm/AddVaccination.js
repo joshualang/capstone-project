@@ -11,6 +11,7 @@ export default function AddVaccination({
   onFormDateChange,
   onFormStickerChange,
   setFormSubmitBack,
+  sendDataToBackend,
 }) {
   return !form.isSubmitted ? (
     <VaccinationForm
@@ -20,6 +21,7 @@ export default function AddVaccination({
       onFormDoctorChange={onFormDoctorChange}
       onFormDateChange={onFormDateChange}
       onFormStickerChange={onFormStickerChange}
+      sendDataToBackend={sendDataToBackend}
     />
   ) : Array.isArray(form.isSubmitted) ? (
     <VaccinationFormSuccess
