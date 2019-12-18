@@ -19,7 +19,7 @@ import { isValidDate, nowAsString } from './dateHelper'
 
 export default function Home({ user }) {
   const { data, isLoading } = useLoadingEffect(user)
-
+  console.log(data)
   const [form, setForm] = useState({
     doctor: '',
     validDoctor: false,

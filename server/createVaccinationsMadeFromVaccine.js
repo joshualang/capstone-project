@@ -38,6 +38,5 @@ module.exports = function createVaccinationsMadeFromVaccine(vaccine, request) {
       vaccinationType: vaccinationType(),
     })
   })
-  console.log(newVaccinations)
   return newVaccinations
 }

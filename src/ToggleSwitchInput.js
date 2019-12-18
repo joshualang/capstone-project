@@ -54,6 +54,6 @@ const Background = styled.label`
   font-size: 1em; /* 1 */
   height: 1em;
   width: 2em;
-  background: ${props => (props.active ? 'green' : 'red')};
+  background: ${props => (props.active ? 'green' : 'crimson')};
   border-radius: 1em;
 `

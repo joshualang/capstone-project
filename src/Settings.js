@@ -97,9 +97,9 @@ export default function({
             <ToggleSwitchInput
               onChange={onDiseaseChange}
               value={settings.diseases}
-              disease="Diphterie"
+              disease="Diphtherie"
             >
-              Diphterie <DetailsText>(empfohlen)</DetailsText>
+              Diphtherie <DetailsText>(empfohlen)</DetailsText>
             </ToggleSwitchInput>
             <ToggleSwitchInput
               onChange={onDiseaseChange}
@@ -143,6 +143,48 @@ export default function({
             >
               Meningokokken C <DetailsText>(empfohlen)</DetailsText>
             </ToggleSwitchInput>
+            <ToggleSwitchInput
+              onChange={onDiseaseChange}
+              value={settings.diseases}
+              disease="Masern"
+            >
+              Masern <DetailsText>(empfohlen)</DetailsText>
+            </ToggleSwitchInput>
+            <ToggleSwitchInput
+              onChange={onDiseaseChange}
+              value={settings.diseases}
+              disease="Mumps"
+            >
+              Mumps <DetailsText>(empfohlen)</DetailsText>
+            </ToggleSwitchInput>
+            <ToggleSwitchInput
+              onChange={onDiseaseChange}
+              value={settings.diseases}
+              disease="Varizellen"
+            >
+              Varizellen <DetailsText>(empfohlen)</DetailsText>
+            </ToggleSwitchInput>
+            <ToggleSwitchInput
+              onChange={onDiseaseChange}
+              value={settings.diseases}
+              disease="HPV"
+            >
+              HPV <DetailsText>(empfohlen)</DetailsText>
+            </ToggleSwitchInput>
+            <ToggleSwitchInput
+              onChange={onDiseaseChange}
+              value={settings.diseases}
+              disease="HerpesZoster"
+            >
+              Herpes Zoster <DetailsText>(empfohlen)</DetailsText>
+            </ToggleSwitchInput>
+            <ToggleSwitchInput
+              onChange={onDiseaseChange}
+              value={settings.diseases}
+              disease="Influenza"
+            >
+              Influenza <DetailsText>(empfohlen)</DetailsText>
+            </ToggleSwitchInput>
           </Indent>
         </div>
         <button
@@ -156,10 +198,13 @@ export default function({
 }
 
 const Settings = styled.form`
+  overflow-y: scroll;
+  height: 100%;
   margin-top: 16px;
   display: flex;
   flex-direction: column;
   gap: 32px;
+  padding-right: 4px;
 `
 const Indent = styled.div`
   padding-left: 8px;
