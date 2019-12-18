@@ -1,5 +1,5 @@
-const getVaccinationType = require('./getVaccinationType')
-const toDateString = require('./toDateString')
+const getVaccinationType = require('../getVaccinationType')
+const toDateString = require('../Time/toDateString')
 
 module.exports = function userFormatter(userDbData) {
   userDbData.age = toDateString(userDbData.age)

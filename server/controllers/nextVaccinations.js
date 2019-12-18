@@ -1,7 +1,7 @@
-const recommendations = require('./recommendations')
+const recommendations = require('./recommendationsHelper')
 const uid = require('uid')
-const setDateFromNow = require('./setDateFromNow')
-const dateToAgeInDays = require('./dateToAgeInDays')
+const setDateFromNow = require('./Time/setDateFromNow')
+const dateToAgeInDays = require('./Time/dateToAgeInDays')
 const onlyNextVaccination = require('./onlyNextVaccination')
 
 module.exports = function nextVaccination(data) {

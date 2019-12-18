@@ -1,7 +1,7 @@
-const updateVaccinations = require('./updateVaccinations')
-const userFormatter = require('./userFormatter')
+const updateVaccinations = require('./updateVaccinationsOpen')
+const userFormatter = require('./controllers/Formatter/userFormatter')
 const createVaccinationsMadeFromVaccine = require('./createVaccinationsMadeFromVaccine')
-const toDateObject = require('./toDateObject')
+const toDateObject = require('./controllers/Time/toDateObject')
 
 const express = require('express')
 const fs = require('fs')
