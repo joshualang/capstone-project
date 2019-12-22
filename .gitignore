@@ -4,6 +4,7 @@ dist
 medical-assistant-19fc3-cee7dfd4e3aa.json
 Medical Assistant-bbe5fc01fae8.json
 firebaseConfig.js
+.env
 
 # Logs
 logs

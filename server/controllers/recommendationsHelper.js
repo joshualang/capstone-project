@@ -1,4 +1,4 @@
-const vaccinationRecommendations = require('./vaccinationRecommendations.json')
+const vaccinationRecommendations = require('../vaccinationRecommendations.json')
 
 module.exports = function recommendations(settings) {
   return vaccinationRecommendations.filter(

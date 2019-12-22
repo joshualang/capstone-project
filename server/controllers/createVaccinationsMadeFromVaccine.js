@@ -1,5 +1,5 @@
 const uid = require('uid')
-const vaccinationRecommendations = require('./vaccinationRecommendations.json')
+const vaccinationRecommendations = require('../vaccinationRecommendations.json')
 const toDateObject = require('./Time/toDateObject')
 
 module.exports = function createVaccinationsMadeFromVaccine(vaccine, request) {

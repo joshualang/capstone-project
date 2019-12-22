@@ -18,7 +18,8 @@ import { patchData, updateSettings } from './services'
 import { isValidDate, nowAsString } from './dateHelper'
 
 export default function Home({ user }) {
-  const { data, isLoading } = useLoadingEffect(user)
+  const [lastRefresh, setLastRefresh] = useState(new Date())
+  const { data, isLoading } = useLoadingEffect(lastRefresh)
   console.log(data)
   const [form, setForm] = useState({
     doctor: '',
@@ -39,6 +40,7 @@ export default function Home({ user }) {
   }
   function setFormSubmitBack() {
     setForm({ ...form, isSubmitted: false })
+    setLastRefresh(new Date())
   }
   function onFormInfoVisibleChange() {
     setForm({ ...form, infoVisible: !form.infoVisible })
