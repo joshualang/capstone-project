@@ -8,7 +8,7 @@ module.exports = function nextVaccination(data) {
   const vaccinationsMade = data.vaccinationsMade
 
   let vaccinationsDue = []
-  const userAgeInDays = dateToAgeInDays(data.age)
+  const userAgeInDays = dateToAgeInDays(data.age._seconds * 1000)
   recommendations(data.settings).forEach((disease, diseaseIndex) => {
     vaccinationsDue = [...vaccinationsDue, []]
     const diseaseName = Object.keys(disease)[0]

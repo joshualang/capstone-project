@@ -9,7 +9,6 @@ export function getData(uid, idToken) {
 }
 
 export function patchData(uid, idToken, vaccination) {
-  console.log('PATCH')
   return fetch(`https://localhost:3338/api/${uid}`, {
     method: 'PATCH',
     body: JSON.stringify(vaccination),
@@ -21,7 +20,6 @@ export function patchData(uid, idToken, vaccination) {
 }
 
 export function updateSettings(uid, idToken, settings) {
-  console.log('PATCH')
   return fetch(`https://localhost:3338/api/settings/${uid}`, {
     method: 'PATCH',
     body: JSON.stringify(settings),

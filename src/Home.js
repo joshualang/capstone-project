@@ -19,8 +19,7 @@ import { isValidDate, nowAsString } from './dateHelper'
 
 export default function Home({ user }) {
   const [lastRefresh, setLastRefresh] = useState(new Date())
-  const { data, isLoading } = useLoadingEffect(lastRefresh)
-  console.log(data)
+  const { data, isLoading } = useLoadingEffect(user, lastRefresh)
   const [form, setForm] = useState({
     doctor: '',
     validDoctor: false,
@@ -71,6 +70,7 @@ export default function Home({ user }) {
   }
 
   function updateSettingsInBackend(settings) {
+    setLastRefresh(new Date())
     return updateSettings(user.uid, user._lat, settings)
   }
 

@@ -1,4 +1,5 @@
 module.exports = function toDateString(dateObject) {
+  const dateObjectCopy = dateObject
   const months = {
     1: 'Jan',
     2: 'Feb',
@@ -14,15 +15,15 @@ module.exports = function toDateString(dateObject) {
     12: 'Dec',
   }
 
-  if (Object.keys(dateObject).length > 1) {
-    dateObject = new Date(dateObject._seconds * 1000)
+  if (Object.keys(dateObjectCopy).length > 1) {
+    dateObjectFormatted = new Date(dateObjectCopy._seconds * 1000)
   } else {
-    dateObject = new Date(dateObject)
+    dateObjectFormatted = new Date(dateObjectCopy)
   }
 
-  const date = dateObject.getDate()
-  const month = dateObject.getMonth() + 1
-  const year = dateObject.getFullYear()
+  const date = dateObjectFormatted.getDate()
+  const month = dateObjectFormatted.getMonth() + 1
+  const year = dateObjectFormatted.getFullYear()
   const dateString = `${months[month]} ${date}, ${year}`
 
   return dateString
