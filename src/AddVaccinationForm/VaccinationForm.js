@@ -18,14 +18,17 @@ export default function({
   onFormDoctorChange,
   onFormDateChange,
   onFormStickerChange,
+  sendDataToBackend,
 }) {
+  console.log(sendDataToBackend)
   return (
     <>
       <Head headline="Impfung hinzufügen" />
       <Form
         onSubmit={event => {
           event.preventDefault()
-          patchData(form).then(res => {
+          console.log(form)
+          sendDataToBackend(form).then(res => {
             onFormSubmit(res)
           })
         }}
@@ -154,6 +157,6 @@ const SubmitButton = styled.button`
   border: 2px solid blue;
   width: 80px;
   height: 32px;
-  background: ${props => (props.isActive ? 'blue' : 'white')};
-  color: ${props => (props.isActive ? 'white' : 'blue')};
+  background: ${props => (props.isActive ? colors.blue : 'white')};
+  color: ${props => (props.isActive ? 'white' : colors.blue)};
 `

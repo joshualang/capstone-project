@@ -32,7 +32,9 @@ export default function({ profile, onMenuClick }) {
             Abmelden
           </Title>
           <Line></Line>
-          <Title>Einstellungen</Title>
+          <Link to="/settings" onClick={() => onMenuClick()}>
+            <Title>Einstellungen</Title>
+          </Link>
         </div>
       </Navigation>
       <ClosingArea onClick={() => onMenuClick()}></ClosingArea>
