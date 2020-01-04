@@ -2,7 +2,7 @@ import styled from 'styled-components/macro'
 
 import colors from '../styles/colors'
 
-export default styled.h3`
+export default styled.p`
   font-family: Helvetica, sans-serif;
   font-weight: 300;
   font-size: 1rem;

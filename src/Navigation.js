@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components/macro'
 import { useSpring, animated } from 'react-spring'
+import { signOut } from './Auth/AuthServices'
 
 import colors from './common/styles/colors'
 
@@ -27,6 +28,9 @@ export default function({ profile, onMenuClick }) {
           </Link>
         </div>
         <div>
+          <Title color="crimson" onClick={() => signOut()}>
+            Abmelden
+          </Title>
           <Line></Line>
           <Title>Einstellungen</Title>
         </div>
