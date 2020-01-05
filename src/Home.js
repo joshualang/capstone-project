@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { Switch, Route, useLocation } from 'react-router-dom'
 import { useTransition } from 'react-spring'
+import useHeight from './hooks/useHeight'
 
 import Main from './Main'
 import Header from './Header'
 import Navigation from './Navigation'
 
-import Vaccinations from './Vaccinations'
+import VaccinationsMade from './VaccinationsMade'
+import VaccinationsOpen from './VaccinationsOpen'
 import VaccinationDetails from './VaccinationDetails'
 import AddVaccination from './AddVaccinationForm/AddVaccination'
 import MoreDropdownMenu from './MoreDropdownMenu'
@@ -97,7 +99,7 @@ export default function Home({ user }) {
   return (
     <>
       {isMenuShown ? (
-        <Navigation profile={user.displayName} onMenuClick={onMenuClick} />
+        <Navigation refresh={setLastRefresh} onMenuClick={onMenuClick} />
       ) : (
         ''
       )}
@@ -146,11 +148,22 @@ export default function Home({ user }) {
                 ></Settings>
               )}
             </Route>
+            <Route path="/vaccinationsOpen">
+              {isLoading ? (
+                <Spinner />
+              ) : (
+                <VaccinationsOpen
+                  data={data.vaccinationsOpen}
+                ></VaccinationsOpen>
+              )}
+            </Route>
             <Route path="/">
               {isLoading ? (
                 <Spinner />
               ) : (
-                <Vaccinations data={data}></Vaccinations>
+                <VaccinationsMade
+                  data={data.vaccinationsMade}
+                ></VaccinationsMade>
               )}
             </Route>
           </Switch>

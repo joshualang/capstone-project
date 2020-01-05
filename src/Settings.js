@@ -48,158 +48,158 @@ export default function({
           </Link>
         }
       />
-      <Settings
-        onSubmit={event => {
-          event.preventDefault()
-          settings.name !== userName && updateUserDisplayName(settings.name)
-          updateSettingsInBackend({
-            age: settings.age,
-            settings: settings.diseases,
-          })
-        }}
-      >
-        <div>
-          <SectionText>Deine Daten</SectionText>
-          <Indent>
-            <TextInput
-              onChange={onFormNameChange}
-              value={settings.name}
-              valid={settings.name}
-            >
-              Name
-            </TextInput>
-            <TextInput
-              onChange={onFormBirthChange}
-              value={settings.age}
-              valid={isValidDate(settings.age)}
-            >
-              Geburtsdatum
-            </TextInput>
-          </Indent>
-        </div>
-        <div>
-          <SectionText>Abgedeckte Krankheiten</SectionText>
-          <Indent>
-            <ToggleSwitchInput
-              onChange={onDiseaseChange}
-              value={settings.diseases}
-              disease="Rotaviren"
-            >
-              Rotaviren <DetailsText>(empfohlen)</DetailsText>
-            </ToggleSwitchInput>
-            <ToggleSwitchInput
-              onChange={onDiseaseChange}
-              value={settings.diseases}
-              disease="Tetanus"
-            >
-              Tetanus <DetailsText>(empfohlen)</DetailsText>
-            </ToggleSwitchInput>
-            <ToggleSwitchInput
-              onChange={onDiseaseChange}
-              value={settings.diseases}
-              disease="Diphtherie"
-            >
-              Diphtherie <DetailsText>(empfohlen)</DetailsText>
-            </ToggleSwitchInput>
-            <ToggleSwitchInput
-              onChange={onDiseaseChange}
-              value={settings.diseases}
-              disease="Pertussis"
-            >
-              Pertussis <DetailsText>(empfohlen)</DetailsText>
-            </ToggleSwitchInput>
-            <ToggleSwitchInput
-              onChange={onDiseaseChange}
-              value={settings.diseases}
-              disease="Hib"
-            >
-              Hib <DetailsText>(empfohlen)</DetailsText>
-            </ToggleSwitchInput>
-            <ToggleSwitchInput
-              onChange={onDiseaseChange}
-              value={settings.diseases}
-              disease="Polio"
-            >
-              Polio <DetailsText>(empfohlen)</DetailsText>
-            </ToggleSwitchInput>
-            <ToggleSwitchInput
-              onChange={onDiseaseChange}
-              value={settings.diseases}
-              disease="HepatitisB"
-            >
-              Hepatitis B <DetailsText>(empfohlen)</DetailsText>
-            </ToggleSwitchInput>
-            <ToggleSwitchInput
-              onChange={onDiseaseChange}
-              value={settings.diseases}
-              disease="Pneumokokken"
-            >
-              Pneumokokken <DetailsText>(empfohlen)</DetailsText>
-            </ToggleSwitchInput>
-            <ToggleSwitchInput
-              onChange={onDiseaseChange}
-              value={settings.diseases}
-              disease="MeningokokkenC"
-            >
-              Meningokokken C <DetailsText>(empfohlen)</DetailsText>
-            </ToggleSwitchInput>
-            <ToggleSwitchInput
-              onChange={onDiseaseChange}
-              value={settings.diseases}
-              disease="Masern"
-            >
-              Masern <DetailsText>(empfohlen)</DetailsText>
-            </ToggleSwitchInput>
-            <ToggleSwitchInput
-              onChange={onDiseaseChange}
-              value={settings.diseases}
-              disease="Mumps"
-            >
-              Mumps <DetailsText>(empfohlen)</DetailsText>
-            </ToggleSwitchInput>
-            <ToggleSwitchInput
-              onChange={onDiseaseChange}
-              value={settings.diseases}
-              disease="Varizellen"
-            >
-              Varizellen <DetailsText>(empfohlen)</DetailsText>
-            </ToggleSwitchInput>
-            <ToggleSwitchInput
-              onChange={onDiseaseChange}
-              value={settings.diseases}
-              disease="HPV"
-            >
-              HPV <DetailsText>(empfohlen)</DetailsText>
-            </ToggleSwitchInput>
-            <ToggleSwitchInput
-              onChange={onDiseaseChange}
-              value={settings.diseases}
-              disease="HerpesZoster"
-            >
-              Herpes Zoster <DetailsText>(empfohlen)</DetailsText>
-            </ToggleSwitchInput>
-            <ToggleSwitchInput
-              onChange={onDiseaseChange}
-              value={settings.diseases}
-              disease="Influenza"
-            >
-              Influenza <DetailsText>(empfohlen)</DetailsText>
-            </ToggleSwitchInput>
-          </Indent>
-        </div>
-        <button
-          ref={refSubmit}
-          type="submit"
-          style={{ display: 'none' }}
-        ></button>
-      </Settings>
+      <Container>
+        <Settings
+          onSubmit={event => {
+            event.preventDefault()
+            settings.name !== userName && updateUserDisplayName(settings.name)
+            updateSettingsInBackend({
+              age: settings.age,
+              settings: settings.diseases,
+            })
+          }}
+        >
+          <div>
+            <SectionText>Deine Daten</SectionText>
+            <Indent>
+              <TextInput
+                onChange={onFormNameChange}
+                value={settings.name}
+                valid={settings.name}
+              >
+                Name
+              </TextInput>
+              <TextInput
+                onChange={onFormBirthChange}
+                value={settings.age}
+                valid={isValidDate(settings.age)}
+              >
+                Geburtsdatum
+              </TextInput>
+            </Indent>
+          </div>
+          <div>
+            <SectionText>Abgedeckte Krankheiten</SectionText>
+            <Indent>
+              <ToggleSwitchInput
+                onChange={onDiseaseChange}
+                value={settings.diseases}
+                disease="Rotaviren"
+              >
+                Rotaviren <DetailsText>(empfohlen)</DetailsText>
+              </ToggleSwitchInput>
+              <ToggleSwitchInput
+                onChange={onDiseaseChange}
+                value={settings.diseases}
+                disease="Tetanus"
+              >
+                Tetanus <DetailsText>(empfohlen)</DetailsText>
+              </ToggleSwitchInput>
+              <ToggleSwitchInput
+                onChange={onDiseaseChange}
+                value={settings.diseases}
+                disease="Diphtherie"
+              >
+                Diphtherie <DetailsText>(empfohlen)</DetailsText>
+              </ToggleSwitchInput>
+              <ToggleSwitchInput
+                onChange={onDiseaseChange}
+                value={settings.diseases}
+                disease="Pertussis"
+              >
+                Pertussis <DetailsText>(empfohlen)</DetailsText>
+              </ToggleSwitchInput>
+              <ToggleSwitchInput
+                onChange={onDiseaseChange}
+                value={settings.diseases}
+                disease="Hib"
+              >
+                Hib <DetailsText>(empfohlen)</DetailsText>
+              </ToggleSwitchInput>
+              <ToggleSwitchInput
+                onChange={onDiseaseChange}
+                value={settings.diseases}
+                disease="Polio"
+              >
+                Polio <DetailsText>(empfohlen)</DetailsText>
+              </ToggleSwitchInput>
+              <ToggleSwitchInput
+                onChange={onDiseaseChange}
+                value={settings.diseases}
+                disease="HepatitisB"
+              >
+                Hepatitis B <DetailsText>(empfohlen)</DetailsText>
+              </ToggleSwitchInput>
+              <ToggleSwitchInput
+                onChange={onDiseaseChange}
+                value={settings.diseases}
+                disease="Pneumokokken"
+              >
+                Pneumokokken <DetailsText>(empfohlen)</DetailsText>
+              </ToggleSwitchInput>
+              <ToggleSwitchInput
+                onChange={onDiseaseChange}
+                value={settings.diseases}
+                disease="MeningokokkenC"
+              >
+                Meningokokken C <DetailsText>(empfohlen)</DetailsText>
+              </ToggleSwitchInput>
+              <ToggleSwitchInput
+                onChange={onDiseaseChange}
+                value={settings.diseases}
+                disease="Masern"
+              >
+                Masern <DetailsText>(empfohlen)</DetailsText>
+              </ToggleSwitchInput>
+              <ToggleSwitchInput
+                onChange={onDiseaseChange}
+                value={settings.diseases}
+                disease="Mumps"
+              >
+                Mumps <DetailsText>(empfohlen)</DetailsText>
+              </ToggleSwitchInput>
+              <ToggleSwitchInput
+                onChange={onDiseaseChange}
+                value={settings.diseases}
+                disease="Varizellen"
+              >
+                Varizellen <DetailsText>(empfohlen)</DetailsText>
+              </ToggleSwitchInput>
+              <ToggleSwitchInput
+                onChange={onDiseaseChange}
+                value={settings.diseases}
+                disease="HPV"
+              >
+                HPV <DetailsText>(empfohlen)</DetailsText>
+              </ToggleSwitchInput>
+              <ToggleSwitchInput
+                onChange={onDiseaseChange}
+                value={settings.diseases}
+                disease="HerpesZoster"
+              >
+                Herpes Zoster <DetailsText>(empfohlen)</DetailsText>
+              </ToggleSwitchInput>
+              <ToggleSwitchInput
+                onChange={onDiseaseChange}
+                value={settings.diseases}
+                disease="Influenza"
+              >
+                Influenza <DetailsText>(empfohlen)</DetailsText>
+              </ToggleSwitchInput>
+            </Indent>
+          </div>
+          <button
+            ref={refSubmit}
+            type="submit"
+            style={{ display: 'none' }}
+          ></button>
+        </Settings>
+      </Container>
     </>
   )
 }
 
 const Settings = styled.form`
-  overflow-y: scroll;
-  height: 100%;
   margin-top: 16px;
   display: flex;
   flex-direction: column;
@@ -208,4 +208,8 @@ const Settings = styled.form`
 `
 const Indent = styled.div`
   padding-left: 8px;
+`
+const Container = styled.div`
+  height: 100%;
+  overflow-y: scroll;
 `
