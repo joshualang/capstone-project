@@ -12,7 +12,7 @@ import VaccinationsOpen from './VaccinationsOpen'
 import VaccinationDetails from './VaccinationDetails'
 import AddVaccination from './AddVaccinationForm/AddVaccination'
 import MoreDropdownMenu from './MoreDropdownMenu'
-import Settings from './Settings'
+import Settings from './Settings/Settings'
 import Spinner from './Spinner'
 
 import useLoadingEffect from './hooks/useLoadingEffect'
@@ -35,6 +35,22 @@ export default function Home({ user }) {
   })
   const [isMoreDropdownMenuShown, setIsMoreDropdownMenuShown] = useState(false)
   const [isMenuShown, setIsMenuShown] = useState(false)
+  const [currentProfile, setCurrentProfile] = useState([
+    'Tommy',
+    'Jens',
+    'Lisa',
+  ])
+  function changeProfile(index) {
+    if (index !== 0) {
+      setCurrentProfile([
+        currentProfile[index],
+        ...currentProfile.slice(0, index),
+        ...currentProfile.slice(index + 1),
+      ])
+      console.log(currentProfile)
+      setLastRefresh(new Date())
+    }
+  }
 
   function onFormSubmit(res) {
     setForm({ ...form, isSubmitted: res })
@@ -99,7 +115,12 @@ export default function Home({ user }) {
   return (
     <>
       {isMenuShown ? (
-        <Navigation refresh={setLastRefresh} onMenuClick={onMenuClick} />
+        <Navigation
+          refresh={setLastRefresh}
+          onMenuClick={onMenuClick}
+          currentProfile={currentProfile}
+          changeProfile={changeProfile}
+        />
       ) : (
         ''
       )}

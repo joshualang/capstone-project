@@ -12,7 +12,7 @@ export default function App() {
     auth.onAuthStateChanged(user => {
       if (user) {
         setUser(user)
-        console.log(user)
+        console.log(user._lat)
       } else {
         setUser(user)
       }

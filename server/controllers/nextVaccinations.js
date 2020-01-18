@@ -19,7 +19,7 @@ module.exports = function nextVaccination(data) {
         !vaccinationsMade.some(
           el => el.vaccinationType === item.vaccinationType
         ) &&
-        userAgeInDays + 90 > item.beginsAtAgeInDays
+        userAgeInDays + 20 > item.beginsAtAgeInDays
       ) {
         vaccinationsDue[diseaseIndex] = [
           ...vaccinationsDue[diseaseIndex],

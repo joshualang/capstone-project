@@ -3,7 +3,8 @@ import styled from 'styled-components/macro'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import firebase from 'firebase'
 import config from './firebaseConfig'
-import colors from '../common/styles/colors'
+import AuthCard from './AuthCard'
+import { createNewUser } from '../services'
 require('firebase/auth')
 
 firebase.initializeApp(config)
@@ -19,11 +20,11 @@ const uiConfig = {
   ],
 }
 
-export default function SignInScreen() {
+export function SignInScreen() {
   return (
-    <SignInCard>
+    <AuthCard>
       <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
-    </SignInCard>
+    </AuthCard>
   )
 }
 
@@ -42,16 +43,20 @@ export function updateUserDisplayName(newName) {
     })
 }
 
-export const signOut = () => auth.signOut()
+export function signUpWithEmail(email, password, name, birth) {
+  auth
+    .createUserWithEmailAndPassword(email, password)
+    .then(user =>
+      createNewUser(user.uid, user._lat, name, birth).then(res =>
+        console.log(res)
+      )
+    )
+    .catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code
+      var errorMessage = error.message
+      // ...
+    })
+}
 
-const SignInCard = styled.div`
-  background: ${colors.white};
-  box-shadow: 0px 4px 8px rgb(48, 48, 48, 0.1);
-  margin: 24px 0;
-  border-radius: 4px;
-  padding: 24px 0;
-  position: fixed;
-  top: 20vh;
-  left: 24px;
-  right: 24px;
-`
+export const signOut = () => auth.signOut()

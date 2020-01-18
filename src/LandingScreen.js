@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/macro'
-import SignInScreen from './Auth/AuthServices'
+import RegisterWithEmail from './Auth/RegisterWithEmail'
+import { SignInScreen } from './Auth/AuthServices'
 import Headline from './common/text/Headline'
 
 import loginBg from './img/loginBg.svg'
@@ -12,6 +13,7 @@ export default function LandingScreen() {
       <Headline color={colors.blue} textAlign="right">
         Gib deiner Gesundheit ein Zuhause
       </Headline>
+      {/* <RegisterWithEmail></RegisterWithEmail> */}
       <SignInScreen></SignInScreen>
     </Background>
   )

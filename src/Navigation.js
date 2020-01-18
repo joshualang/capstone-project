@@ -11,7 +11,13 @@ import Line from './Line'
 
 import ProfileChooser from './ProfileChooser'
 
-export default function({ profiles, onMenuClick, refresh }) {
+export default function({
+  profiles,
+  onMenuClick,
+  refresh,
+  currentProfile,
+  changeProfile,
+}) {
   const props = useSpring({
     config: { tension: 5000, mass: 1, friction: 300 },
     opacity: 1,
@@ -26,6 +32,8 @@ export default function({ profiles, onMenuClick, refresh }) {
           <ProfileChooser
             refresh={refresh}
             profiles={profiles}
+            currentProfile={currentProfile}
+            changeProfile={changeProfile}
           ></ProfileChooser>
           <Line margin="8px 0 16px"></Line>
           <FlexboxGap>
@@ -33,7 +41,7 @@ export default function({ profiles, onMenuClick, refresh }) {
               <Title>Impfpass</Title>
             </Link>
             <Link to="/vaccinationsOpen" onClick={() => onMenuClick()}>
-              <Title>Offene Impfungen</Title>
+              <Title>Anstehende Impfungen</Title>
             </Link>
           </FlexboxGap>
         </div>

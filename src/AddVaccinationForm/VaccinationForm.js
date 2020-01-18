@@ -10,6 +10,7 @@ import Title from '../common/text/Title'
 import DetailsText from '../common/text/DetailsText'
 
 import Head from '../Head'
+import SubmitButton from '../common/SubmitButton'
 
 export default function({
   form,
@@ -20,7 +21,6 @@ export default function({
   onFormStickerChange,
   sendDataToBackend,
 }) {
-  console.log(sendDataToBackend)
   return (
     <>
       <Head headline="Impfung hinzufügen" />
@@ -150,13 +150,4 @@ const Flexbox = styled.div`
     width: 1rem;
     height: 1rem;
   }
-`
-const SubmitButton = styled.button`
-  align-self: flex-start;
-  border-radius: 16px;
-  border: 2px solid blue;
-  width: 80px;
-  height: 32px;
-  background: ${props => (props.isActive ? colors.blue : 'white')};
-  color: ${props => (props.isActive ? 'white' : colors.blue)};
 `
