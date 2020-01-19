@@ -2,11 +2,11 @@ const updateVaccinations = require('./controllers/updateVaccinationsOpen')
 const userFormatter = require('./controllers/Formatter/userFormatter')
 const createVaccinationsMadeFromVaccine = require('./controllers/createVaccinationsMadeFromVaccine')
 const toDateObject = require('./controllers/Time/toDateObject')
+const defaultSettings = require('./defaultSettings.json')
 
 const express = require('express')
 const bodyParser = require('body-parser')
 const fs = require('fs')
-const https = require('https')
 const app = express()
 const cors = require('cors')
 const port = 3338
@@ -20,40 +20,18 @@ admin.initializeApp({
 
 let db = admin.firestore()
 
-console.log(fs.readFileSync('./env/server.cert'))
-
 app.use(cors())
 app.use(bodyParser())
 app.use(express.json())
 app.set('json spaces', 2)
 
-app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept, authorization'
-  )
-  next()
-})
-
-https
-  .createServer(
-    {
-      key: fs.readFileSync('./env/server.key'),
-      cert: fs.readFileSync('./env/server.cert'),
-    },
-    app
-  )
-  .listen(port, function() {
-    console.log(
-      'Example app listening on port 3338! Go to https://localhost:3338/'
-    )
-  })
+app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
 app.post('/api/newuser/:user', function(req, res) {
   const { user } = req.params
   const idToken = req.headers.authorization
   console.log(req.body)
+  console.log('user', user)
   res.send('got it')
   // admin
   //   .auth()
@@ -64,8 +42,9 @@ app.post('/api/newuser/:user', function(req, res) {
   db.collection('users')
     .doc(user)
     .set({
-      ...req.body,
-      settings: { rotaviren: true },
+      name: req.body.name,
+      age: admin.firestore.Timestamp.fromDate(toDateObject(req.body.age)),
+      settings: { ...defaultSettings },
       vaccinationsMade: [],
       vaccinationsOpen: [],
     })
@@ -80,112 +59,73 @@ app.post('/api/newuser/:user', function(req, res) {
 
 app.get('/api/:user', function(req, res) {
   const { user } = req.params
-  const idToken = req.headers.authorization
-  console.log('request', req)
-  admin
-    .auth()
-    .verifyIdToken(idToken)
-    .then(function(decodedToken) {
-      let uid = decodedToken.uid
-      if (uid === user) {
+
+  db.collection('users')
+    .doc(user)
+    .get()
+    .then(doc => {
+      if (!doc.exists) {
+        console.log('No such document!')
+      } else {
+        const newData = updateVaccinations(doc.data())
         db.collection('users')
           .doc(user)
-          .get()
-          .then(doc => {
-            if (!doc.exists) {
-              console.log('No such document!')
-            } else {
-              const newData = updateVaccinations(doc.data())
-              db.collection('users')
-                .doc(user)
-                .set(newData)
+          .set(newData)
 
-              res.json(userFormatter(newData))
-            }
-          })
-          .catch(err => {
-            console.log('Error getting document', err)
-          })
-      } else {
-        console.log('not auth')
+        res.json(userFormatter(newData))
       }
     })
-    .catch(function(error) {
-      console.log(error)
+    .catch(err => {
+      console.log('Error getting document', err)
     })
 })
 
 app.patch('/api/settings/:user', (req, res) => {
   const { user } = req.params
-  const idToken = req.headers.authorization
-  admin
-    .auth()
-    .verifyIdToken(idToken)
-    .then(function(decodedToken) {
-      let uid = decodedToken.uid
-      console.log('uid', uid)
-      if (uid === user) {
+
+  db.collection('users')
+    .doc(user)
+    .get()
+    .then(doc => {
+      if (!doc.exists) {
+        console.log('No such document!')
+      } else {
+        console.log('settings', req.body)
         db.collection('users')
           .doc(user)
-          .get()
-          .then(doc => {
-            if (!doc.exists) {
-              console.log('No such document!')
-            } else {
-              console.log('settings', req.body)
-              db.collection('users')
-                .doc(user)
-                .set(
-                  {
-                    age: toDateObject(req.body.age),
-                    settings: req.body.settings,
-                  },
-                  { merge: true }
-                )
-            }
-          })
+          .set(
+            {
+              name: req.body.name,
+              age: toDateObject(req.body.age),
+              settings: req.body.settings,
+            },
+            { merge: true }
+          )
       }
     })
 })
 
 app.patch('/api/:user', (req, res) => {
   const { user } = req.params
-  const idToken = req.headers.authorization
-  admin
-    .auth()
-    .verifyIdToken(idToken)
-    .then(function(decodedToken) {
-      let uid = decodedToken.uid
-      if (uid === user) {
-        db.collection('vaccines')
-          .doc(req.body.sticker)
-          .get()
-          .then(doc => {
-            if (!doc.exists) {
-              res.json(
-                'Wir haben leider keine entsprechende Impfung gefunden. Vielleicht hast du dich vertippt?'
-              )
-            } else {
-              const vaccine = doc.data()
-              const newVaccinations = createVaccinationsMadeFromVaccine(
-                vaccine,
-                req
-              )
-              db.collection('users')
-                .doc(user)
-                .update({
-                  vaccinationsMade: admin.firestore.FieldValue.arrayUnion(
-                    ...newVaccinations
-                  ),
-                })
-              res.json(newVaccinations)
-            }
-          })
+  db.collection('vaccines')
+    .doc(req.body.sticker)
+    .get()
+    .then(doc => {
+      if (!doc.exists) {
+        res.json(
+          'Wir haben leider keine entsprechende Impfung gefunden. Vielleicht hast du dich vertippt?'
+        )
       } else {
-        console.log('not auth')
+        const vaccine = doc.data()
+        const newVaccinations = createVaccinationsMadeFromVaccine(vaccine, req)
+        db.collection('users')
+          .doc(user)
+          .update({
+            vaccinationsMade: admin.firestore.FieldValue.arrayUnion(
+              ...newVaccinations
+            ),
+          })
+        res.json(newVaccinations)
       }
-    })
-    .catch(function(error) {
-      console.log(error)
     })
 })

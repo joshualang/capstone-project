@@ -46,17 +46,21 @@ export function updateUserDisplayName(newName) {
 export function signUpWithEmail(email, password, name, birth) {
   auth
     .createUserWithEmailAndPassword(email, password)
-    .then(user =>
-      createNewUser(user.uid, user._lat, name, birth).then(res =>
-        console.log(res)
-      )
-    )
+    .then(user => {
+      console.log('createuser', user.user.uid, user.uid)
+      createNewUser(user.user.uid, user.user._lat, name, birth)
+    })
+    //.then((window.location.href = '/'))
     .catch(function(error) {
       // Handle Errors here.
       var errorCode = error.code
       var errorMessage = error.message
       // ...
     })
+}
+
+export function signInWithEmail(email, password) {
+  auth.signInWithEmailAndPassword(email, password)
 }
 
 export const signOut = () => auth.signOut()

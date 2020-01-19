@@ -18,7 +18,7 @@ export default function ToggleSwitchInput({
           id={children}
           type="checkbox"
           onChange={event => onChange(disease, event)}
-          checked={value[disease]}
+          checked={value[disease] ? 1 : 0}
         />
         <div></div>
       </Background>

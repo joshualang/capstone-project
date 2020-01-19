@@ -1,0 +1,17 @@
+{
+  "Masern": "true",
+  "Rotaviren": "true",
+  "Mumps": "true",
+  "HerpesZoster": "true",
+  "Influenza": "true",
+  "Pneumokokken": "true",
+  "HPV": "true",
+  "Hib": "true",
+  "Pertussis": "true",
+  "Tetanus": "true",
+  "Polio": "true",
+  "Diphtherie": "true",
+  "MeningokokkenC": "true",
+  "HepatitisB": "true",
+  "Varizellen": "true"
+}

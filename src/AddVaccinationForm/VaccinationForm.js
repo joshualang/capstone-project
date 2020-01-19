@@ -80,7 +80,7 @@ export default function({
                 Zum Beispiel:
               </DetailsText>
               <img src={vaccinationExample} alt="vaccination sticker"></img>
-              <DetailsText>Prevenar 32323 P661966</DetailsText>
+              <DetailsText>Hexyon</DetailsText>
             </>
           ) : (
             <></>

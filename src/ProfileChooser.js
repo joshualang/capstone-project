@@ -28,6 +28,7 @@ export default function ProfileChooser({
             <SectionText
               onClick={() => changeProfile(index)}
               style={{ marginBottom: '8px' }}
+              key={item}
             >
               <a>{item}</a>
             </SectionText>

@@ -22,6 +22,7 @@ import { isValidDate, nowAsString } from './dateHelper'
 export default function Home({ user }) {
   const [lastRefresh, setLastRefresh] = useState(new Date())
   const { data, isLoading } = useLoadingEffect(user, lastRefresh)
+  console.log(data)
   const [form, setForm] = useState({
     doctor: '',
     validDoctor: false,
@@ -54,10 +55,10 @@ export default function Home({ user }) {
 
   function onFormSubmit(res) {
     setForm({ ...form, isSubmitted: res })
+    setLastRefresh(new Date())
   }
   function setFormSubmitBack() {
     setForm({ ...form, isSubmitted: false })
-    setLastRefresh(new Date())
   }
   function onFormInfoVisibleChange() {
     setForm({ ...form, infoVisible: !form.infoVisible })
@@ -118,7 +119,7 @@ export default function Home({ user }) {
         <Navigation
           refresh={setLastRefresh}
           onMenuClick={onMenuClick}
-          currentProfile={currentProfile}
+          currentProfile={[data.name]}
           changeProfile={changeProfile}
         />
       ) : (
@@ -163,7 +164,7 @@ export default function Home({ user }) {
               ) : (
                 <Settings
                   updateSettingsInBackend={updateSettingsInBackend}
-                  userName={user.displayName}
+                  userName={data.name}
                   userAge={data.age}
                   diseases={data.settings}
                 ></Settings>

@@ -1,5 +1,5 @@
 export function getData(uid, idToken) {
-  return fetch(`https://localhost:3338/api/${uid}`, {
+  return fetch(`http://localhost:3338/api/${uid}`, {
     method: 'GET',
     headers: {
       'content-type': 'application/json',
@@ -11,7 +11,7 @@ export function getData(uid, idToken) {
 }
 
 export function patchData(uid, idToken, vaccination) {
-  return fetch(`https://localhost:3338/api/${uid}`, {
+  return fetch(`http://localhost:3338/api/${uid}`, {
     method: 'PATCH',
     body: JSON.stringify(vaccination),
     headers: {
@@ -22,7 +22,8 @@ export function patchData(uid, idToken, vaccination) {
 }
 
 export function updateSettings(uid, idToken, settings) {
-  return fetch(`https://localhost:3338/api/settings/${uid}`, {
+  console.log('update', settings)
+  return fetch(`http://localhost:3338/api/settings/${uid}`, {
     method: 'PATCH',
     body: JSON.stringify(settings),
     headers: {
@@ -34,7 +35,7 @@ export function updateSettings(uid, idToken, settings) {
 
 export function createNewUser(uid, idToken, name, age) {
   console.log('Posting Data')
-  return fetch(`https://localhost:3338/api/newuser/${uid}`, {
+  return fetch(`http://localhost:3338/api/newuser/${uid}`, {
     method: 'POST',
     body: JSON.stringify({ name: name, age: age }),
     headers: {

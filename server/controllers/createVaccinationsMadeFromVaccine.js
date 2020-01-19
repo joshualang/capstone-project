@@ -11,14 +11,20 @@ module.exports = function createVaccinationsMadeFromVaccine(vaccine, request) {
       )
 
       if (indexOfDisease >= 0) {
-        return vaccinationRecommendations[indexOfDisease][disease].find(
+        const userAgeInDays =
+          (toDateObject(request.body.date).getTime() -
+            toDateObject(request.body.userBirth).getTime()) /
+          (1000 * 60 * 60 * 24)
+        console.log('userAgeInDays', userAgeInDays)
+        const entryInIntervall = vaccinationRecommendations[indexOfDisease][
+          disease
+        ].find(
           entry =>
-            entry.beginsAtAgeInDays <
-            (toDateObject(request.body.date).getTime() -
-              toDateObject(request.body.userBirth).getTime()) /
-              (1000 * 60 * 60 * 24) <
-            entry.endsAtAgeInDays
-        ).vaccinationType
+            entry.beginsAtAgeInDays < userAgeInDays &&
+            userAgeInDays < entry.endsAtAgeInDays
+        )
+        console.log(entryInIntervall, entryInIntervall.vaccinationType)
+        return entryInIntervall.vaccinationType
       } else {
         return 'Impfung nicht zuruordnen'
       }

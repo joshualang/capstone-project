@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react'
 import styled from 'styled-components/macro'
 import Head from '../Head'
 import SectionText from '../common/text/SectionText'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import checkmark from '../img/checkmark.svg'
 import ToggleSwitchInput from '../ToggleSwitchInput'
 import TextInput from '../TextInput'
@@ -54,11 +54,12 @@ export default function({
         <Settings
           onSubmit={event => {
             event.preventDefault()
-            settings.name !== userName && updateUserDisplayName(settings.name)
             updateSettingsInBackend({
+              name: settings.name,
               age: settings.age,
               settings: settings.diseases,
             })
+            window.location.href = '/'
           }}
         >
           <div>
