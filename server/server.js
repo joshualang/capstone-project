@@ -29,16 +29,7 @@ app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
 app.post('/api/newuser/:user', function(req, res) {
   const { user } = req.params
-  const idToken = req.headers.authorization
-  console.log(req.body)
-  console.log('user', user)
   res.send('got it')
-  // admin
-  //   .auth()
-  //   .verifyIdToken(idToken)
-  //   .then(function(decodedToken) {
-  //     let uid = decodedToken.uid
-  //     if (uid === user) {
   db.collection('users')
     .doc(user)
     .set({
@@ -48,13 +39,6 @@ app.post('/api/newuser/:user', function(req, res) {
       vaccinationsMade: [],
       vaccinationsOpen: [],
     })
-  //   } else {
-  //     console.log('not auth')
-  //   }
-  // })
-  // .catch(function(error) {
-  //   console.log(error)
-  // })
 })
 
 app.get('/api/:user', function(req, res) {
@@ -68,6 +52,7 @@ app.get('/api/:user', function(req, res) {
         console.log('No such document!')
       } else {
         const newData = updateVaccinations(doc.data())
+        console.log(newData)
         db.collection('users')
           .doc(user)
           .set(newData)
@@ -90,7 +75,6 @@ app.patch('/api/settings/:user', (req, res) => {
       if (!doc.exists) {
         console.log('No such document!')
       } else {
-        console.log('settings', req.body)
         db.collection('users')
           .doc(user)
           .set(

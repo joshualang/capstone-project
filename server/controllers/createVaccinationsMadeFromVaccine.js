@@ -15,7 +15,6 @@ module.exports = function createVaccinationsMadeFromVaccine(vaccine, request) {
           (toDateObject(request.body.date).getTime() -
             toDateObject(request.body.userBirth).getTime()) /
           (1000 * 60 * 60 * 24)
-        console.log('userAgeInDays', userAgeInDays)
         const entryInIntervall = vaccinationRecommendations[indexOfDisease][
           disease
         ].find(
@@ -23,7 +22,6 @@ module.exports = function createVaccinationsMadeFromVaccine(vaccine, request) {
             entry.beginsAtAgeInDays < userAgeInDays &&
             userAgeInDays < entry.endsAtAgeInDays
         )
-        console.log(entryInIntervall, entryInIntervall.vaccinationType)
         return entryInIntervall.vaccinationType
       } else {
         return 'Impfung nicht zuruordnen'

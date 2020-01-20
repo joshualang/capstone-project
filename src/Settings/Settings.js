@@ -1,17 +1,13 @@
 import React, { useState, useRef } from 'react'
 import styled from 'styled-components/macro'
 import Head from '../Head'
-import SectionText from '../common/text/SectionText'
-import { Link, Redirect } from 'react-router-dom'
+
+import { Link } from 'react-router-dom'
 import checkmark from '../img/checkmark.svg'
-import ToggleSwitchInput from '../ToggleSwitchInput'
-import TextInput from '../TextInput'
-import DetailsText from '../common/text/DetailsText'
 import PersonalInformation from './PersonalInformation'
 import DiseasesSelected from './DiseasesSelected'
 
 import { stringifyDate, isValidDate } from '../dateHelper'
-import { updateUserDisplayName } from '../Auth/AuthServices'
 
 export default function({
   userAge,
@@ -25,7 +21,7 @@ export default function({
     age: stringifyDate(new Date(userAge)),
     diseases: { ...diseases },
   })
-  console.log(settings)
+
   function onFormNameChange(event) {
     setSettings({ ...settings, name: event.target.value })
   }
@@ -33,7 +29,6 @@ export default function({
     setSettings({ ...settings, age: event.target.value })
   }
   function onDiseaseChange(disease, event) {
-    console.log(event.target.checked)
     setSettings({
       ...settings,
       diseases: { ...settings.diseases, [disease]: event.target.checked },
@@ -93,9 +88,6 @@ const Settings = styled.form`
   flex-direction: column;
   gap: 32px;
   padding-right: 4px;
-`
-const Indent = styled.div`
-  padding-left: 8px;
 `
 const Container = styled.div`
   height: 100%;

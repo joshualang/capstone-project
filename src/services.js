@@ -22,7 +22,6 @@ export function patchData(uid, idToken, vaccination) {
 }
 
 export function updateSettings(uid, idToken, settings) {
-  console.log('update', settings)
   return fetch(`http://localhost:3338/api/settings/${uid}`, {
     method: 'PATCH',
     body: JSON.stringify(settings),
@@ -34,7 +33,6 @@ export function updateSettings(uid, idToken, settings) {
 }
 
 export function createNewUser(uid, idToken, name, age) {
-  console.log('Posting Data')
   return fetch(`http://localhost:3338/api/newuser/${uid}`, {
     method: 'POST',
     body: JSON.stringify({ name: name, age: age }),

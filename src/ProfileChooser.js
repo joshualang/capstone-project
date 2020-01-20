@@ -14,7 +14,6 @@ export default function ProfileChooser({
   const maxHeight = useHeight(profilesEl)
   function onUserClick() {
     setIsProfileChooserOpen(!isProfileChooserOpen)
-    console.log('user clicked', isProfileChooserOpen)
   }
   return (
     <div>
@@ -27,10 +26,10 @@ export default function ProfileChooser({
           {currentProfile.map((item, index) => (
             <SectionText
               onClick={() => changeProfile(index)}
-              style={{ marginBottom: '8px' }}
+              style={{ marginBottom: '8px', cursor: 'pointer' }}
               key={item}
             >
-              <a>{item}</a>
+              {item}
             </SectionText>
           ))}
         </Profiles>

@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
-import styled from 'styled-components/macro'
 import { signUpWithEmail } from './AuthServices'
-import AuthCard from './AuthCard'
 import { isValidDate } from '../dateHelper'
 import isValidEmail from './isValidEmail'
 

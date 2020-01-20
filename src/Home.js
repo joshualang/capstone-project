@@ -1,7 +1,6 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import { Switch, Route, useLocation } from 'react-router-dom'
 import { useTransition } from 'react-spring'
-import useHeight from './hooks/useHeight'
 
 import Main from './Main'
 import Header from './Header'
@@ -11,7 +10,6 @@ import VaccinationsMade from './VaccinationsMade'
 import VaccinationsOpen from './VaccinationsOpen'
 import VaccinationDetails from './VaccinationDetails'
 import AddVaccination from './AddVaccinationForm/AddVaccination'
-import MoreDropdownMenu from './MoreDropdownMenu'
 import Settings from './Settings/Settings'
 import Spinner from './Spinner'
 
@@ -22,7 +20,6 @@ import { isValidDate, nowAsString } from './dateHelper'
 export default function Home({ user }) {
   const [lastRefresh, setLastRefresh] = useState(new Date())
   const { data, isLoading } = useLoadingEffect(user, lastRefresh)
-  console.log(data)
   const [form, setForm] = useState({
     doctor: '',
     validDoctor: false,
@@ -34,7 +31,6 @@ export default function Home({ user }) {
     infoVisible: false,
     isSubmitted: false,
   })
-  const [isMoreDropdownMenuShown, setIsMoreDropdownMenuShown] = useState(false)
   const [isMenuShown, setIsMenuShown] = useState(false)
   const [currentProfile, setCurrentProfile] = useState([
     'Tommy',
@@ -48,7 +44,6 @@ export default function Home({ user }) {
         ...currentProfile.slice(0, index),
         ...currentProfile.slice(index + 1),
       ])
-      console.log(currentProfile)
       setLastRefresh(new Date())
     }
   }
@@ -96,9 +91,6 @@ export default function Home({ user }) {
   function onMenuClick() {
     setIsMenuShown(!isMenuShown)
   }
-  function onMoreDropdownMenuClick() {
-    setIsMoreDropdownMenuShown(!isMoreDropdownMenuShown)
-  }
 
   const location = useLocation()
   const animationConfig = {
@@ -125,17 +117,8 @@ export default function Home({ user }) {
       ) : (
         ''
       )}
-      {isMoreDropdownMenuShown ? (
-        <MoreDropdownMenu
-          onMoreDropdownMenuClick={onMoreDropdownMenuClick}
-        ></MoreDropdownMenu>
-      ) : (
-        ''
-      )}
-      <Header
-        onMenuClick={onMenuClick}
-        onMoreDropdownMenuClick={onMoreDropdownMenuClick}
-      />
+
+      <Header onMenuClick={onMenuClick} />
       {transitions.map(({ item, props, key }) => (
         <Main key={key} style={props}>
           <Switch location={item}>

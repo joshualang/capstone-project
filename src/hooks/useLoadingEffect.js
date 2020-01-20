@@ -9,7 +9,6 @@ export default function useLoadingEffect(user, lastRefresh) {
       setData(loadedData)
       setIsLoading(false)
     })
-    console.log('refresh')
   }, [lastRefresh])
 
   return { data, isLoading }

@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components/macro'
-import { patchData } from '../services'
 
 import info from '../img/info.svg'
 import vaccinationExample from '../img/vaccinationExample.jpg'
@@ -27,7 +26,6 @@ export default function({
       <Form
         onSubmit={event => {
           event.preventDefault()
-          console.log(form)
           sendDataToBackend(form).then(res => {
             onFormSubmit(res)
           })
