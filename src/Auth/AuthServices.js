@@ -1,6 +1,6 @@
 import firebase from 'firebase'
 import config from './firebaseConfig'
-import { createNewUser } from '../services'
+import { createUser } from '../services'
 require('firebase/auth')
 
 firebase.initializeApp(config)
@@ -25,7 +25,7 @@ export function signUpWithEmail(email, password, name, birth) {
   auth
     .createUserWithEmailAndPassword(email, password)
     .then(user => {
-      createNewUser(user.user.uid, user.user._lat, name, birth)
+      createUser(user.user.uid, user.user._lat, name, birth)
     })
     //.then((window.location.href = '/'))
     .catch(function(error) {

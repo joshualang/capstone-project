@@ -11,15 +11,16 @@ import VaccinationsOpen from './VaccinationsOpen'
 import VaccinationDetails from './VaccinationDetails'
 import AddVaccination from './AddVaccinationForm/AddVaccination'
 import Settings from './Settings/Settings'
-import Spinner from './Spinner'
+import Spinner from './common/Spinner'
 
 import useLoadingEffect from './hooks/useLoadingEffect'
-import { patchData, updateSettings } from './services'
+import { addVaccinationProfile, updateSettingsProfile } from './services'
 import { isValidDate, nowAsString } from './dateHelper'
 
 export default function Home({ user }) {
   const [lastRefresh, setLastRefresh] = useState(new Date())
-  const { data, isLoading } = useLoadingEffect(user, lastRefresh)
+  const { data, profiles, isLoading } = useLoadingEffect(user, lastRefresh)
+  console.log(data)
   const [form, setForm] = useState({
     doctor: '',
     validDoctor: false,
@@ -27,10 +28,11 @@ export default function Home({ user }) {
     validDate: true,
     sticker: '',
     validSticker: false,
-    userBirth: '24.09.2019',
+    userBirth: null,
     infoVisible: false,
     isSubmitted: false,
   })
+  console.log(form)
   const [isMenuShown, setIsMenuShown] = useState(false)
   const [currentProfile, setCurrentProfile] = useState([
     'Tommy',
@@ -49,7 +51,7 @@ export default function Home({ user }) {
   }
 
   function onFormSubmit(res) {
-    setForm({ ...form, isSubmitted: res })
+    setForm({ ...form, isSubmitted: res.result })
     setLastRefresh(new Date())
   }
   function setFormSubmitBack() {
@@ -79,13 +81,13 @@ export default function Home({ user }) {
       validSticker: event.target.value,
     })
   }
-  function sendDataToBackend(data) {
-    return patchData(user.uid, user._lat, data)
+  function addVaccination(date, vaccine, doctor) {
+    return addVaccinationProfile(data._id, user._lat, date, vaccine, doctor)
   }
 
   function updateSettingsInBackend(settings) {
     setLastRefresh(new Date())
-    return updateSettings(user.uid, user._lat, settings)
+    return updateSettingsProfile(data._id, user._lat, settings)
   }
 
   function onMenuClick() {
@@ -123,16 +125,21 @@ export default function Home({ user }) {
         <Main key={key} style={props}>
           <Switch location={item}>
             <Route path="/addvaccination">
-              <AddVaccination
-                form={form}
-                setFormSubmitBack={setFormSubmitBack}
-                onFormSubmit={onFormSubmit}
-                onFormInfoVisibleChange={onFormInfoVisibleChange}
-                onFormDoctorChange={onFormDoctorChange}
-                onFormDateChange={onFormDateChange}
-                onFormStickerChange={onFormStickerChange}
-                sendDataToBackend={sendDataToBackend}
-              ></AddVaccination>
+              {isLoading ? (
+                <Spinner />
+              ) : (
+                <AddVaccination
+                  form={form}
+                  data={data}
+                  setFormSubmitBack={setFormSubmitBack}
+                  onFormSubmit={onFormSubmit}
+                  onFormInfoVisibleChange={onFormInfoVisibleChange}
+                  onFormDoctorChange={onFormDoctorChange}
+                  onFormDateChange={onFormDateChange}
+                  onFormStickerChange={onFormStickerChange}
+                  addVaccination={addVaccination}
+                ></AddVaccination>
+              )}
             </Route>
             <Route path="/vaccinationdetails/:id">
               {isLoading ? (
@@ -148,8 +155,9 @@ export default function Home({ user }) {
                 <Settings
                   updateSettingsInBackend={updateSettingsInBackend}
                   userName={data.name}
-                  userAge={data.age}
+                  userBirth={data.birth}
                   diseases={data.settings}
+                  setLastRefresh={setLastRefresh}
                 ></Settings>
               )}
             </Route>

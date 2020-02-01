@@ -179,7 +179,7 @@ exports.profile_add_vaccination = (req: Request, res: Response) => {
             .then((update: any) =>
               res.status(201).json({
                 message: 'Handling POST request to profile/vaccinations',
-                result: update,
+                result: newVaccinationsMade,
               })
             )
             .catch((err: object) => {

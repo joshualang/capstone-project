@@ -62,7 +62,7 @@ export default function DiseasesSelected({ onDiseaseChange, settings }) {
         <ToggleSwitchInput
           onChange={onDiseaseChange}
           value={settings.diseases}
-          disease="HepatitisB"
+          disease="Hepatitis B"
         >
           Hepatitis B <DetailsText>(empfohlen)</DetailsText>
         </ToggleSwitchInput>

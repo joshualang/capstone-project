@@ -5,14 +5,14 @@ const Profile = require('../models/Profile')
 import { Request, Response } from 'express'
 
 exports.user_get_by_id = (req: Request, res: Response) => {
-  const { user } = req.params
-  User.findById(user)
+  const { uid } = req.params
+  User.findOne({ uid: uid })
     .select('-__v')
     .exec()
     .then((result: any) => {
       res.status(200).json({
         message: 'Handling GET request to user/',
-        user: result,
+        user: { _id: result._id, uid: result.uid, profiles: result.profiles },
       })
     })
     .catch((err: object) => {
@@ -25,6 +25,7 @@ exports.user_get_by_id = (req: Request, res: Response) => {
 }
 
 exports.user_create = (req: Request, res: Response) => {
+  const { uid } = req.params
   const { birth, name } = req.body
   const profile = new Profile({
     _id: new mongoose.Types.ObjectId(),
@@ -36,14 +37,28 @@ exports.user_create = (req: Request, res: Response) => {
     .then((result: any) => {
       const user = new User({
         _id: new mongoose.Types.ObjectId(),
+        uid: uid,
         profiles: [{ _id: result._id, name: result.name }],
       })
-      user.save().then((result: any) => {
-        res.status(201).json({
-          message: 'Handling POST request to user/createuser',
-          createdUser: { _id: result._id, profiles: result.profiles },
+      user
+        .save()
+        .then((result: any) => {
+          res.status(201).json({
+            message: 'Handling POST request to user/createuser',
+            createdUser: {
+              _id: result._id,
+              uid: result.uid,
+              profiles: result.profiles,
+            },
+          })
         })
-      })
+        .catch((err: object) => {
+          console.log(err)
+          res.status(500).json({
+            message: 'Handling POST request to user/createuser',
+            error: err,
+          })
+        })
     })
     .catch((err: object) => {
       console.log(err)
@@ -55,8 +70,8 @@ exports.user_create = (req: Request, res: Response) => {
 }
 
 exports.user_delete_by_id = (req: Request, res: Response) => {
-  const { user } = req.params
-  User.findByIdAndDelete(user)
+  const { uid } = req.params
+  User.findOneAndDelete({ uid: uid })
     .exec()
     .then((result: any) => {
       res.status(200).json({

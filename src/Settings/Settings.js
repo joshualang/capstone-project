@@ -10,15 +10,16 @@ import DiseasesSelected from './DiseasesSelected'
 import { stringifyDate, isValidDate } from '../dateHelper'
 
 export default function({
-  userAge,
+  userBirth,
   userName,
   updateSettingsInBackend,
   diseases,
+  setLastRefresh,
 }) {
   const refSubmit = useRef(null)
   const [settings, setSettings] = useState({
     name: userName,
-    age: stringifyDate(new Date(userAge)),
+    birth: stringifyDate(new Date(userBirth)),
     diseases: { ...diseases },
   })
 
@@ -26,7 +27,7 @@ export default function({
     setSettings({ ...settings, name: event.target.value })
   }
   function onFormBirthChange(event) {
-    setSettings({ ...settings, age: event.target.value })
+    setSettings({ ...settings, birth: event.target.value })
   }
   function onDiseaseChange(disease, event) {
     setSettings({
@@ -34,7 +35,6 @@ export default function({
       diseases: { ...settings.diseases, [disease]: event.target.checked },
     })
   }
-
   return (
     <>
       <Head
@@ -51,10 +51,10 @@ export default function({
             event.preventDefault()
             updateSettingsInBackend({
               name: settings.name,
-              age: settings.age,
+              birth: settings.birth,
               settings: settings.diseases,
             })
-            window.location.href = '/'
+            setLastRefresh(new Date())
           }}
         >
           <div>

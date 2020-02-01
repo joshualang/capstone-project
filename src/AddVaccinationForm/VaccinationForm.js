@@ -10,6 +10,7 @@ import DetailsText from '../common/text/DetailsText'
 
 import Head from '../Head'
 import SubmitButton from '../common/SubmitButton'
+import { stringifyDate } from '../dateHelper'
 
 export default function({
   form,
@@ -18,7 +19,7 @@ export default function({
   onFormDoctorChange,
   onFormDateChange,
   onFormStickerChange,
-  sendDataToBackend,
+  addVaccination,
 }) {
   return (
     <>
@@ -26,7 +27,7 @@ export default function({
       <Form
         onSubmit={event => {
           event.preventDefault()
-          sendDataToBackend(form).then(res => {
+          addVaccination(form.date, form.sticker, form.doctor).then(res => {
             onFormSubmit(res)
           })
         }}
@@ -88,7 +89,7 @@ export default function({
             name="vaccinationSticker"
             onInput={event => onFormStickerChange(event)}
             type="text"
-            placeholder="Infanrix hexa A21CA404C"
+            placeholder="Rotarix"
             value={form.sticker}
             valid={form.validSticker}
           ></Input>

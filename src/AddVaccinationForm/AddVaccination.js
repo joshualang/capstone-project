@@ -5,23 +5,25 @@ import VaccinationFormSuccess from './VaccinationFormSuccess'
 
 export default function AddVaccination({
   form,
+  data,
   onFormSubmit,
   onFormInfoVisibleChange,
   onFormDoctorChange,
   onFormDateChange,
   onFormStickerChange,
   setFormSubmitBack,
-  sendDataToBackend,
+  addVaccination,
 }) {
   return !form.isSubmitted ? (
     <VaccinationForm
       form={form}
+      data={data}
       onFormSubmit={onFormSubmit}
       onFormInfoVisibleChange={onFormInfoVisibleChange}
       onFormDoctorChange={onFormDoctorChange}
       onFormDateChange={onFormDateChange}
       onFormStickerChange={onFormStickerChange}
-      sendDataToBackend={sendDataToBackend}
+      addVaccination={addVaccination}
     />
   ) : Array.isArray(form.isSubmitted) ? (
     <VaccinationFormSuccess

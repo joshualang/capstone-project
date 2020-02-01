@@ -10,15 +10,8 @@ const profileSchema = new mongoose.Schema({
     {
       date: Date,
       vaccineId: String,
-      doctor: String,
-      _id: mongoose.Schema.Types.ObjectId,
-      vaccinationType: String,
-    },
-  ],
-  vaccinationsOpen: [
-    {
-      begins: Date,
       disease: String,
+      doctor: String,
       _id: mongoose.Schema.Types.ObjectId,
       vaccinationType: String,
     },

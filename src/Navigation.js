@@ -7,7 +7,7 @@ import { signOut } from './Auth/AuthServices'
 import colors from './common/styles/colors'
 
 import Title from './common/text/Title'
-import Line from './Line'
+import Line from './common/Line'
 
 import ProfileChooser from './ProfileChooser'
 

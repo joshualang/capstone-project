@@ -22,8 +22,8 @@ export default function PersonalInformation({
         </TextInput>
         <TextInput
           onChange={onFormBirthChange}
-          value={settings.age}
-          valid={isValidDate(settings.age)}
+          value={settings.birth}
+          valid={isValidDate(settings.birth)}
         >
           Geburtsdatum
         </TextInput>

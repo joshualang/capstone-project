@@ -2,6 +2,7 @@ import mongoose from 'mongoose'
 
 const userSchema = new mongoose.Schema({
   _id: { type: mongoose.Schema.Types.ObjectId, required: true },
+  uid: { type: String, required: true },
   profiles: [
     {
       _id: {
