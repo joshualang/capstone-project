@@ -1,6 +1,6 @@
 import firebase from 'firebase'
 import config from './firebaseConfig'
-import { createUser } from '../services'
+import { createUser } from '../../services'
 require('firebase/auth')
 
 firebase.initializeApp(config)

@@ -3,11 +3,13 @@ import styled from 'styled-components/macro'
 import Head from '../Head'
 
 import { Link } from 'react-router-dom'
-import checkmark from '../img/checkmark.svg'
+import checkmark from '../../../img/checkmark.svg'
 import PersonalInformation from './PersonalInformation'
 import DiseasesSelected from './DiseasesSelected'
 
-import { stringifyDate, isValidDate } from '../dateHelper'
+import { stringifyDate, isValidDate } from '../../../helper/dateHelper'
+
+import useSettings from '../../../hooks/settings'
 
 export default function({
   userBirth,
@@ -16,6 +18,9 @@ export default function({
   diseases,
   setLastRefresh,
 }) {
+  const { handleChange, handleSubmit, values } = useSettings(() =>
+    console.log('custom hook')
+  )
   const refSubmit = useRef(null)
   const [settings, setSettings] = useState({
     name: userName,
@@ -56,6 +61,7 @@ export default function({
             })
             setLastRefresh(new Date())
           }}
+          onChange={handleChange}
         >
           <div>
             <PersonalInformation

@@ -2,9 +2,9 @@ import React from 'react'
 import styled from 'styled-components/macro'
 import { useParams } from 'react-router-dom'
 
-import colors from './common/styles/colors'
-import Title from './common/text/Title'
-import Text from './common/text/Text'
+import colors from '../common/styles/colors'
+import Title from '../common/text/Title'
+import Text from '../common/text/Text'
 import Head from './Head'
 
 export default function VaccinationDetails({ data }) {

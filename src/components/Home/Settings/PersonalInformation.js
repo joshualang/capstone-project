@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/macro'
-import SectionText from '../common/text/SectionText'
-import TextInput from '../TextInput'
+import SectionText from '../../common/text/SectionText'
+import TextInput from '../../common/TextInput'
 
 export default function PersonalInformation({
   onFormNameChange,

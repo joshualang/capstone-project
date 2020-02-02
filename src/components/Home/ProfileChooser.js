@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import styled from 'styled-components/macro'
-import useHeight from './hooks/useHeight'
-import SectionText from './common/text/SectionText'
+import useHeight from '../../hooks/useHeight'
+import SectionText from '../common/text/SectionText'
 
 export default function ProfileChooser({
   refresh,

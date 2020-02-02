@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { getUser, getProfile } from './../services'
+import { getUser, getProfile } from '../helper/services'
 
 export default function useLoadingEffect(user, lastRefresh) {
   const [data, setData] = useState({})

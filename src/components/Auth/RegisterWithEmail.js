@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { signUpWithEmail } from './AuthServices'
-import { isValidDate } from '../dateHelper'
+import { isValidDate } from '../../../helper/dateHelper'
 import isValidEmail from './isValidEmail'
 
-import TextInput from '../TextInput'
-import SubmitButton from '../common/SubmitButton'
+import TextInput from '../../common/TextInput'
+import SubmitButton from '../../common/SubmitButton'
 
 export default function RegisterWithEmail() {
   const [registrationData, setRegistrationData] = useState({

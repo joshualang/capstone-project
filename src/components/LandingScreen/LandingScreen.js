@@ -2,12 +2,12 @@ import React from 'react'
 import { Switch, Route, Link } from 'react-router-dom'
 import styled from 'styled-components/macro'
 import RegisterWithEmail from './Auth/RegisterWithEmail'
-import Headline from './common/text/Headline'
+import Headline from '../common/text/Headline'
 import AuthCard from './Auth/AuthCard'
-import Text from './common/text/Text'
+import Text from '../common/text/Text'
 
-import loginBg from './img/loginBg.svg'
-import colors from './common/styles/colors'
+import loginBg from '../../img/loginBg.svg'
+import colors from '../common/styles/colors'
 import LoginWithEmail from './Auth/LoginWithEmail'
 
 export default function LandingScreen() {

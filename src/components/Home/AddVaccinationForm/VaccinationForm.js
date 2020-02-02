@@ -1,16 +1,15 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 
-import info from '../img/info.svg'
-import vaccinationExample from '../img/vaccinationExample.jpg'
+import info from '../../../img/info.svg'
+import vaccinationExample from '../../../img/vaccinationExample.jpg'
 
-import colors from '../common/styles/colors'
-import Title from '../common/text/Title'
-import DetailsText from '../common/text/DetailsText'
+import colors from '../../common/styles/colors'
+import Title from '../../common/text/Title'
+import DetailsText from '../../common/text/DetailsText'
 
 import Head from '../Head'
-import SubmitButton from '../common/SubmitButton'
-import { stringifyDate } from '../dateHelper'
+import SubmitButton from '../../common/SubmitButton'
 
 export default function({
   form,

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components/macro'
-import Title from './common/text/Title'
+import Title from './text/Title'
 
 export default function ToggleSwitchInput({
   children,

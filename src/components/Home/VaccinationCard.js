@@ -4,9 +4,9 @@ import TimeAgo from "react-timeago"
 import germanStrings from "react-timeago/lib/language-strings/de"
 import buildFormatter from "react-timeago/lib/formatters/buildFormatter"
 
-import colors from "./common/styles/colors"
-import Title from "./common/text/Title"
-import DetailsText from "./common/text/DetailsText"
+import colors from "../common/styles/colors"
+import Title from "../common/text/Title"
+import DetailsText from "../common/text/DetailsText"
 import { Link } from "react-router-dom"
 
 export default function Vaccination({ vaccination, date, doctor, id }) {

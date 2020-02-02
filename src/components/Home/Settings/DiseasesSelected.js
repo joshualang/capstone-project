@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 
-import ToggleSwitchInput from '../ToggleSwitchInput'
-import DetailsText from '../common/text/DetailsText'
-import SectionText from '../common/text/SectionText'
+import ToggleSwitchInput from '../../common/ToggleSwitchInput'
+import DetailsText from '../../common/text/DetailsText'
+import SectionText from '../../common/text/SectionText'
 
 export default function DiseasesSelected({ onDiseaseChange, settings }) {
   return (

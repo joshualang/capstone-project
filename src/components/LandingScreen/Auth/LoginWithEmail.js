@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { signInWithEmail } from './AuthServices'
 import isValidEmail from './isValidEmail'
 
-import TextInput from '../TextInput'
-import SubmitButton from '../common/SubmitButton'
+import TextInput from '../../common/TextInput'
+import SubmitButton from '../../common/SubmitButton'
 
 export default function RegisterWithEmail() {
   const [loginData, setLoginData] = useState({

@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 
-import Title from '../common/text/Title'
+import Title from '../../common/text/Title'
 import Head from '../Head'
-import error from '../img/error.svg'
+import error from '../../../img/error.svg'
 
 export default function VaccinationFormFailure({
   submitMessage,

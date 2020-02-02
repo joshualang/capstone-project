@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components/macro'
-import Line from './common/Line'
-import back from './img/ios-back.svg'
-import SectionText from './common/text/SectionText'
-import Fadeout from './common/Fadeout'
+import Line from '../common/Line'
+import back from '../../img/ios-back.svg'
+import SectionText from '../common/text/SectionText'
+import Fadeout from '../common/Fadeout'
 
 export default function({
   topRight,

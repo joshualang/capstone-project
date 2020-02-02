@@ -1,10 +1,10 @@
 import React from 'react'
 import VaccinationCard from './VaccinationCard'
 import styled from 'styled-components/macro'
-import SectionText from './common/text/SectionText'
-import Text from './common/text/Text'
+import SectionText from '../common/text/SectionText'
+import Text from '../common/text/Text'
 
-import nomadevaccinations from './img/nomadevaccinations.svg'
+import nomadevaccinations from '../../img/nomadevaccinations.svg'
 
 export default function({ data }) {
   return (

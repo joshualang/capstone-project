@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components/macro'
-import Headline from './common/text/Headline'
-import menu from './img/menu.svg'
-import plus from './img/plus.svg'
+import Headline from '../common/text/Headline'
+import menu from '../../img/menu.svg'
+import plus from '../../img/plus.svg'
 import { Link } from 'react-router-dom'
 
 export default function Header({ onMenuClick }) {

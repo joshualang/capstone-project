@@ -11,11 +11,11 @@ import VaccinationsOpen from './VaccinationsOpen'
 import VaccinationDetails from './VaccinationDetails'
 import AddVaccination from './AddVaccinationForm/AddVaccination'
 import Settings from './Settings/Settings'
-import Spinner from './common/Spinner'
+import Spinner from '../common/Spinner'
 
-import useLoadingEffect from './hooks/useLoadingEffect'
-import { addVaccinationProfile, updateSettingsProfile } from './services'
-import { isValidDate, nowAsString } from './dateHelper'
+import useLoadingEffect from '../../hooks/useLoadingEffect'
+import { addVaccinationProfile, updateSettingsProfile } from '../../helper/services'
+import { isValidDate, nowAsString } from '../../helper/dateHelper'
 
 export default function Home({ user }) {
   const [lastRefresh, setLastRefresh] = useState(new Date())

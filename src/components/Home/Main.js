@@ -1,5 +1,5 @@
 import styled from "styled-components/macro"
-import colors from "./common/styles/colors"
+import colors from "../common/styles/colors"
 import { animated } from "react-spring"
 
 export default styled(animated.main)`

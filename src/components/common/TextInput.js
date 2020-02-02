@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/macro'
-import Title from './common/text/Title'
-import colors from './common/styles/colors'
+import Title from './text/Title'
+import colors from './styles/colors'
 
 export default function TextInput({
   children,

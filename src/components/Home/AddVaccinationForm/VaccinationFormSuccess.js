@@ -3,11 +3,11 @@ import styled from 'styled-components/macro'
 import { Link } from 'react-router-dom'
 
 import VaccinationCard from '../VaccinationCard'
-import Title from '../common/text/Title'
+import Title from '../../common/text/Title'
 import Head from '../Head'
 
-import checkmark from '../img/checkmark.svg'
-import success from '../img/success.svg'
+import checkmark from '../../../img/checkmark.svg'
+import success from '../../../img/success.svg'
 
 export default function VaccinationFormSuccess({
   submitMessage,
