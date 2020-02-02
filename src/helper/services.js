@@ -72,10 +72,16 @@ export function deleteProfile(profileid, idToken) {
     .catch(err => console.log(err))
 }
 
-export function updateSettingsProfile(profileid, idToken, settings) {
+export function updateSettingsProfile(
+  profileid,
+  idToken,
+  name,
+  birth,
+  settings
+) {
   return fetch(`http://localhost:3338/api/profile/settings/${profileid}`, {
     method: 'PATCH',
-    body: JSON.stringify({ settings: settings }),
+    body: JSON.stringify({ name: name, birth: birth, settings: settings }),
     headers: {
       'content-type': 'application/json',
       authorization: idToken,

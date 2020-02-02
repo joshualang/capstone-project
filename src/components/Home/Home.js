@@ -14,13 +14,12 @@ import Settings from './Settings/Settings'
 import Spinner from '../common/Spinner'
 
 import useLoadingEffect from '../../hooks/useLoadingEffect'
-import { addVaccinationProfile, updateSettingsProfile } from '../../helper/services'
+import { addVaccinationProfile } from '../../helper/services'
 import { isValidDate, nowAsString } from '../../helper/dateHelper'
 
 export default function Home({ user }) {
   const [lastRefresh, setLastRefresh] = useState(new Date())
   const { data, profiles, isLoading } = useLoadingEffect(user, lastRefresh)
-  console.log(data)
   const [form, setForm] = useState({
     doctor: '',
     validDoctor: false,
@@ -32,7 +31,6 @@ export default function Home({ user }) {
     infoVisible: false,
     isSubmitted: false,
   })
-  console.log(form)
   const [isMenuShown, setIsMenuShown] = useState(false)
   const [currentProfile, setCurrentProfile] = useState([
     'Tommy',
@@ -83,11 +81,6 @@ export default function Home({ user }) {
   }
   function addVaccination(date, vaccine, doctor) {
     return addVaccinationProfile(data._id, user._lat, date, vaccine, doctor)
-  }
-
-  function updateSettingsInBackend(settings) {
-    setLastRefresh(new Date())
-    return updateSettingsProfile(data._id, user._lat, settings)
   }
 
   function onMenuClick() {
@@ -153,11 +146,11 @@ export default function Home({ user }) {
                 <Spinner />
               ) : (
                 <Settings
-                  updateSettingsInBackend={updateSettingsInBackend}
+                  profileid={data._id}
+                  idToken={user._lat}
                   userName={data.name}
                   userBirth={data.birth}
-                  diseases={data.settings}
-                  setLastRefresh={setLastRefresh}
+                  settings={data.settings}
                 ></Settings>
               )}
             </Route>

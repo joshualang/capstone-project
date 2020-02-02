@@ -2,23 +2,18 @@ import React from 'react'
 import styled from 'styled-components/macro'
 import Title from './text/Title'
 
-export default function ToggleSwitchInput({
-  children,
-  value,
-  onChange = () => {},
-  disease,
-}) {
+export default function ToggleSwitchInput({ children, checked, name }) {
   return (
     <Switch>
       <label htmlFor={children}>
         <Title>{children}</Title>
       </label>
-      <Background active={value[disease]} className="switch">
+      <Background active={checked} className="switch">
         <input
           id={children}
           type="checkbox"
-          onChange={event => onChange(disease, event)}
-          checked={value[disease] ? 1 : 0}
+          name={name}
+          defaultChecked={checked}
         />
         <div></div>
       </Background>
@@ -53,7 +48,7 @@ const Switch = styled.div`
 
 const Background = styled.label`
   display: inline-block;
-  font-size: 1em; /* 1 */
+  font-size: 1em;
   height: 1em;
   width: 2em;
   background: ${props => (props.active ? 'green' : 'crimson')};

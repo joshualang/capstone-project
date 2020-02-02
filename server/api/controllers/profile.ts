@@ -126,10 +126,10 @@ exports.profile_delete_by_id = (req: Request, res: Response) => {
 
 exports.profile_update_settings = (req: Request, res: Response) => {
   const { profile } = req.params
-  const settings = req.body.settings
+  const { settings, name, birth } = req.body
   Profile.findByIdAndUpdate(
     profile,
-    { settings: settings },
+    { settings: settings, name: name, birth: birth },
     { runValidators: true, new: true }
   )
     .exec()

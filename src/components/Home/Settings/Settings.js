@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useRef } from 'react'
 import styled from 'styled-components/macro'
 import Head from '../Head'
 
@@ -7,39 +7,19 @@ import checkmark from '../../../img/checkmark.svg'
 import PersonalInformation from './PersonalInformation'
 import DiseasesSelected from './DiseasesSelected'
 
-import { stringifyDate, isValidDate } from '../../../helper/dateHelper'
-
+import { isValidDate } from '../../../helper/dateHelper'
 import useSettings from '../../../hooks/settings'
 
-export default function({
-  userBirth,
-  userName,
-  updateSettingsInBackend,
-  diseases,
-  setLastRefresh,
-}) {
-  const { handleChange, handleSubmit, values } = useSettings(() =>
-    console.log('custom hook')
-  )
+export default function({ profileid, idToken, userBirth, userName, settings }) {
   const refSubmit = useRef(null)
-  const [settings, setSettings] = useState({
-    name: userName,
-    birth: stringifyDate(new Date(userBirth)),
-    diseases: { ...diseases },
-  })
+  const { handleChange, handleSubmit, values } = useSettings(
+    profileid,
+    idToken,
+    userBirth,
+    userName,
+    settings
+  )
 
-  function onFormNameChange(event) {
-    setSettings({ ...settings, name: event.target.value })
-  }
-  function onFormBirthChange(event) {
-    setSettings({ ...settings, birth: event.target.value })
-  }
-  function onDiseaseChange(disease, event) {
-    setSettings({
-      ...settings,
-      diseases: { ...settings.diseases, [disease]: event.target.checked },
-    })
-  }
   return (
     <>
       <Head
@@ -51,31 +31,15 @@ export default function({
         }
       />
       <Container>
-        <Settings
-          onSubmit={event => {
-            event.preventDefault()
-            updateSettingsInBackend({
-              name: settings.name,
-              birth: settings.birth,
-              settings: settings.diseases,
-            })
-            setLastRefresh(new Date())
-          }}
-          onChange={handleChange}
-        >
+        <Settings onSubmit={handleSubmit} onChange={handleChange}>
           <div>
             <PersonalInformation
-              settings={settings}
-              onFormNameChange={onFormNameChange}
-              onFormBirthChange={onFormBirthChange}
+              values={values}
               isValidDate={isValidDate}
             ></PersonalInformation>
           </div>
           <div>
-            <DiseasesSelected
-              onDiseaseChange={onDiseaseChange}
-              settings={settings}
-            ></DiseasesSelected>
+            <DiseasesSelected values={values}></DiseasesSelected>
           </div>
           <button
             ref={refSubmit}

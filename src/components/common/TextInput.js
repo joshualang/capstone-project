@@ -6,7 +6,7 @@ import colors from './styles/colors'
 export default function TextInput({
   children,
   value,
-  onChange,
+  name,
   valid,
   type = 'text',
 }) {
@@ -15,12 +15,7 @@ export default function TextInput({
       <label>
         <Title>{children}</Title>
       </label>
-      <Input
-        type={type}
-        onChange={event => onChange(event)}
-        value={value}
-        valid={valid}
-      ></Input>
+      <Input type={type} name={name} defaultValue={value} valid={valid}></Input>
     </Flexbox>
   )
 }

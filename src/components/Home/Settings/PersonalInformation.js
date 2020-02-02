@@ -3,27 +3,18 @@ import styled from 'styled-components/macro'
 import SectionText from '../../common/text/SectionText'
 import TextInput from '../../common/TextInput'
 
-export default function PersonalInformation({
-  onFormNameChange,
-  settings,
-  onFormBirthChange,
-  isValidDate,
-}) {
+export default function PersonalInformation({ values, isValidDate }) {
   return (
     <div>
       <SectionText>Deine Daten</SectionText>
       <Indent>
-        <TextInput
-          onChange={onFormNameChange}
-          value={settings.name}
-          valid={settings.name}
-        >
+        <TextInput value={values.name} valid={values.name} name="name">
           Name
         </TextInput>
         <TextInput
-          onChange={onFormBirthChange}
-          value={settings.birth}
-          valid={isValidDate(settings.birth)}
+          value={values.birth}
+          valid={isValidDate(values.birth)}
+          name="birth"
         >
           Geburtsdatum
         </TextInput>
