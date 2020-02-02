@@ -3,37 +3,23 @@ import VaccinationForm from './VaccinationForm'
 import VaccinationFormFailure from './VaccinationFormFailure'
 import VaccinationFormSuccess from './VaccinationFormSuccess'
 
-export default function AddVaccination({
-  form,
-  data,
-  onFormSubmit,
-  onFormInfoVisibleChange,
-  onFormDoctorChange,
-  onFormDateChange,
-  onFormStickerChange,
-  setFormSubmitBack,
-  addVaccination,
-}) {
-  return !form.isSubmitted ? (
+import useAddVaccination from '../../../hooks/addvaccination'
+
+export default function AddVaccination({ profileid, idToken }) {
+  const { handleChange, handleSubmit, values } = useAddVaccination(
+    profileid,
+    idToken
+  )
+
+  return !values.submitMessage ? (
     <VaccinationForm
-      form={form}
-      data={data}
-      onFormSubmit={onFormSubmit}
-      onFormInfoVisibleChange={onFormInfoVisibleChange}
-      onFormDoctorChange={onFormDoctorChange}
-      onFormDateChange={onFormDateChange}
-      onFormStickerChange={onFormStickerChange}
-      addVaccination={addVaccination}
+      handleChange={handleChange}
+      handleSubmit={handleSubmit}
+      values={values}
     />
-  ) : Array.isArray(form.isSubmitted) ? (
-    <VaccinationFormSuccess
-      setFormSubmitBack={setFormSubmitBack}
-      submitMessage={form.isSubmitted}
-    />
+  ) : Array.isArray(values.submitMessage) ? (
+    <VaccinationFormSuccess submitMessage={values.submitMessage} />
   ) : (
-    <VaccinationFormFailure
-      setFormSubmitBack={setFormSubmitBack}
-      submitMessage={form.isSubmitted}
-    />
+    <VaccinationFormFailure submitMessage={values.submitMessage} />
   )
 }

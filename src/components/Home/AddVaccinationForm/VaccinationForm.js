@@ -11,89 +11,51 @@ import DetailsText from '../../common/text/DetailsText'
 import Head from '../Head'
 import SubmitButton from '../../common/SubmitButton'
 
-export default function({
-  form,
-  onFormSubmit,
-  onFormInfoVisibleChange,
-  onFormDoctorChange,
-  onFormDateChange,
-  onFormStickerChange,
-  addVaccination,
-}) {
+import { isValidDate } from '../../../helper/dateHelper'
+
+export default function({ handleChange, handleSubmit, values }) {
   return (
     <>
       <Head headline="Impfung hinzufügen" />
-      <Form
-        onSubmit={event => {
-          event.preventDefault()
-          addVaccination(form.date, form.sticker, form.doctor).then(res => {
-            onFormSubmit(res)
-          })
-        }}
-      >
+      <Form onSubmit={handleSubmit} onChange={handleChange}>
         <Flexbox>
-          <label htmlFor="vaccinationDoctor">
+          <label htmlFor="doctor">
             <Title>Name des Arztes</Title>
           </label>
           <Input
-            id="vaccinationDoctor"
-            name="vaccinationDoctor"
-            onInput={event => onFormDoctorChange(event)}
-            placeholder="Dr. med. Max Mustermann"
+            id="doctor"
+            name="doctor"
+            placeholder="Dr. med. Max Musterarzt"
             type="text"
-            value={form.doctor}
-            valid={form.validDoctor}
+            valid={values.doctor}
           ></Input>
         </Flexbox>
         <Flexbox>
-          <label htmlFor="vaccinationDate">
+          <label htmlFor="date">
             <Title>Datum der Impfung</Title>
           </label>
           <Input
-            id="vaccinationDate"
-            name="vaccinationDate"
-            onInput={event => onFormDateChange(event)}
+            id="date"
+            name="date"
             placeholder="DD.MM.YYYY"
-            value={form.date}
+            defaultValue={values.date}
             type="text"
-            valid={form.validDate}
+            valid={isValidDate(values.date)}
           ></Input>
         </Flexbox>
         <Flexbox>
-          <Flexbox
-            flexDirection="row"
-            onClick={() => onFormInfoVisibleChange()}
-          >
-            <label htmlFor="vaccinationSticker">
-              <Title>Text auf den Aufklebern</Title>
-            </label>
-            <img className="icon" src={info} alt="further information"></img>
-          </Flexbox>
-          {form.infoVisible ? (
-            <>
-              <DetailsText>
-                Bitte geben Sie alle Informationen der Aufkleber
-                leerzeichengetrennt an.
-                <br />
-                Zum Beispiel:
-              </DetailsText>
-              <img src={vaccinationExample} alt="vaccination sticker"></img>
-              <DetailsText>Hexyon</DetailsText>
-            </>
-          ) : (
-            <></>
-          )}
+          <label htmlFor="vaccine">
+            <Title>Impfstoff</Title>
+          </label>
           <Input
-            id="vaccinationSticker"
-            name="vaccinationSticker"
-            onInput={event => onFormStickerChange(event)}
+            id="vaccine"
+            name="vaccine"
             type="text"
-            placeholder="Rotarix"
-            value={form.sticker}
-            valid={form.validSticker}
+            placeholder="Hexyon"
+            valid={values.vaccine}
           ></Input>
         </Flexbox>
-        {form.validSticker && form.validDate && form.validDoctor ? (
+        {values.vaccine && isValidDate(values.date) && values.doctor ? (
           <SubmitButton isActive={true} type="submit">
             Submit
           </SubmitButton>

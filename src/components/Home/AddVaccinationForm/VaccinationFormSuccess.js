@@ -9,17 +9,13 @@ import Head from '../Head'
 import checkmark from '../../../img/checkmark.svg'
 import success from '../../../img/success.svg'
 
-export default function VaccinationFormSuccess({
-  submitMessage,
-  setFormSubmitBack,
-}) {
+export default function VaccinationFormSuccess({ submitMessage }) {
   return (
     <>
       <Head
         headline="Impfung hinzugefügt"
-        onTopLeftClick={() => setFormSubmitBack()}
         topRight={
-          <Link to="/" onClick={() => setFormSubmitBack()}>
+          <Link to="/">
             <img height="18px" width="18px" src={checkmark} alt="submit" />
           </Link>
         }
