@@ -9,6 +9,7 @@ import DiseasesSelected from './DiseasesSelected'
 
 import { isValidDate } from '../../../helper/dateHelper'
 import useSettings from '../../../hooks/settings'
+import SectionText from '../../common/text/SectionText'
 
 export default function({ profileid, idToken, userBirth, userName, settings }) {
   const refSubmit = useRef(null)
@@ -38,6 +39,10 @@ export default function({ profileid, idToken, userBirth, userName, settings }) {
               isValidDate={isValidDate}
             ></PersonalInformation>
           </div>
+
+          <Link to="addprofile">
+            <SectionText>Profil hinzufügen</SectionText>
+          </Link>
           <div>
             <DiseasesSelected values={values}></DiseasesSelected>
           </div>
@@ -56,7 +61,7 @@ const Settings = styled.form`
   margin-top: 16px;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 24px;
   padding-right: 4px;
 `
 const Container = styled.div`

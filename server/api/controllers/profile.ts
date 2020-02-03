@@ -38,7 +38,7 @@ exports.profile_get_by_id = (req: Request, res: Response) => {
 }
 
 exports.profile_create_with_user_id = (req: Request, res: Response) => {
-  const { user } = req.params
+  const { uid } = req.params
   const { birth, name } = req.body
   const profile = new Profile({
     _id: new mongoose.Types.ObjectId(),
@@ -48,7 +48,7 @@ exports.profile_create_with_user_id = (req: Request, res: Response) => {
   profile
     .save()
     .then((result: any) => {
-      User.findByIdAndUpdate(user, {
+      User.findOneAndUpdate({uid: uid}, {
         $push: { profiles: { _id: result._id, name: result.name } },
       })
         .exec()

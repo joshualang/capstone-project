@@ -14,26 +14,17 @@ import Settings from './Settings/Settings'
 import Spinner from '../common/Spinner'
 
 import useLoadingEffect from '../../hooks/useLoadingEffect'
+import CreateProfile from './CreateProfile'
 
 export default function Home({ user }) {
   const [lastRefresh, setLastRefresh] = useState(new Date())
-  const { data, profiles, isLoading } = useLoadingEffect(user, lastRefresh)
+  const [profileId, setProfileId] = useState(null)
   const [isMenuShown, setIsMenuShown] = useState(false)
-  const [currentProfile, setCurrentProfile] = useState([
-    'Tommy',
-    'Jens',
-    'Lisa',
-  ])
-  function changeProfile(index) {
-    if (index !== 0) {
-      setCurrentProfile([
-        currentProfile[index],
-        ...currentProfile.slice(0, index),
-        ...currentProfile.slice(index + 1),
-      ])
-      setLastRefresh(new Date())
-    }
-  }
+  const { data, profiles, isLoading } = useLoadingEffect(
+    user,
+    lastRefresh,
+    profileId
+  )
 
   function onMenuClick() {
     setIsMenuShown(!isMenuShown)
@@ -56,10 +47,10 @@ export default function Home({ user }) {
     <>
       {isMenuShown ? (
         <Navigation
-          refresh={setLastRefresh}
           onMenuClick={onMenuClick}
-          currentProfile={[data.name]}
-          changeProfile={changeProfile}
+          profiles={profiles}
+          currentProfileId={data._id}
+          setProfileId={setProfileId}
         />
       ) : (
         ''
@@ -79,13 +70,6 @@ export default function Home({ user }) {
                 ></AddVaccination>
               )}
             </Route>
-            <Route path="/vaccinationdetails/:id">
-              {isLoading ? (
-                <Spinner />
-              ) : (
-                <VaccinationDetails data={data}></VaccinationDetails>
-              )}
-            </Route>
             <Route path="/settings">
               {isLoading ? (
                 <Spinner />
@@ -97,6 +81,16 @@ export default function Home({ user }) {
                   userBirth={data.birth}
                   settings={data.settings}
                 ></Settings>
+              )}
+            </Route>
+            <Route path="/addprofile">
+              <CreateProfile idToken={user._lat} uid={user.uid}></CreateProfile>
+            </Route>
+            <Route path="/vaccinationdetails/:id">
+              {isLoading ? (
+                <Spinner />
+              ) : (
+                <VaccinationDetails data={data}></VaccinationDetails>
               )}
             </Route>
             <Route path="/vaccinationsOpen">

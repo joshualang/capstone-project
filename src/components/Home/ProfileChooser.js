@@ -2,11 +2,12 @@ import React, { useState, useRef } from 'react'
 import styled from 'styled-components/macro'
 import useHeight from '../../hooks/useHeight'
 import SectionText from '../common/text/SectionText'
+import Line from '../common/Line'
 
 export default function ProfileChooser({
-  refresh,
-  currentProfile,
-  changeProfile,
+  profiles,
+  currentProfileId,
+  setProfileId,
 }) {
   const [isProfileChooserOpen, setIsProfileChooserOpen] = useState(false)
 
@@ -15,6 +16,9 @@ export default function ProfileChooser({
   function onUserClick() {
     setIsProfileChooserOpen(!isProfileChooserOpen)
   }
+  const currentProfileIndex = profiles.findIndex(
+    profile => profile._id === currentProfileId
+  )
   return (
     <div>
       <User onClick={() => onUserClick()}>
@@ -23,13 +27,15 @@ export default function ProfileChooser({
           active={isProfileChooserOpen}
           maxHeight={maxHeight}
         >
-          {currentProfile.map((item, index) => (
+          <SectionText>{profiles[currentProfileIndex].name}</SectionText>
+          <Line></Line>
+          {profiles.map(item => (
             <SectionText
-              onClick={() => changeProfile(index)}
+              onClick={() => setProfileId(item._id)}
               style={{ marginBottom: '8px', cursor: 'pointer' }}
-              key={item}
+              key={item._id}
             >
-              {item}
+              {item.name}
             </SectionText>
           ))}
         </Profiles>
@@ -90,6 +96,7 @@ const Profiles = styled.div`
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  width: 100%;
   transition: height 0.3s ease-in-out;
   height: ${props => (props.active ? props.maxHeight + 'px' : '21px')};
 `

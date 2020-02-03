@@ -12,11 +12,10 @@ import Line from '../common/Line'
 import ProfileChooser from './ProfileChooser'
 
 export default function({
-  profiles,
   onMenuClick,
-  refresh,
-  currentProfile,
-  changeProfile,
+  profiles,
+  currentProfileId,
+  setProfileId,
 }) {
   const props = useSpring({
     config: { tension: 5000, mass: 1, friction: 300 },
@@ -30,10 +29,9 @@ export default function({
       <Navigation style={props}>
         <div>
           <ProfileChooser
-            refresh={refresh}
             profiles={profiles}
-            currentProfile={currentProfile}
-            changeProfile={changeProfile}
+            currentProfileId={currentProfileId}
+            setProfileId={setProfileId}
           ></ProfileChooser>
           <Line margin="8px 0 16px"></Line>
           <FlexboxGap>
