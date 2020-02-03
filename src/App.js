@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import firebase from 'firebase/app'
 
-import Home from './Home'
-import LandingScreen from './LandingScreen'
+import Home from './components/Home/Home'
+import LandingScreen from './components/LandingScreen/LandingScreen'
 const auth = firebase.auth()
 
 export default function App() {
@@ -12,7 +12,6 @@ export default function App() {
     auth.onAuthStateChanged(user => {
       if (user) {
         setUser(user)
-        console.log(user)
       } else {
         setUser(user)
       }

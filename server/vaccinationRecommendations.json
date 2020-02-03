@@ -1,6 +1,7 @@
 [
   {
-    "Rotaviren": [
+    "disease": "Rotaviren",
+    "recommendations": [
       {
         "vaccinationType": "rotavirusG1",
         "beginsAtAgeInDays": 42,
@@ -26,7 +27,8 @@
     ]
   },
   {
-    "Tetanus": [
+    "disease": "Tetanus",
+    "recommendations": [
       {
         "vaccinationType": "tetanusG1",
         "beginsAtAgeInDays": 62,
@@ -74,7 +76,8 @@
     ]
   },
   {
-    "Diphtherie": [
+    "disease": "Diphtherie",
+    "recommendations": [
       {
         "vaccinationType": "diphtherieG1",
         "beginsAtAgeInDays": 62,
@@ -122,7 +125,8 @@
     ]
   },
   {
-    "Pertussis": [
+    "disease": "Pertussis",
+    "recommendations": [
       {
         "vaccinationType": "pertussisG1",
         "beginsAtAgeInDays": 62,
@@ -169,7 +173,8 @@
     ]
   },
   {
-    "Hib": [
+    "disease": "Hib",
+    "recommendations": [
       {
         "vaccinationType": "hibG1",
         "beginsAtAgeInDays": 62,
@@ -198,7 +203,8 @@
     ]
   },
   {
-    "Polio": [
+    "disease": "Polio",
+    "recommendations": [
       {
         "vaccinationType": "polioG1",
         "beginsAtAgeInDays": 62,
@@ -233,7 +239,8 @@
     ]
   },
   {
-    "Hepatitis B": [
+    "disease": "Hepatitis B",
+    "recommendations": [
       {
         "vaccinationType": "hepatitisBG1",
         "beginsAtAgeInDays": 62,
@@ -262,7 +269,8 @@
     ]
   },
   {
-    "Pneumokokken": [
+    "disease": "Pneumokokken",
+    "recommendations": [
       {
         "vaccinationType": "pneumokokkenG1",
         "beginsAtAgeInDays": 62,
@@ -298,7 +306,8 @@
     ]
   },
   {
-    "MeningokokkenC": [
+    "disease": "MeningokokkenC",
+    "recommendations": [
       {
         "vaccinationType": "meningokokkenG1",
         "beginsAtAgeInDays": 365,
@@ -308,7 +317,8 @@
     ]
   },
   {
-    "Masern": [
+    "disease": "Masern",
+    "recommendations": [
       {
         "vaccinationType": "masernG1",
         "beginsAtAgeInDays": 341,
@@ -331,7 +341,8 @@
     ]
   },
   {
-    "Mumps": [
+    "disease": "Mumps",
+    "recommendations": [
       {
         "vaccinationType": "mumpsG1",
         "beginsAtAgeInDays": 341,
@@ -347,7 +358,8 @@
     ]
   },
   {
-    "Varizellen": [
+    "disease": "Varizellen",
+    "recommendations": [
       {
         "vaccinationType": "variazellenG1",
         "beginsAtAgeInDays": 341,
@@ -363,7 +375,8 @@
     ]
   },
   {
-    "HPV": [
+    "disease": "HPV",
+    "recommendations": [
       {
         "vaccinationType": "hpvG1",
         "beginsAtAgeInDays": 3285,
@@ -383,7 +396,8 @@
     ]
   },
   {
-    "Herpes Zoster": [
+    "disease": "Herpes Zoster",
+    "recommendations": [
       {
         "vaccinationType": "herpesZosterG1",
         "beginsAtAgeInDays": 21900,
@@ -403,7 +417,8 @@
     ]
   },
   {
-    "Influenza": [
+    "disease": "Influenza",
+    "recommendations": [
       {
         "vaccinationType": "influenza",
         "beginsAtAgeInDays": 21900,
