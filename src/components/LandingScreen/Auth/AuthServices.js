@@ -1,9 +1,8 @@
-import firebase from 'firebase'
-import config from './firebaseConfig'
+import firebase from 'firebase/app'
+import 'firebase/auth'
 import { createUser } from '../../../helper/services'
-require('firebase/auth')
-
-firebase.initializeApp(config)
+const firebaseConfig = JSON.parse(process.env.REACT_APP_FIREBASE_CONFIG)
+firebase.initializeApp(firebaseConfig)
 const auth = firebase.auth()
 
 export function updateUserDisplayName(newName) {
