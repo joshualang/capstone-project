@@ -19,4 +19,4 @@ jobs:
     - run: npm install
     - run: npm run now-build
     - run: npm i -g now@16.4.4
-    - run: now --prod -t ${{ secrets.ZEIT_TOKEN }} -e REACT_APP_FIREBASE_CONFIG=${{secrets.REACT_APP_FIREBASE_CONFIG}} deploy dist
+    - run: now --prod -t ${{ secrets.ZEIT_TOKEN }} -e REACT_APP_FIREBASE_CONFIG=${{ secrets.REACT_APP_FIREBASE_CONFIG }} deploy dist
