@@ -47,6 +47,7 @@ export default function Home({ user }) {
     <>
       {isMenuShown ? (
         <Navigation
+          isLoading={isLoading}
           onMenuClick={onMenuClick}
           profiles={profiles}
           currentProfileId={data._id}

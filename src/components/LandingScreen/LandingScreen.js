@@ -66,7 +66,6 @@ const Options = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
 `
 
 const LoginButton = styled.button`
@@ -76,4 +75,5 @@ const LoginButton = styled.button`
   color: white;
   text-decoration: none;
   padding: 8px;
+  margin: 16px;
 `

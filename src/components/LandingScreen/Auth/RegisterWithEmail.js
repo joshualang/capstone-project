@@ -2,85 +2,47 @@ import React, { useState } from 'react'
 import { signUpWithEmail } from './AuthServices'
 import { isValidDate } from '../../../helper/dateHelper'
 import isValidEmail from './isValidEmail'
+import { useRegistration } from '../../../hooks/useAuth'
 
+import Text from '../../common/text/Text'
 import TextInput from '../../common/TextInput'
 import SubmitButton from '../../common/SubmitButton'
+import Nav from './Nav'
 
 export default function RegisterWithEmail() {
-  const [registrationData, setRegistrationData] = useState({
-    email: '',
-    password: '',
-    name: '',
-    birth: '',
-  })
+  const { handleChange, handleSubmit, values } = useRegistration()
   return (
-    <form
-      onSubmit={event => {
-        event.preventDefault()
-        signUpWithEmail(
-          registrationData.email,
-          registrationData.password,
-          registrationData.name,
-          registrationData.birth
-        )
-      }}
-    >
-      <TextInput
-        onChange={event =>
-          setRegistrationData({
-            ...registrationData,
-            email: event.target.value,
-          })
-        }
-        type="email"
-        valid={isValidEmail(registrationData.email)}
-      >
-        E-Mail
-      </TextInput>
-      <TextInput
-        onChange={event =>
-          setRegistrationData({
-            ...registrationData,
-            password: event.target.value,
-          })
-        }
-        type="password"
-        valid={registrationData.password.length > 7}
-      >
-        Passwort
-      </TextInput>
-      <TextInput
-        onChange={event =>
-          setRegistrationData({
-            ...registrationData,
-            name: event.target.value,
-          })
-        }
-        valid={registrationData.name}
-      >
-        Name
-      </TextInput>
-      <TextInput
-        onChange={event =>
-          setRegistrationData({
-            ...registrationData,
-            birth: event.target.value,
-          })
-        }
-        valid={isValidDate(registrationData.birth)}
-      >
-        Geburtsdatum
-      </TextInput>
-      <SubmitButton
-        isActive={
-          isValidEmail(registrationData.email) &&
-          registrationData.password > 7 &&
-          registrationData.name &&
-          isValidDate(registrationData.birth)
-        }
-      >
-        Registrieren
-      </SubmitButton>
-    </form>
+    <>
+      <Nav>Registrieren</Nav>
+      <form onSubmit={handleSubmit} onChange={handleChange}>
+        <TextInput name="email" type="email" valid={isValidEmail(values.email)}>
+          E-Mail
+        </TextInput>
+        <TextInput
+          name="password"
+          type="password"
+          valid={values.password.length > 7}
+        >
+          Passwort
+        </TextInput>
+        <TextInput name="name" type="text" valid={values.name}>
+          Name
+        </TextInput>
+        <TextInput name="birth" type="text" valid={isValidDate(values.birth)}>
+          Geburtsdatum
+        </TextInput>
+        <Text>{values.message}</Text>
+        <SubmitButton
+          isActive={
+            isValidEmail(values.email) &&
+            values.password.length > 7 &&
+            values.name &&
+            isValidDate(values.birth)
+          }
+        >
+          Registrieren
+        </SubmitButton>
+      </form>
+    </>
   )
 }
