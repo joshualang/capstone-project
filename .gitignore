@@ -6,6 +6,13 @@ Medical Assistant-bbe5fc01fae8.json
 firebaseConfig.js
 .env
 nodemon.json
+*.crt
+*.key
+*.pem
+*.srl
+*.csr
+*.cnf
+*.ext
 
 server/**/*.js
 server/server.js

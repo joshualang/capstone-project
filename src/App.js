@@ -20,5 +20,5 @@ export default function App() {
     })
   }, [])
 
-  return false ? <Home user={user}></Home> : <LandingScreen></LandingScreen>
+  return user ? <Home user={user}></Home> : <LandingScreen></LandingScreen>
 }
