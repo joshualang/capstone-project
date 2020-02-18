@@ -19,7 +19,7 @@ jobs:
     - run: npm install
     - run: npm run now-build
     - name: ZEIT Now Deployment
-      uses: amondnet/now-deployment@v2.0.0
+      uses: amondnet/now-deployment@v2.0.0 -y
       with:
         # zeit.co token
         zeit-token: ${{ secrets.ZEIT_TOKEN }}
