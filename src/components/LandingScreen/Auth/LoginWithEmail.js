@@ -1,49 +1,35 @@
-import React, { useState } from 'react'
-import { signInWithEmail } from './AuthServices'
+import React from 'react'
 import isValidEmail from './isValidEmail'
+import { useLogin } from '../../../hooks/useAuth'
 
+import Text from '../../common/text/Text'
 import TextInput from '../../common/TextInput'
 import SubmitButton from '../../common/SubmitButton'
+import Nav from './Nav'
 
 export default function RegisterWithEmail() {
-  const [loginData, setLoginData] = useState({
-    email: '',
-    password: '',
-  })
+  const { handleChange, handleSubmit, values } = useLogin()
   return (
-    <form
-      onSubmit={event => {
-        event.preventDefault()
-        signInWithEmail(loginData.email, loginData.password)
-      }}
-    >
-      <TextInput
-        onChange={event =>
-          setLoginData({
-            ...loginData,
-            email: event.target.value,
-          })
-        }
-        type="email"
-      >
-        E-Mail
-      </TextInput>
-      <TextInput
-        onChange={event =>
-          setLoginData({
-            ...loginData,
-            password: event.target.value,
-          })
-        }
-        type="password"
-      >
-        Passwort
-      </TextInput>
-      <SubmitButton
-        isActive={isValidEmail(loginData.email) && loginData.password > 7}
-      >
-        Einloggen
-      </SubmitButton>
-    </form>
+    <>
+      <Nav>Einloggen</Nav>
+      <form onChange={handleChange} onSubmit={handleSubmit}>
+        <TextInput name="email" type="email" valid={isValidEmail(values.email)}>
+          E-Mail
+        </TextInput>
+        <TextInput
+          name="password"
+          type="password"
+          valid={values.password.length > 7}
+        >
+          Passwort
+        </TextInput>
+        <Text>{values.message}</Text>
+        <SubmitButton
+          isActive={isValidEmail(values.email) && values.password.length > 7}
+        >
+          Einloggen
+        </SubmitButton>
+      </form>
+    </>
   )
 }

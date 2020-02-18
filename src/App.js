@@ -8,6 +8,7 @@ const auth = firebase.auth()
 
 export default function App() {
   const [user, setUser] = useState(null)
+  console.log(user)
 
   useEffect(() => {
     auth.onAuthStateChanged(user => {
@@ -19,5 +20,5 @@ export default function App() {
     })
   }, [])
 
-  return user ? <Home user={user}></Home> : <LandingScreen></LandingScreen>
+  return false ? <Home user={user}></Home> : <LandingScreen></LandingScreen>
 }
