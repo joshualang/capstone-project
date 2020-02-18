@@ -20,4 +20,4 @@ jobs:
     - run: npm run now-build
     - run: npm i -g now 
     - run: ls -la
-    - run: now -t ${{ secrets.ZEIT_TOKEN }} --prod
+    - run: now -t ${{ secrets.ZEIT_TOKEN }} --prod -f deploy dist
