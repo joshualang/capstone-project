@@ -18,9 +18,5 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm install
     - run: npm run now-build
-    - name: ZEIT Now Deployment
-      uses: amondnet/now-deployment@v2.0.0
-      with:
-        # zeit.co token
-        zeit-token: ${{ secrets.ZEIT_TOKEN }}
-        now-args: -y 
+    - run: npm audit fix
+    - run: npx now -t ${{ secrets.ZEIT_TOKEN }} --prod
